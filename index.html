@@ -3,11 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>모던 포트폴리오</title>
+    <title>LEE JAEHOON | Official Website</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png.png" />
+    <link rel="shortcut icon" type="image/png" href="assets/favicon.png.png" />
+    <link rel="apple-touch-icon" href="assets/favicon.png.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800;900&display=swap"
       rel="stylesheet"
     />
     <link
@@ -19,9 +22,8 @@
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <div class="logo">JH</div>
         <nav class="nav">
-          <button class="nav-toggle" aria-label="메뉴 열기"></button>
+          <div class="nav-icon" aria-hidden="true"></div>
           <ul class="nav-list">
             <li><a href="#about">About</a></li>
             <li><a href="#book">Book</a></li>
@@ -29,19 +31,25 @@
             <li><a href="#collaboration">Collaboration</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+          <button class="nav-toggle" aria-label="메뉴 열기"></button>
         </nav>
       </div>
     </header>
 
     <main>
       <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-frame">
-          <div class="hero-media">
-            <img src="assets/profile-hero.jpg" alt="IT 커뮤니케이터 이재훈" />
+        <div class="hero-overlay"></div>
+        <div class="hero-inner">
+          <div class="hero-photo">
+            <img src="assets/profile-hero.png.png" alt="IT 커뮤니케이터 이재훈" class="hero-photo-image" />
           </div>
-          <div class="hero-banner">
-            <p class="eyebrow">IT Commuicator</p>
-            <h1 id="hero-title">LEE JAEHOON</h1>
+          <div class="hero-title-wrapper">
+            <p class="hero-eyebrow">IT COMMUNICATOR</p>
+            <div class="hero-name-container">
+              <h1 id="hero-title" class="hero-name">LEE JAEHOON</h1>
+              <p class="christmas-message">특별한 이유는 없어요. 크리스마스는 그냥 기분이 좋잖아요🎄</p>
+              <div class="snowflakes"></div>
+            </div>
           </div>
         </div>
       </section>
