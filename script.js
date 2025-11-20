@@ -131,3 +131,154 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// 강연 카드 hover 이미지 효과
+document.addEventListener("DOMContentLoaded", function () {
+  const lectureItems = document.querySelectorAll(".lecture-item");
+  const lectureImage = document.querySelector(".lecture-image");
+  if (lectureItems.length > 0 && lectureImage) {
+    lectureItems.forEach((item, index) => {
+      item.addEventListener("mouseenter", () => {
+        const src = item.dataset.image;
+
+        if (src) {
+          lectureImage.src = src;
+          lectureImage.alt = item.textContent.trim();
+
+          const showImage = () => {
+            lectureImage.classList.add("is-visible");
+          };
+
+          if (lectureImage.complete && lectureImage.naturalHeight !== 0) {
+            showImage();
+          } else {
+            const onImageLoad = () => {
+              showImage();
+              lectureImage.removeEventListener("load", onImageLoad);
+              lectureImage.removeEventListener("error", onImageError);
+            };
+            
+            const onImageError = () => {
+              lectureImage.removeEventListener("load", onImageLoad);
+              lectureImage.removeEventListener("error", onImageError);
+            };
+            
+            lectureImage.addEventListener("load", onImageLoad);
+            lectureImage.addEventListener("error", onImageError);
+            
+            // 이미지가 이미 로드 중이거나 완료된 경우를 대비
+            if (lectureImage.complete) {
+              if (lectureImage.naturalHeight !== 0) {
+                onImageLoad();
+              } else {
+                onImageError();
+              }
+            }
+          }
+        }
+      });
+
+      item.addEventListener("mouseleave", () => {
+        lectureImage.classList.remove("is-visible");
+      });
+    });
+
+    // 카드 전체에서 마우스가 벗어날 때도 처리
+    const lectureCard = document.querySelector(".collab-card-lecture");
+    if (lectureCard) {
+      lectureCard.addEventListener("mouseleave", () => {
+        lectureImage.classList.remove("is-visible");
+      });
+    }
+  } else {
+    console.error("필수 요소를 찾을 수 없습니다:", {
+      lectureItems: lectureItems.length,
+      lectureImage: !!lectureImage
+    });
+  }
+});
+
+// 기고 브랜드 탭 인터랙션
+const articlesByBrand = {
+  kb: [
+    { title: "하이브의 엔터테인먼트 혁신, 위버스로 만들어가는 글로벌 팬 커뮤니티", url: "https://kbthink.com/life/daily/hybe.html" },
+    { title: "스포티파이 플레이리스트 추천 기술, AI DJ와 함께하는 음악 경험", url: "https://kbthink.com/life/daily/spotify.html" },
+    { title: "AI 에이전트란? 활용 사례와 발전 방향 알아보기", url: "https://kbthink.com/life/daily/ai-agent.html" },
+    { title: "데이터 센터란? 냉각 기술의 중요성과 건설이 어려운 이유", url: "https://kbthink.com/life/daily/data-center.html" },
+    { title: "전체보기", url: "https://kbthink.com/search/result.html?sk=%EC%9D%B4%EC%9E%AC%ED%9B%88" },
+  ],
+  hyundaicard: [
+    {
+      title: "우리 삶과 가까워지는 안전하고 빠른 결제 'EMV 컨택리스'",
+      url: "https://newsroom.hyundaicard.com/front/board/TECHITSSUE-%EC%9A%B0%EB%A6%AC-%EC%82%B6%EA%B3%BC-%EA%B0%80%EA%B9%8C%EC%9B%8C%EC%A7%80%EB%8A%94-%EC%95%88%EC%A0%84%ED%95%98%EA%B3%A0-%EB%B9%A0%EB%A5%B8-%EA%B2%B0%EC%A0%9C-EMV-%EC%BB%A8%ED%83%9D%EB%A6%AC%EC%8A%A4?bbsSeq=2099&menuCategory=MNC002&contentCategory=&topMenuCd=FMC002&sort=1&noImageContent=Y",
+    },
+    {
+      title: "나보다 나를 더 잘 아는 추천 알고리즘",
+      url: "https://newsroom.hyundaicard.com/front/board/TECHITSSUE-%EB%82%98%EB%B3%B4%EB%8B%A4-%EB%82%98%EB%A5%BC-%EB%8D%94-%EC%9E%98-%EC%95%84%EB%8A%94-%EC%B6%94%EC%B2%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98?bbsSeq=2049&menuCategory=MNC002&contentCategory=&topMenuCd=FMC002&sort=1&noImageContent=Y",
+    },
+  ],
+  yozmit: [
+    { title: "요즘IT 기고문 보러가기", url: "https://yozm.wishket.com/magazine/@jhjh126/" },
+  ],
+  skt: [
+    { title: "SK AI SUMMIT 2025, SK가 그린 AI 인프라의 미래", url: "https://www.sktelecom.com/webzine/lib/tstory_detail.do?index=52&currentPage=1&keyword=" },
+    { title: "GPU, 대체 뭐길래 다들 난리일까?", url: "https://www.sktelecom.com/webzine/lib/insight_detail.do?index=40&currentPage=1&keyword=" },
+  ],
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const brandTabs = document.querySelectorAll(".brand-tab");
+  const articleList = document.querySelector(".collab-card-article .article-list");
+
+  if (!brandTabs.length || !articleList) return;
+
+  const renderArticles = (brandKey) => {
+    const articles = articlesByBrand[brandKey] || [];
+    articleList.innerHTML = "";
+
+    if (!articles.length) {
+      const emptyItem = document.createElement("li");
+      emptyItem.className = "article-item";
+      emptyItem.textContent = "콘텐츠를 준비 중입니다.";
+      articleList.appendChild(emptyItem);
+      return;
+    }
+
+    articles.forEach((article) => {
+      const listItem = document.createElement("li");
+      listItem.className = "article-item";
+
+      const link = document.createElement("a");
+      link.className = "article-title";
+      link.href = article.url;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.textContent = article.title;
+
+      listItem.appendChild(link);
+      articleList.appendChild(listItem);
+    });
+  };
+
+  const activateTab = (tab) => {
+    brandTabs.forEach((btn) => {
+      btn.classList.remove("is-active");
+      btn.setAttribute("aria-selected", "false");
+    });
+    tab.classList.add("is-active");
+    tab.setAttribute("aria-selected", "true");
+  };
+
+  brandTabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      activateTab(tab);
+      renderArticles(tab.dataset.brand);
+    });
+  });
+
+  const firstTab = brandTabs[0];
+  if (firstTab) {
+    activateTab(firstTab);
+    renderArticles(firstTab.dataset.brand);
+  }
+});
+

@@ -17,6 +17,14 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/linecorp/line-seed-sans-kr@1.0.1/Web/LINESeedKR.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -47,7 +55,7 @@
             <p class="hero-eyebrow">IT COMMUNICATOR</p>
             <div class="hero-name-container">
               <h1 id="hero-title" class="hero-name">LEE JAEHOON</h1>
-              <p class="christmas-message">특별한 이유는 없어요. 크리스마스는 그냥 기분이 좋잖아요🎄</p>
+              <p class="christmas-message">크리스마스는 그냥 기분이 좋잖아요🎄</p>
               <div class="snowflakes"></div>
             </div>
           </div>
@@ -57,28 +65,47 @@
       <section id="about" class="content-section about">
         <div class="section-stack">
           <p class="eyebrow">About</p>
-          <h2>About Me</h2>
+          <h2>안녕하세요</h2>
           <p class="lead">
             기술을 사람의 언어로 번역하는 IT 커뮤니케이터입니다. 테크 트렌드 속 의미를 이야기로
             엮고, 산업과 독자 사이를 연결하는 콘텐츠를 만듭니다.
           </p>
+          <div class="about-hashtags">
+            <span>#쉽고</span>
+            <span>#재밌는</span>
+            <span>#콘텐츠를</span>
+            <span>#지향합니다</span>
+          </div>
         </div>
       </section>
 
       <section id="book" class="content-section book">
         <div class="section-stack">
           <p class="eyebrow">Book</p>
-          <h2>Book</h2>
-          <p class="lead">『샘 올트먼, 더 비전 2030』은 AI 시대를 통찰하는 새로운 서사입니다.</p>
-          <div class="cta-row">
-            <a
-              class="btn primary pill"
-              href="https://product.kyobobook.co.kr/detail/S000216910863"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Purchase
-            </a>
+          <h2>샘 올트먼, 더 비전 2030</h2>
+          <div class="book-card">
+            <div class="book-cover-wrapper">
+              <img src="assets/book-cover.jpg.jpg" alt="샘 올트먼, 더 비전 2030" class="book-cover-image" />
+            </div>
+            <div class="book-content">
+              <h3 class="book-title">샘 올트먼, 더 비전 2030</h3>
+              <p class="book-description">AI 시대를 통찰하는 새로운 서사입니다.</p>
+              <ul class="book-points">
+                <li>AI 혁명의 현재와 미래</li>
+                <li>샘 올트먼의 비전과 전략</li>
+                <li>2030년 기술 트렌드 예측</li>
+              </ul>
+              <div class="cta-row">
+                <a
+                  class="btn primary pill"
+                  href="https://product.kyobobook.co.kr/detail/S000216910863"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Purchase
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -86,17 +113,43 @@
       <section id="newsletter" class="content-section newsletter">
         <div class="section-stack">
           <p class="eyebrow">Newsletter</p>
-          <h2>테크잇슈</h2>
-          <p class="lead">테크잇슈는 기술을 가장 인간답게 이야기하는 뉴스레터입니다.</p>
-          <div class="cta-row">
-            <a
-              class="btn primary pill"
-              href="https://page.stibee.com/subscriptions/297134"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Subscribe
-            </a>
+          <h2>TECHITSSUE</h2>
+          <div class="newsletter-layout">
+            <div class="newsletter-intro">
+              <p class="newsletter-description">IT·AI 트렌드를 정리해 전달하는 뉴스레터입니다.</p>
+              <div class="cta-row">
+                <a
+                  class="btn primary pill"
+                  href="https://page.stibee.com/subscriptions/297134"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  구독하기
+                </a>
+              </div>
+            </div>
+            <div class="newsletter-content-list">
+              <div class="content-item">
+                <span class="content-brand">무신사</span>
+                <a href="https://stibee.com/api/v1.0/emails/share/N7xFjdPHrYNUnO1qJyxeeVpF-2pLyTA" target="_blank" rel="noreferrer" class="content-title">약은 약사에게, 글로벌 진출은 무신사에게?</a>
+              </div>
+              <div class="content-item">
+                <span class="content-brand">현대카드</span>
+                <a href="#" class="content-title">콘텐츠 제목 예시 2</a>
+              </div>
+              <div class="content-item">
+                <span class="content-brand">삼성물산</span>
+                <a href="#" class="content-title">콘텐츠 제목 예시 3</a>
+              </div>
+              <div class="content-item">
+                <span class="content-brand">SKT</span>
+                <a href="#" class="content-title">콘텐츠 제목 예시 4</a>
+              </div>
+              <div class="content-item">
+                <span class="content-brand">YozmIT</span>
+                <a href="#" class="content-title">콘텐츠 제목 예시 5</a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -105,40 +158,43 @@
         <div class="section-stack">
           <p class="eyebrow">Collaboration</p>
           <h2>Collaboration</h2>
-          <p class="lead">브랜드 칼럼, 강연, 전략 기획 등 다양한 형태의 협업을 진행합니다.</p>
-          <div class="logo-grid">
-            <a
-              class="btn primary pill logo-btn"
-              href="https://www.sktelecom.com/webzine/lib/tstory_detail.do?index=52&currentPage=1&keyword="
-              target="_blank"
-              rel="noreferrer"
-            >
-              SKT
-            </a>
-            <a
-              class="btn primary pill logo-btn"
-              href="https://newsroom.hyundaicard.com/front/search/searchList?sort=1&searchKeyword=TECHITSSUE&searchAllYN=&topMenuCd=001&tagYn=Y&menuCategory=&searchYear=&searchMonth=&noImageContent=N&newsBannerYn=N&bannerTitle=&oriSchKeyword=TECHITSSUE"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Hyundai Card
-            </a>
-            <a
-              class="btn primary pill logo-btn"
-              href="https://kbthink.com/search/result.html?sk=%EC%9D%B4%EC%9E%AC%ED%9B%88&tab=tam_contents&category=dcp_all"
-              target="_blank"
-              rel="noreferrer"
-            >
-              KB
-            </a>
-            <a
-              class="btn primary pill logo-btn"
-              href="https://yozm.wishket.com/magazine/@jhjh126/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              YozmIT
-            </a>
+          <div class="collab-cards">
+            <div class="collab-card collab-card-article">
+              <h3 class="collab-card-title">기고</h3>
+              <div class="brand-tabs" role="tablist" aria-label="기고 브랜드 선택">
+                <button class="brand-tab is-active" type="button" data-brand="kb" role="tab" aria-selected="true">
+                  KB
+                </button>
+                <button class="brand-tab" type="button" data-brand="skt" role="tab" aria-selected="false">
+                  SKT
+                </button>
+                <button class="brand-tab" type="button" data-brand="hyundaicard" role="tab" aria-selected="false">
+                  현대카드
+                </button>
+                <button class="brand-tab" type="button" data-brand="yozmit" role="tab" aria-selected="false">
+                  요즘IT
+                </button>
+              </div>
+              <div class="brand-articles" role="tabpanel">
+                <ul class="article-list"></ul>
+              </div>
+            </div>
+            <div class="collab-card collab-card-lecture">
+              <h3 class="collab-card-title">강연</h3>
+              <div class="lecture-content">
+                <ul class="lecture-list">
+                  <li class="lecture-item" data-image="assets/lecture-1.jpg.jpg">
+                    동탄국제고 | AI로 그리는 미래 시대 준비
+                  </li>
+                  <li class="lecture-item" data-image="assets/lecture-2.jpg.jpg">
+                    아이에이클라우드 | 사내 워크샵 특강
+                  </li>
+                </ul>
+                <div class="lecture-image-container">
+                  <img src="" alt="" class="lecture-image" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
