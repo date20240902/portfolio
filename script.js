@@ -217,7 +217,11 @@ const articlesByBrand = {
     },
   ],
   yozmit: [
-    { title: "요즘IT 기고문 보러가기", url: "https://yozm.wishket.com/magazine/@jhjh126/" },
+    { title: "2024년 가트너 10대 전략 기술 트렌트 톺아보기", url: "https://yozm.wishket.com/magazine/detail/2298/" },
+    { title: "더 이상 외면할 수 없는 양자컴퓨터", url: "https://yozm.wishket.com/magazine/detail/2888/" },
+    { title: "생성형 AI 시대를 이해하기 위한 필수 용어 사전", url: "https://yozm.wishket.com/magazine/detail/2360/" },
+    { title: "ChatGPT vs Claude, 수능 보고 서울대 갈 수 있을까?", url: "https://yozm.wishket.com/magazine/detail/2851/" },
+    { title: "전체보기", url: "https://yozm.wishket.com/magazine/@jhjh126/" },
   ],
   skt: [
     { title: "SK AI SUMMIT 2025, SK가 그린 AI 인프라의 미래", url: "https://www.sktelecom.com/webzine/lib/tstory_detail.do?index=52&currentPage=1&keyword=" },
@@ -280,5 +284,202 @@ document.addEventListener("DOMContentLoaded", () => {
     activateTab(firstTab);
     renderArticles(firstTab.dataset.brand);
   }
+});
+
+// Newsletter 브랜드 뱃지 및 패널 인터랙션
+const brandedContentByBrand = {
+  skt: [
+    { title: "에이닷, 이렇게 좋은데 외않써?", url: "https://stibee.com/api/v1.0/emails/share/LPctRbs-Mm2mf3V-VqvMpcugcyuAt6s" },
+  ],
+  aws: [
+    { title: "기업에서는 AI를 어떻게 활용할까?", url: "https://stibee.com/api/v1.0/emails/share/usVDUAqmRAAiLRi92GVSoN8hqj14-xs" },
+  ],
+  musinsa: [
+    { title: "약은 약사에게, 글로벌 진출은 무신사에게?", url: "https://stibee.com/api/v1.0/emails/share/N7xFjdPHrYNUnO1qJyxeeVpF-2pLyTA" },
+  ],
+  crowdworks: [
+    { title: "AI 에이전트의 문턱, AIpy가 낮추다", url: "https://stibee.com/api/v1.0/emails/share/siOQdTN3R6EL4nVCPA_ioJbLnbJFWj8" },
+  ],
+  eastsoft: [
+    { title: "한국의 퍼플렉시티, 제가 먼저 알아보았습니다", url: "https://stibee.com/api/v1.0/emails/share/VxLN_fOl6OdGjs6K_0MoK29jmavRhps" },
+  ],
+  nhncommerce: [
+    { title: "세상에 나쁜 쇼핑몰은 없다", url: "https://stibee.com/api/v1.0/emails/share/QW_muqoIJqBIy28calJxToB0bwpXfbY" },
+  ],
+  willbook: [
+    { title: "거장 '헨리 키신저', AI 시대에 남긴 마지막 조언", url: "https://stibee.com/api/v1.0/emails/share/AumFfmeFKJeSCIyYPzC-BPAwdymyzF4" },
+  ],
+};
+
+const brandNames = {
+  skt: "SKT",
+  aws: "AWS",
+  musinsa: "무신사",
+  crowdworks: "크라우드웍스",
+  eastsoft: "이스트소프트",
+  nhncommerce: "NHN커머스",
+  willbook: "윌북",
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const brandBadges = document.querySelectorAll(".brand-badge");
+  const brandedContentBtn = document.querySelector(".branded-content-btn");
+  const brandedPanelOverlay = document.querySelector(".branded-panel-overlay");
+  const brandedPanel = document.querySelector(".branded-panel");
+  const panelClose = document.querySelector(".panel-close");
+  const panelBrandName = document.querySelector(".panel-brand-name");
+  const panelBrandDesc = document.querySelector(".panel-brand-desc");
+  const panelContentList = document.querySelector(".panel-content-list");
+
+  if (!brandedPanelOverlay || !brandedPanel || !panelClose || !panelBrandName || !panelBrandDesc || !panelContentList) return;
+
+  const openPanel = (brandKey) => {
+    const brandName = brandNames[brandKey] || brandKey;
+    const contents = brandedContentByBrand[brandKey] || [];
+
+    // 브랜드명 설정
+    panelBrandName.textContent = brandName;
+    // 설명 숨기기 (개별 브랜드 선택 시)
+    panelBrandDesc.textContent = "";
+    panelBrandDesc.style.display = "none";
+
+    // 콘텐츠 리스트 렌더링
+    panelContentList.innerHTML = "";
+    if (contents.length === 0) {
+      const emptyItem = document.createElement("li");
+      emptyItem.textContent = "콘텐츠를 준비 중입니다.";
+      panelContentList.appendChild(emptyItem);
+    } else {
+      contents.forEach((content) => {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = content.url;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.textContent = content.title;
+        listItem.appendChild(link);
+        panelContentList.appendChild(listItem);
+      });
+    }
+
+    // 뱃지 활성화 상태 업데이트
+    brandBadges.forEach((badge) => {
+      badge.classList.remove("is-active");
+      if (badge.dataset.brand === brandKey) {
+        badge.classList.add("is-active");
+      }
+    });
+
+    // 브랜디드 콘텐츠 버튼 활성화 상태 제거
+    if (brandedContentBtn) {
+      brandedContentBtn.classList.remove("is-active");
+    }
+
+    // 패널 열기
+    brandedPanelOverlay.classList.add("is-open");
+    document.body.style.overflow = "hidden"; // 스크롤 방지
+  };
+
+  const openAllBrandsPanel = () => {
+    // 모든 브랜드 콘텐츠를 합쳐서 표시
+    panelBrandName.textContent = "브랜디드 콘텐츠";
+    // 설명 표시
+    panelBrandDesc.textContent = "TECHITSSUE를 통해 발행된 브랜디드 콘텐츠를 모았습니다.";
+    panelBrandDesc.style.display = "block";
+
+    panelContentList.innerHTML = "";
+
+    // 모든 브랜드의 콘텐츠를 "기업명 | 제목" 형식으로 표시
+    Object.keys(brandedContentByBrand).forEach((brandKey) => {
+      const brandName = brandNames[brandKey] || brandKey;
+      const contents = brandedContentByBrand[brandKey] || [];
+
+      // 해당 브랜드의 콘텐츠들
+      contents.forEach((content) => {
+        const listItem = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = content.url;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.textContent = `${brandName} | ${content.title}`;
+        listItem.appendChild(link);
+        panelContentList.appendChild(listItem);
+      });
+    });
+
+    // 뱃지 활성화 상태 제거
+    brandBadges.forEach((badge) => {
+      badge.classList.remove("is-active");
+    });
+
+    // 브랜디드 콘텐츠 버튼 활성화
+    if (brandedContentBtn) {
+      brandedContentBtn.classList.add("is-active");
+    }
+
+    // 패널 열기
+    brandedPanelOverlay.classList.add("is-open");
+    document.body.style.overflow = "hidden"; // 스크롤 방지
+  };
+
+  const closePanel = () => {
+    brandedPanelOverlay.classList.remove("is-open");
+    document.body.style.overflow = ""; // 스크롤 복원
+    // 뱃지 활성화 상태 제거
+    brandBadges.forEach((badge) => {
+      badge.classList.remove("is-active");
+    });
+    // 브랜디드 콘텐츠 버튼 활성화 상태 제거
+    if (brandedContentBtn) {
+      brandedContentBtn.classList.remove("is-active");
+    }
+  };
+
+  // 브랜디드 콘텐츠 버튼 클릭 이벤트
+  if (brandedContentBtn) {
+    brandedContentBtn.addEventListener("click", () => {
+      if (brandedPanelOverlay.classList.contains("is-open")) {
+        // 이미 열려있고 브랜디드 콘텐츠 버튼이 활성화되어 있으면 닫기
+        if (brandedContentBtn.classList.contains("is-active")) {
+          closePanel();
+        } else {
+          // 다른 브랜드가 열려있으면 모든 브랜드 콘텐츠로 변경
+          openAllBrandsPanel();
+        }
+      } else {
+        // 닫혀있으면 모든 브랜드 콘텐츠 열기
+        openAllBrandsPanel();
+      }
+    });
+  }
+
+  // 뱃지 클릭 이벤트
+  brandBadges.forEach((badge) => {
+    badge.addEventListener("click", () => {
+      const brandKey = badge.dataset.brand;
+      if (brandedPanelOverlay.classList.contains("is-open")) {
+        // 이미 열려있고 같은 브랜드면 닫기
+        if (badge.classList.contains("is-active")) {
+          closePanel();
+        } else {
+          // 다른 브랜드면 내용만 변경
+          openPanel(brandKey);
+        }
+      } else {
+        // 닫혀있으면 열기
+        openPanel(brandKey);
+      }
+    });
+  });
+
+  // 닫기 버튼 클릭 이벤트
+  panelClose.addEventListener("click", closePanel);
+
+  // 오버레이 배경 클릭 시 닫기
+  brandedPanelOverlay.addEventListener("click", (e) => {
+    if (e.target === brandedPanelOverlay) {
+      closePanel();
+    }
+  });
 });
 
