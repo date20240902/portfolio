@@ -137,12 +137,12 @@ document.addEventListener("DOMContentLoaded", function () {
   const lectureImage = document.querySelector(".lecture-image");
   if (lectureItems.length > 0 && lectureImage) {
     lectureItems.forEach((item, index) => {
-      item.addEventListener("mouseenter", () => {
-        const src = item.dataset.image;
+      const showLectureImage = (targetItem) => {
+        const src = targetItem.dataset.image;
 
         if (src) {
           lectureImage.src = src;
-          lectureImage.alt = item.textContent.trim();
+          lectureImage.alt = targetItem.textContent.trim();
 
           const showImage = () => {
             lectureImage.classList.add("is-visible");
@@ -175,10 +175,21 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           }
         }
+      };
+
+      // 데스크톱: 마우스 이벤트
+      item.addEventListener("mouseenter", () => {
+        showLectureImage(item);
       });
 
       item.addEventListener("mouseleave", () => {
         lectureImage.classList.remove("is-visible");
+      });
+
+      // 모바일: 터치 이벤트
+      item.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        showLectureImage(item);
       });
     });
 

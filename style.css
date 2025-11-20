@@ -1686,37 +1686,68 @@ h3 {
   }
 }
 
-/* 모바일 전용 스타일 (767px 이하) */
-@media (max-width: 767px) {
+/* 모바일 전용 스타일 (768px 이하) */
+@media (max-width: 768px) {
+  /* 위쪽 여백은 살짝만 남기고 전체 높이를 줄입니다 */
   .hero {
-    padding: 0;
-    min-height: calc(100vh - var(--header-height));
+    padding-top: 5rem;
+    padding-bottom: 3rem;
+    min-height: auto;
+    margin-top: var(--header-height);
   }
 
+  /* 세로 화면에서 위쪽부터 차곡차곡 쌓이도록 정렬 */
   .hero-inner {
-    padding: 0 1rem;
-    gap: 1rem;
-    min-height: 100%;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
+    gap: 1.5rem;
+    padding: 0 1rem;
+    min-height: auto;
+    margin-top: 0;
   }
 
+  /* 인물 사진 컨테이너 */
   .hero-photo {
+    position: relative;
+    left: auto;
+    bottom: auto;
     max-width: 100%;
+    margin-top: 0;
     margin-bottom: 0;
+    width: auto;
   }
 
   .hero-photo-image {
-    max-height: 35vh;
+    max-height: 45vh;
+    max-width: 338px;
+    object-position: center center;
   }
   
+  /* 텍스트 영역 */
   .hero-title-wrapper {
-    margin-top: 0;
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin: 0;
+    text-align: center;
+    align-items: center;
   }
   
+  /* 타이틀 스타일 */
   .hero-title-wrapper h1,
   .hero-name {
-    font-size: clamp(2rem, 8vw, 3rem);
+    font-size: clamp(2.2rem, 6vw, 2.8rem);
+    line-height: 1.1;
+    text-align: center;
+  }
+
+  /* 서브타이틀 스타일 */
+  .hero-eyebrow {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    letter-spacing: 0.08em;
+    text-align: center;
   }
   
   .hero-overlay {
@@ -1964,12 +1995,12 @@ h3 {
   }
 
   .article-item {
-    text-align: center;
+    text-align: left;
   }
 
-  /* 모바일 - 강연 카드 이미지 숨김 (hover가 없으므로) */
+  /* 모바일 - 강연 카드 이미지 표시 */
   .lecture-image-container {
-    display: none !important;
+    display: block !important;
   }
 
 }
