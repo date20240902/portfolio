@@ -3,8 +3,8 @@
   --bg: #111111;
   --bg-alt: #1A1A1A;
   --card: #1A1A1A;
-  --accent: #6B85FF;
-  --accent-2: #6B85FF;
+  --accent: #275EFE;
+  --accent-2: #275EFE;
   --text: #F2F2F2;
   --muted: #A8A8A8;
   --stroke: #2A2A2A;
@@ -79,6 +79,7 @@ main {
   font-weight: 400;
 }
 
+
 .content-section :is(h1, h2) {
   font-family: "LINESeedKR-Bd", "LINE Seed Sans KR Bold", "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700;
@@ -87,6 +88,11 @@ main {
 .content-section :is(.tag, .brand-tab, .btn) {
   font-family: "SUIT", "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 500;
+}
+
+/* 버튼 hover 시 색상 강제 적용 - content-section 내부 버튼도 포함 */
+.content-section .btn.primary:hover {
+  color: #111111 !important;
 }
 
 .content-section:not(.about)::before {
@@ -406,8 +412,8 @@ main {
   transform: translateY(-3px);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   background: #1A1A1A;
-  border-color: #6B85FF;
-  color: #6B85FF;
+  border-color: #275EFE;
+  color: #275EFE;
 }
 
 .about-hashtags {
@@ -421,7 +427,7 @@ main {
   font-family: "SUIT", "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 500;
   font-size: clamp(1rem, 2vw, 1.3rem);
-  color: #6B85FF;
+  color: #275EFE;
 }
 
 .hashtag-row {
@@ -436,6 +442,7 @@ main {
   padding: 0.2rem 0.4rem;
   animation: hashtag-float 4s ease-in-out infinite;
   display: inline-block;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.25);
 }
 
 .about-hashtags span:nth-child(1) {
@@ -591,7 +598,7 @@ main {
 }
 
 .book-points .book-link:hover {
-  color: #6B85FF;
+  color: #275EFE;
 }
 
 .book-points li:last-child {
@@ -615,9 +622,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(107, 133, 255, 0.2);
+  background: rgba(39, 94, 254, 0.2);
   border-radius: 50%;
-  color: #6B85FF;
+  color: #275EFE;
   font-size: 0.9rem;
   font-weight: 700;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
@@ -629,37 +636,8 @@ main {
 }
 
 .book-purchase-btn {
-  background: #6B85FF;
-  color: #F2F2F2;
-  font-weight: 700;
   padding: 1.1rem 2.5rem;
   font-size: 1.05rem;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border: none;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.book-purchase-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.book-purchase-btn:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 20px rgba(107, 133, 255, 0.3);
-  background: #7A94FF;
-}
-
-.book-purchase-btn:hover::before {
-  left: 100%;
 }
 
 /* Newsletter 섹션 - 새로운 구조 */
@@ -712,54 +690,8 @@ main {
 .newsletter-btn {
   flex: 0 1 auto;
   min-width: 180px;
-  justify-content: center;
-  padding: 1rem 2rem;
-  font-size: 1rem;
-  font-weight: 600;
-  background: linear-gradient(145deg, #222, #111);
-  color: #F2F2F2;
-  border: 1px solid #2A2A2A;
-  border-radius: 999px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
 }
 
-.newsletter-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.newsletter-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border-color: #6B85FF;
-  color: #6B85FF;
-}
-
-.newsletter-btn:hover::before {
-  left: 100%;
-}
-
-.newsletter-btn.is-active {
-  background: #6B85FF;
-  color: #F2F2F2;
-  border-color: #6B85FF;
-  box-shadow: 0 0 20px rgba(107, 133, 255, 0.3);
-  transform: translateY(-1px);
-}
 
 /* 브랜드 뱃지 그리드 */
 .brand-badges {
@@ -786,17 +718,17 @@ main {
 }
 
 .brand-badge:hover {
-  border-color: #6B85FF;
-  color: #6B85FF;
+  border-color: #275EFE;
+  color: #275EFE;
   transform: translateY(-1px);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .brand-badge.is-active {
-  background: #6B85FF;
+  background: #275EFE;
   color: #F2F2F2;
-  border-color: #6B85FF;
-  box-shadow: 0 0 20px rgba(107, 133, 255, 0.3);
+  border-color: #275EFE;
+  box-shadow: 0 0 20px rgba(39, 94, 254, 0.3);
   transform: translateY(-1px);
 }
 
@@ -866,11 +798,11 @@ main {
 }
 
 .panel-close:hover {
-  background: #6B85FF;
+  background: #275EFE;
   color: #F2F2F2;
-  border-color: #6B85FF;
+  border-color: #275EFE;
   transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(107, 133, 255, 0.3);
+  box-shadow: 0 0 20px rgba(39, 94, 254, 0.3);
 }
 
 .panel-content {
@@ -927,7 +859,7 @@ main {
 }
 
 .panel-content-list a:hover {
-  color: #6B85FF;
+  color: #275EFE;
   text-decoration: underline;
   text-underline-offset: 4px;
 }
@@ -960,7 +892,7 @@ main {
 .collab-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border-color: #6B85FF;
+  border-color: #275EFE;
 }
 
 .collab-card-title {
@@ -980,7 +912,7 @@ main {
   bottom: 0;
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #6B85FF 0%, rgba(107, 133, 255, 0.3) 100%);
+  background: linear-gradient(90deg, #275EFE 0%, rgba(39, 94, 254, 0.3) 100%);
   border-radius: 2px;
 }
 
@@ -1008,7 +940,7 @@ main {
   left: 0;
   top: 0.2rem;
   font-size: 1.2rem;
-  color: #6B85FF;
+  color: #275EFE;
 }
 
 .brand-tabs {
@@ -1034,15 +966,15 @@ main {
 }
 
 .brand-tab:hover {
-  border-color: #6B85FF;
-  color: #6B85FF;
+  border-color: #275EFE;
+  color: #275EFE;
 }
 
 .brand-tab.is-active {
-  background: #6B85FF;
+  background: #275EFE;
   color: #F2F2F2;
-  border-color: #6B85FF;
-  box-shadow: 0 0 20px rgba(107, 133, 255, 0.3);
+  border-color: #275EFE;
+  box-shadow: 0 0 20px rgba(39, 94, 254, 0.3);
   transform: translateY(-1px);
 }
 
@@ -1068,7 +1000,7 @@ main {
 }
 
 .article-title:hover {
-  color: #6B85FF;
+  color: #275EFE;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -1107,11 +1039,11 @@ main {
   left: 0;
   top: 0.2rem;
   font-size: 1.2rem;
-  color: #6B85FF;
+  color: #275EFE;
 }
 
 .lecture-item:hover {
-  color: #6B85FF;
+  color: #275EFE;
 }
 
 .lecture-image-container {
@@ -1163,36 +1095,7 @@ main {
 
 .contact-btn {
   min-width: 140px;
-  justify-content: center;
-  background: linear-gradient(145deg, #222, #111);
-  color: #F2F2F2;
-  border: 1px solid #2A2A2A;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.contact-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s ease;
-}
-
-.contact-btn:hover {
-  border-color: #6B85FF;
-  color: #6B85FF;
-  transform: translateY(-2px);
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.contact-btn:hover::before {
-  left: 100%;
+  padding: 0.9rem 1.8rem;
 }
 
 .site-header {
@@ -1296,12 +1199,12 @@ main {
   left: 0;
   width: 0;
   height: 2px;
-  background: #6B85FF;
+  background: #275EFE;
   transition: width 0.3s ease;
 }
 
 .nav-list a:hover {
-  color: #6B85FF;
+  color: #275EFE;
   transform: translateY(-1px);
 }
 
@@ -1506,7 +1409,7 @@ main {
   text-transform: uppercase;
   letter-spacing: 0.3em;
   font-size: 0.75rem;
-  color: #6B85FF;
+  color: #275EFE;
   margin-bottom: 0.8rem;
 }
 
@@ -1521,37 +1424,165 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.9rem 1.8rem;
-  border-radius: 999px;
-  border: 1px solid transparent;
+  padding: 0;
+  border: none;
+  background: transparent;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
 }
 
-.btn.primary {
-  background: #6B85FF;
-  color: #F2F2F2;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  border: none;
-}
 
 .btn.ghost {
+  border: 1px solid #2A2A2A;
   border-color: #2A2A2A;
   color: #F2F2F2;
   background: linear-gradient(145deg, #222, #111);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
+
+.btn.ghost:hover {
+  border-color: #275EFE;
+  color: #275EFE;
+}
+
+/* Newsletter, Book, Contact 버튼 스타일 - 텍스트 스크롤 효과 */
+.newsletter-btn,
+.book-purchase-btn,
+.contact-btn {
+  --background: #275EFE;
+  --text: #F2F2F2;
+  --font-size: 16px;
+  --duration: 0.44s;
+  --move-hover: -4px;
+  --shadow: 0 2px 8px -1px rgba(39, 94, 254, 0.32);
+  --shadow-hover: 0 4px 20px -2px rgba(39, 94, 254, 0.5);
+  --font-shadow: var(--font-size);
+  
+  padding: 16px 32px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  line-height: var(--font-size);
+  border-radius: 24px;
+  display: inline-block;
+  outline: none;
+  border: none;
+  font-size: var(--font-size);
+  letter-spacing: 0.5px;
+  background: var(--background);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transform: translateY(0) translateZ(0);
+  transition: transform var(--duration) ease, box-shadow var(--duration) ease;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
+}
+
+.newsletter-btn > div,
+.book-purchase-btn > div,
+.contact-btn > div {
+  display: flex;
+  overflow: hidden;
+  text-shadow: 0 var(--font-shadow) 0 var(--text);
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.newsletter-btn > div > span,
+.book-purchase-btn > div > span,
+.contact-btn > div > span {
+  display: block;
+  backface-visibility: hidden;
+  transition: transform var(--duration) ease;
+  transform: translateY(0) translateZ(0);
+}
+
+.newsletter-btn:hover,
+.book-purchase-btn:hover,
+.contact-btn:hover {
+  transform: translateY(var(--move-hover)) translateZ(0);
+  box-shadow: var(--shadow-hover);
+}
+
+.newsletter-btn:hover > div > span,
+.book-purchase-btn:hover > div > span,
+.contact-btn:hover > div > span {
+  transform: translateY(calc(var(--font-size) * -1)) translateZ(0);
+}
+
+.newsletter-btn > div > span:nth-child(1) { transition-delay: 0.05s; }
+.newsletter-btn > div > span:nth-child(2) { transition-delay: 0.1s; }
+.newsletter-btn > div > span:nth-child(3) { transition-delay: 0.15s; }
+.newsletter-btn > div > span:nth-child(4) { transition-delay: 0.2s; }
+.newsletter-btn > div > span:nth-child(5) { transition-delay: 0.25s; }
+.newsletter-btn > div > span:nth-child(6) { transition-delay: 0.3s; }
+.newsletter-btn > div > span:nth-child(7) { transition-delay: 0.35s; }
+.newsletter-btn > div > span:nth-child(8) { transition-delay: 0.4s; }
+.newsletter-btn > div > span:nth-child(9) { transition-delay: 0.45s; }
+.newsletter-btn > div > span:nth-child(10) { transition-delay: 0.5s; }
+.newsletter-btn > div > span:nth-child(11) { transition-delay: 0.55s; }
+.newsletter-btn > div > span:nth-child(12) { transition-delay: 0.6s; }
+
+.book-purchase-btn > div > span:nth-child(1) { transition-delay: 0.05s; }
+.book-purchase-btn > div > span:nth-child(2) { transition-delay: 0.1s; }
+.book-purchase-btn > div > span:nth-child(3) { transition-delay: 0.15s; }
+.book-purchase-btn > div > span:nth-child(4) { transition-delay: 0.2s; }
+.book-purchase-btn > div > span:nth-child(5) { transition-delay: 0.25s; }
+.book-purchase-btn > div > span:nth-child(6) { transition-delay: 0.3s; }
+.book-purchase-btn > div > span:nth-child(7) { transition-delay: 0.35s; }
+.book-purchase-btn > div > span:nth-child(8) { transition-delay: 0.4s; }
+.book-purchase-btn > div > span:nth-child(9) { transition-delay: 0.45s; }
+.book-purchase-btn > div > span:nth-child(10) { transition-delay: 0.5s; }
+.book-purchase-btn > div > span:nth-child(11) { transition-delay: 0.55s; }
+.book-purchase-btn > div > span:nth-child(12) { transition-delay: 0.6s; }
+
+.contact-btn > div > span:nth-child(1) { transition-delay: 0.05s; }
+.contact-btn > div > span:nth-child(2) { transition-delay: 0.1s; }
+.contact-btn > div > span:nth-child(3) { transition-delay: 0.15s; }
+.contact-btn > div > span:nth-child(4) { transition-delay: 0.2s; }
+.contact-btn > div > span:nth-child(5) { transition-delay: 0.25s; }
+.contact-btn > div > span:nth-child(6) { transition-delay: 0.3s; }
+.contact-btn > div > span:nth-child(7) { transition-delay: 0.35s; }
+.contact-btn > div > span:nth-child(8) { transition-delay: 0.4s; }
+.contact-btn > div > span:nth-child(9) { transition-delay: 0.45s; }
+.contact-btn > div > span:nth-child(10) { transition-delay: 0.5s; }
+.contact-btn > div > span:nth-child(11) { transition-delay: 0.55s; }
+.contact-btn > div > span:nth-child(12) { transition-delay: 0.6s; }
+
+.newsletter-btn:hover,
+.book-purchase-btn:hover,
+.contact-btn:hover {
+  --y: var(--move-hover);
+  box-shadow: none;
+}
+
+.newsletter-btn:hover > div > span,
+.book-purchase-btn:hover > div > span,
+.contact-btn:hover > div > span {
+  --m: calc(var(--font-size) * -1);
+}
+
+/* hover 시 텍스트 복제 효과를 위한 스타일 */
+.newsletter-btn > div > span,
+.book-purchase-btn > div > span,
+.contact-btn > div > span {
+  position: relative;
+}
+
 
 .btn.full {
   width: 100%;
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-}
-
 
 .text-link {
-  color: #6B85FF;
+  color: #275EFE;
   font-weight: 600;
 }
 
@@ -1564,6 +1595,7 @@ h3 {
 }
 
 .btn.pill {
+  padding: 0.9rem 1.8rem;
   border-radius: 999px;
   min-width: 150px;
   justify-content: center;
@@ -1603,7 +1635,7 @@ h3 {
 
 .contact-btn {
   min-width: 140px;
-  justify-content: center;
+  padding: 0.9rem 1.8rem;
 }
 
 .site-footer {
@@ -1611,6 +1643,14 @@ h3 {
   padding: 2rem 0;
   background: #1A1A1A;
   color: #F2F2F2;
+}
+
+/* Highlight 효과 - IT 커뮤니케이터 이재훈 */
+.highlight {
+  background: linear-gradient(90deg, #ffffff 0%, #d6d6d6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
 }
 
 .footer-inner {
@@ -1676,6 +1716,7 @@ h3 {
 
 /* 모바일 전용 스타일 (768px 이하) */
 @media (max-width: 768px) {
+
   /* 위쪽 여백은 살짝만 남기고 전체 높이를 줄입니다 */
   .hero {
     padding-top: 5rem;

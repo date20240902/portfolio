@@ -494,3 +494,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// 버튼 텍스트 스크롤 효과 - 텍스트를 각 글자로 분리
+document.addEventListener("DOMContentLoaded", () => {
+  const buttons = document.querySelectorAll(".newsletter-btn, .book-purchase-btn, .contact-btn");
+  
+  buttons.forEach(button => {
+    const text = button.textContent.trim();
+    if (text && !button.querySelector("div")) {
+      // 텍스트를 각 글자로 분리하고, 각 span에 data-char 속성 추가
+      const letters = text.split("");
+      const html = '<div>' + letters.map(letter => `<span data-char="${letter}">${letter}</span>`).join("") + '</div>';
+      button.innerHTML = html;
+    }
+  });
+});
+
