@@ -227,6 +227,13 @@ const articlesByBrand = {
       url: "https://newsroom.hyundaicard.com/front/board/TECHITSSUE-%EB%82%98%EB%B3%B4%EB%8B%A4-%EB%82%98%EB%A5%BC-%EB%8D%94-%EC%9E%98-%EC%95%84%EB%8A%94-%EC%B6%94%EC%B2%9C-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98?bbsSeq=2049&menuCategory=MNC002&contentCategory=&topMenuCd=FMC002&sort=1&noImageContent=Y",
     },
   ],
+  outstanding: [
+    { title: "아마존에서 현대차를 구입할 수 있는 시대가 열립니다", url: "https://outstanding.kr/amazonhyundai20231205" },
+    { title: "오픈AI와 어깨를 나란히 하고 엔비디아가 투자한 한국 AI 스타트업 '트웰브랩스'", url: "https://outstanding.kr/twelvelabs20231026" },
+    { title: "AI, X, TESLA.. 일론 머스크는 왜 프리미엄 도메인을 사랑하나", url: "https://outstanding.kr/premiundomain20230911" },
+    { title: "넥스트 위챗, X가 아닌 그랩일 가능성이 높습니다", url: "https://outstanding.kr/superappgrab20231004" },
+    { title: "전체보기", url: "https://outstanding.kr/search_detail/%EC%9D%B4%EC%9E%AC%ED%9B%88" },
+  ],
   yozmit: [
     { title: "2024년 가트너 10대 전략 기술 트렌트 톺아보기", url: "https://yozm.wishket.com/magazine/detail/2298/" },
     { title: "더 이상 외면할 수 없는 양자컴퓨터", url: "https://yozm.wishket.com/magazine/detail/2888/" },
@@ -237,6 +244,9 @@ const articlesByBrand = {
   skt: [
     { title: "SK AI SUMMIT 2025, SK가 그린 AI 인프라의 미래", url: "https://www.sktelecom.com/webzine/lib/tstory_detail.do?index=52&currentPage=1&keyword=" },
     { title: "GPU, 대체 뭐길래 다들 난리일까?", url: "https://www.sktelecom.com/webzine/lib/insight_detail.do?index=40&currentPage=1&keyword=" },
+  ],
+  cheil: [
+    { title: "엔터테인먼트 허브로 진화하는 거실", url: "https://magazine.cheil.com/57425" },
   ],
 };
 
