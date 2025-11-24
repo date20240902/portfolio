@@ -678,18 +678,193 @@ main {
   line-height: 1.6;
 }
 
-.newsletter-buttons {
+.newsletter-actions {
   display: flex;
-  flex-direction: row;
-  gap: 1rem;
   justify-content: center;
-  margin-bottom: 2.5rem;
+  gap: 1.25rem;
+  margin: 2rem auto;
   flex-wrap: wrap;
 }
 
-.newsletter-btn {
-  flex: 0 1 auto;
-  min-width: 180px;
+.btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 2.4rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pill.primary {
+  background: #275EFE;
+  color: #fff;
+}
+
+.btn-pill.secondary {
+  background: #275EFE;
+  color: #fff;
+}
+
+.btn-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.newsletter-subscribe {
+  max-width: 520px;
+  margin: 1rem auto 1rem;
+}
+
+.newsletter-subscribe #stb_subscribe {
+  background: transparent !important;
+}
+
+.newsletter-subscribe #stb_subscribe .stb_header {
+  display: none;
+}
+
+.newsletter-tagline {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.newsletter-tagline span {
+  font-family: "SUIT", "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 500;
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: #275EFE;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.25);
+  padding: 0.2rem 0.4rem;
+  animation: hashtag-float 4s ease-in-out infinite;
+}
+
+.newsletter-subscribe .stb_form {
+  background: #1A1A1A !important;
+  color: var(--muted) !important;
+  padding: 2rem !important;
+  border-radius: 24px !important;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.newsletter-subscribe .stb_form * {
+  color: var(--muted) !important;
+  font-family: inherit;
+}
+
+.newsletter-subscribe .stb_form_title,
+.newsletter-subscribe .stb_form_description,
+.newsletter-subscribe label,
+.newsletter-subscribe .stb_form_set_label {
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
+  text-align: left;
+}
+
+.newsletter-subscribe .stb_form_set {
+  text-align: left;
+}
+
+.newsletter-subscribe .stb_form_set_label {
+  display: block;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.newsletter-subscribe .stb_form_set_input {
+  background: #2A2A2A !important;
+  border-color: #2A2A2A !important;
+  color: #f5f5f5 !important;
+  width: 100%;
+  text-align: left;
+}
+.newsletter-subscribe .stb_form_set_input::placeholder {
+  color: #c7c7c7;
+}
+
+.newsletter-subscribe .stb_form_set_input:focus {
+  border-color: #2A2A2A !important;
+  outline: none;
+}
+
+.newsletter-subscribe .stb_form_policy {
+  text-align: left;
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.newsletter-subscribe .stb_form_policy label {
+  color: var(--muted);
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  line-height: 1.6;
+}
+
+.newsletter-subscribe .stb_form_policy input[type="checkbox"] {
+  accent-color: #275EFE;
+  margin-right: 0.5rem;
+  background-color: #2A2A2A !important;
+  border-color: #2A2A2A !important;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #2A2A2A;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+}
+
+.newsletter-subscribe .stb_form_policy input[type="checkbox"]:checked {
+  background-color: #275EFE !important;
+  border-color: #275EFE !important;
+}
+
+.newsletter-subscribe .stb_form_policy input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.newsletter-subscribe .stb_form_modal_open_btn {
+  color: #275EFE;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.newsletter-subscribe .stb_form_submit_button {
+  background-color: #275efe !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  padding: 0.9rem 2.4rem !important;
+}
+
+@media (max-width: 768px) {
+  .newsletter-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-pill {
+    width: 100%;
+    max-width: 280px;
+  }
 }
 
 
