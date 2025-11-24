@@ -136,6 +136,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const lectureItems = document.querySelectorAll(".lecture-item");
   const lectureImage = document.querySelector(".lecture-image");
   if (lectureItems.length > 0 && lectureImage) {
+    // 기본 이미지 설정 (첫 번째 항목 - 동탄국제고)
+    const firstItem = lectureItems[0];
+    if (firstItem && firstItem.dataset.image) {
+      lectureImage.src = firstItem.dataset.image;
+      lectureImage.alt = firstItem.textContent.trim();
+      lectureImage.classList.add("is-visible");
+    }
+    
     lectureItems.forEach((item, index) => {
       const showLectureImage = (targetItem) => {
         const src = targetItem.dataset.image;
