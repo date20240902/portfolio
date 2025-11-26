@@ -127,6 +127,7 @@ main {
   box-sizing: border-box;
 }
 
+
 .hero::after {
   content: "";
   position: absolute;
@@ -752,6 +753,17 @@ main {
   font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
   border: none !important;
   box-shadow: none !important;
+}
+
+@media (max-width: 640px) {
+  .newsletter-subscribe {
+    max-width: 100%;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .newsletter-subscribe .stb_form {
+    padding: 1.5rem 1.25rem !important;
+  }
 }
 .newsletter-subscribe .stb_form * {
   color: var(--muted) !important;
@@ -2071,8 +2083,8 @@ h3 {
 
 
   .book-content {
-    text-align: center;
-    align-items: center;
+    text-align: left;
+    align-items: flex-start;
     gap: 1.25rem;
   }
 

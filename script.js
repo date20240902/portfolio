@@ -13,49 +13,6 @@ window.addEventListener("click", (event) => {
   }
 });
 
-// Hero Section 패럴랙스 효과
-const heroSection = document.querySelector(".hero");
-const heroPhotoImage = document.querySelector(".hero-photo-image");
-
-if (heroSection && heroPhotoImage) {
-  let mouseX = 0;
-  let mouseY = 0;
-  let currentX = 0;
-  let currentY = 0;
-  const parallaxStrength = 0.02; // 패럴랙스 강도 (낮을수록 약함)
-
-  heroSection.addEventListener("mousemove", (e) => {
-    const rect = heroSection.getBoundingClientRect();
-    // 마우스 위치를 섹션 중심 기준으로 -1 ~ 1 범위로 정규화
-    mouseX = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-    mouseY = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-  });
-
-  // 부드러운 애니메이션을 위한 requestAnimationFrame
-  function animateParallax() {
-    // 부드러운 보간 (easing)
-    currentX += (mouseX - currentX) * 0.1;
-    currentY += (mouseY - currentY) * 0.1;
-
-    // 이미지에 약한 변환 적용 (vh 단위 사용)
-    const translateX = currentX * parallaxStrength * 2; // vw 단위로 변환
-    const translateY = currentY * parallaxStrength * 2; // vh 단위로 변환
-    
-    heroPhotoImage.style.transform = `translate(${translateX}vw, ${translateY}vh)`;
-    
-    requestAnimationFrame(animateParallax);
-  }
-
-  // 마우스가 섹션을 벗어나면 원래 위치로 복귀
-  heroSection.addEventListener("mouseleave", () => {
-    mouseX = 0;
-    mouseY = 0;
-  });
-
-  // 애니메이션 시작
-  animateParallax();
-}
-
 // 크리스마스 눈송이 효과
 document.addEventListener("DOMContentLoaded", () => {
   const heroNameContainer = document.querySelector(".hero-name-container");
@@ -526,4 +483,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
