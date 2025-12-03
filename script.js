@@ -406,6 +406,37 @@ function initCompanyCarousel() {
     isDragging = false;
   });
 
+  // 데스크톱용 마우스 드래그 제스처
+  let mouseStartX = 0;
+  let isMouseDown = false;
+
+  const handleMouseDown = (e) => {
+    mouseStartX = e.clientX;
+    isMouseDown = true;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isMouseDown) return;
+    const dx = e.clientX - mouseStartX;
+    if (Math.abs(dx) > 40) {
+      isMouseDown = false;
+      if (dx > 0) {
+        goPrev();
+      } else {
+        goNext();
+      }
+    }
+  };
+
+  const handleMouseUpOrLeave = () => {
+    isMouseDown = false;
+  };
+
+  carousel.addEventListener("mousedown", handleMouseDown);
+  carousel.addEventListener("mousemove", handleMouseMove);
+  carousel.addEventListener("mouseup", handleMouseUpOrLeave);
+  carousel.addEventListener("mouseleave", handleMouseUpOrLeave);
+
   // 초기 위치: 첫 번째 실제 슬라이드
   update(false);
 }
@@ -514,6 +545,37 @@ function initLectureCarousel() {
 
   // 초기 위치: 첫 번째 실제 슬라이드
   update(false);
+
+  // 데스크톱용 마우스 드래그 제스처
+  let mouseStartX = 0;
+  let isMouseDown = false;
+
+  const handleMouseDown = (e) => {
+    mouseStartX = e.clientX;
+    isMouseDown = true;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isMouseDown) return;
+    const dx = e.clientX - mouseStartX;
+    if (Math.abs(dx) > 40) {
+      isMouseDown = false;
+      if (dx > 0) {
+        goPrev();
+      } else {
+        goNext();
+      }
+    }
+  };
+
+  const handleMouseUpOrLeave = () => {
+    isMouseDown = false;
+  };
+
+  wrapper.addEventListener("mousedown", handleMouseDown);
+  wrapper.addEventListener("mousemove", handleMouseMove);
+  wrapper.addEventListener("mouseup", handleMouseUpOrLeave);
+  wrapper.addEventListener("mouseleave", handleMouseUpOrLeave);
 }
 
 // 초기화
