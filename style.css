@@ -1146,6 +1146,17 @@ main {
   background: #275EFE;
 }
 
+@media (max-width: 768px) {
+  /* 모바일에서는 기고 캐러셀의 화살표도 숨기고 콘텐츠만 보이게 */
+  .company-carousel {
+    gap: 0;
+  }
+
+  .company-carousel__nav {
+    display: none;
+  }
+}
+
 .company-carousel__viewport {
   overflow: hidden;
   flex: 1 1 auto;
@@ -1510,14 +1521,9 @@ main {
     gap: 0; /* 모바일에서는 좌우 간격 제거해서 한 화면에 하나만 보이게 */
   }
 
+  /* 모바일에서는 좌우 화살표 제거하고, 그 공간까지 콘텐츠가 차지하도록 */
   .carousel-btn {
-    width: 40px;
-    height: 40px;
-  }
-
-  .carousel-btn svg {
-    width: 20px;
-    height: 20px;
+    display: none;
   }
 
   /* 모바일에서도 로고 크기와 위치를 데스크톱과 동일한 규칙으로 유지 */
@@ -1534,7 +1540,7 @@ main {
     flex-direction: column;
     gap: 1.5rem;
     width: 100%;
-    padding: 0 0.75rem; /* 모바일에서 좌우 여백을 조금 줄임 */
+    padding: 0 0.75rem; /* 기본 모바일 좌우 여백 */
     box-sizing: border-box;
     align-items: center; /* 로고/텍스트 블록을 가로 중앙 정렬 */
   }
@@ -1563,6 +1569,11 @@ main {
     width: 100%;
     height: 180px;
     margin: 0 auto;
+  }
+
+  /* 기고(company-carousel) 안에서는 여백을 한 단계 더 줄이기 */
+  .company-carousel .article-carousel-layout {
+    padding: 0 0.5rem;
   }
 
   .article-carousel-text {
