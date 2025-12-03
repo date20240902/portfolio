@@ -258,55 +258,32 @@
           <p class="eyebrow">Collaboration</p>
           <h2>함께해요</h2>
           <div class="collab-cards">
+            <!-- 기고 캐러셀 (company-carousel) -->
             <div class="collab-card collab-card-article">
               <h3 class="collab-card-title">기고</h3>
-              <div class="brand-tabs" role="tablist" aria-label="기고 브랜드 선택">
-                <button class="brand-tab is-active" type="button" data-brand="kb" role="tab" aria-selected="true">
-                  KB
-                </button>
-                <button class="brand-tab" type="button" data-brand="skt" role="tab" aria-selected="false">
-                  SKT
-                </button>
-                <button class="brand-tab" type="button" data-brand="hyundaicard" role="tab" aria-selected="false">
-                  현대카드
-                </button>
-                <button class="brand-tab" type="button" data-brand="outstanding" role="tab" aria-selected="false">
-                  아웃스탠딩
-                </button>
-                <button class="brand-tab" type="button" data-brand="yozmit" role="tab" aria-selected="false">
-                  요즘IT
-                </button>
-                <button class="brand-tab" type="button" data-brand="cheil" role="tab" aria-selected="false">
-                  제일기획
-                </button>
-              </div>
-              <div class="brand-articles" role="tabpanel">
-                <ul class="article-list"></ul>
+              <div class="company-carousel">
+                <button class="company-carousel__nav company-carousel__nav--prev" aria-label="이전 브랜드">‹</button>
+                <div class="company-carousel__viewport">
+                  <div class="company-carousel__track">
+                    <!-- JS에서 KB / SKT / 현대카드 / 아웃스탠딩 / 요즘IT / 제일기획 슬라이드가 동적으로 생성됩니다. -->
+                  </div>
+                </div>
+                <button class="company-carousel__nav company-carousel__nav--next" aria-label="다음 브랜드">›</button>
               </div>
             </div>
+            <!-- 강연 캐러셀 -->
             <div class="collab-card collab-card-lecture">
               <h3 class="collab-card-title">강연</h3>
-              <div class="lecture-content">
-                <ul class="lecture-list">
-                  <li class="lecture-item" data-image="assets/lecture-1.jpg.jpg">
-                    동탄국제고 | AI로 그리는 미래 시대 준비
-                  </li>
-                  <li class="lecture-item" data-image="assets/lecture-2.jpg.jpg">
-                    아이에이클라우드 | 사내 워크샵 특강
-                  </li>
-                  <li class="lecture-item" data-image="assets/lecture-3.jpg.jpg.jpg">
-                    마이온컴퍼니 | 갓생러 미니 토크 콘서트
-                  </li>
-                  <li class="lecture-item" data-image="assets/lecture-4.jpg.jpg.jpg">
-                    샘 올트먼, 더 비전 2030 | 북토크 & AI 강연
-                  </li>
-                  <li class="lecture-item" data-image="assets/lecture-5.jpg.jpg.jpg">
-                    대전 스타트업스쿨 | 스타트업 성장을 위한 전략적 뉴스레터 구축
-                  </li>
-                </ul>
-                <div class="lecture-image-container">
-                  <img src="" alt="" class="lecture-image" />
+              <div class="carousel-wrapper">
+                <button class="carousel-btn carousel-btn-prev" aria-label="이전 강연">
+                  ‹
+                </button>
+                <div class="carousel-container">
+                  <div class="carousel-track" id="lecture-carousel-track">
+                    <!-- 동적으로 생성됨 -->
+                  </div>
                 </div>
+                <button class="carousel-btn carousel-btn-next" aria-label="다음 강연">›</button>
               </div>
             </div>
           </div>
