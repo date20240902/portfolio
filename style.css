@@ -1128,6 +1128,42 @@ main {
   gap: 0.75rem;
 }
 
+/* 기고 섹션 - 모바일용 스와이프 안내 힌트 */
+.carousel-swipe-hint {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .carousel-swipe-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    opacity: 1;
+    transform: translateY(0);
+    animation: swipeHintFloat 1.6s ease-in-out infinite alternate;
+    pointer-events: none; /* 힌트는 클릭/터치 방해 X */
+  }
+
+  .carousel-swipe-hint .hint-arrow {
+    font-size: 0.95rem;
+    opacity: 0.85;
+  }
+
+}
+
+@keyframes swipeHintFloat {
+  from {
+    transform: translateY(2px);
+  }
+  to {
+    transform: translateY(-2px);
+  }
+}
+
 .company-carousel__nav {
   width: 32px;
   height: 32px;
