@@ -18,8 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroNameContainer = document.querySelector(".hero-name-container");
   const snowflakesContainer = document.querySelector(".snowflakes");
 
-  console.log("크리스마스 효과 초기화:", { heroNameContainer, snowflakesContainer });
-
   if (heroNameContainer && snowflakesContainer) {
     let snowflakeInterval = null;
     const snowflakeSymbols = ["❄", "❅", "❆", "✻", "✼", "✽"];
@@ -32,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 텍스트 영역 내 랜덤 위치에서 시작
       const containerRect = heroNameContainer.getBoundingClientRect();
       const startX = Math.random() * containerRect.width;
-      const startY = -20; // 텍스트 위쪽에서 시작 (음수로 위에서 시작)
+      const startY = -20; // 텍스트 위쪽에서 시작
       
       snowflake.style.position = "absolute";
       snowflake.style.left = `${startX}px`;
@@ -65,8 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, duration * 1000 + 100);
     }
 
-    heroNameContainer.addEventListener("mouseenter", (e) => {
-      console.log("마우스 진입 감지!");
+    heroNameContainer.addEventListener("mouseenter", () => {
       // 마우스 진입 시 눈송이 생성 시작 (0.2초마다)
       if (snowflakeInterval) {
         clearInterval(snowflakeInterval);
@@ -78,7 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     heroNameContainer.addEventListener("mouseleave", () => {
-      console.log("마우스 떠남 감지!");
       // 마우스 떠날 때 눈송이 생성 중지
       if (snowflakeInterval) {
         clearInterval(snowflakeInterval);
@@ -88,6 +84,58 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// Hero Terminal-style Typewriter Effect (No Delete, Different Timing)
+document.addEventListener("DOMContentLoaded", () => {
+  const messages = [
+    "Analyzing Tech Trends & Strategy",
+    "Crafting Story-Driven Content",
+    "Building Tech Brands & Networks"
+  ];
+
+  // 각 줄마다 다른 타이핑 속도와 시작 시간
+  const configs = [
+    { typeSpeed: 80, initialDelay: 200 },   // 느리게, 빠르게 시작
+    { typeSpeed: 60, initialDelay: 600 },    // 중간 속도, 중간에 시작
+    { typeSpeed: 100, initialDelay: 1000 }  // 빠르게, 늦게 시작
+  ];
+
+  function createTypewriter(lineId, message, config) {
+    const lineElement = document.getElementById(lineId);
+    if (!lineElement) return;
+
+    const textElement = lineElement.querySelector(".message-text");
+    if (!textElement) return;
+
+    let currentText = "";
+    let timeoutId = null;
+
+    function type() {
+      // 타이핑만 진행 (삭제 없음)
+      if (currentText.length < message.length) {
+        currentText = message.slice(0, currentText.length + 1);
+        textElement.textContent = currentText;
+        timeoutId = setTimeout(type, config.typeSpeed);
+      }
+      // 타이핑 완료 후에는 그대로 유지 (더 이상 동작 없음)
+    }
+
+    // 각 줄마다 다른 초기 딜레이로 시작
+    setTimeout(() => {
+      type();
+    }, config.initialDelay);
+
+    // cleanup 함수 반환 (필요시 사용)
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }
+
+  // 3개 줄 모두 독립적으로 시작 (다른 속도와 타이밍)
+  createTypewriter("message-line-1", messages[0], configs[0]);
+  createTypewriter("message-line-2", messages[1], configs[1]);
+  createTypewriter("message-line-3", messages[2], configs[2]);
+});
+
 // (이전에 추가했던 히어로 타이포그래피 애니메이션은 모두 제거하여 기본 상태로 되돌렸습니다.)
 
 // 기고 브랜드 데이터
@@ -95,6 +143,7 @@ const articlesByBrand = {
   kb: {
     name: "KB",
     logo: "assets/logo-kb.png.png",
+    mission: "**금융 DX 브랜딩** | '기술을 아는 금융'을 위한 트렌드 재해석",
     articles: [
       { title: "하이브의 엔터테인먼트 혁신, 위버스로 만들어가는 글로벌 팬 커뮤니티", url: "https://kbthink.com/life/daily/hybe.html" },
       { title: "스포티파이 플레이리스트 추천 기술, AI DJ와 함께하는 음악 경험", url: "https://kbthink.com/life/daily/spotify.html" },
@@ -106,6 +155,7 @@ const articlesByBrand = {
   skt: {
     name: "SKT",
     logo: "assets/logo-skt.png.png",
+    mission: "**AI 기술 리더십 전파** | 복잡한 인프라 생태계를 대중의 언어로 해설",
     articles: [
       { title: "SK AI SUMMIT 2025, SK가 그린 AI 인프라의 미래", url: "https://www.sktelecom.com/webzine/lib/tstory_detail.do?index=52&currentPage=1&keyword=" },
       { title: "GPU, 대체 뭐길래 다들 난리일까?", url: "https://www.sktelecom.com/webzine/lib/insight_detail.do?index=40&currentPage=1&keyword=" },
@@ -114,7 +164,12 @@ const articlesByBrand = {
   hyundaicard: {
     name: "현대카드",
     logo: "assets/logo-hyundaicard.png.png",
+    mission: "**테크와 라이프스타일의 연결** | 금융·결제 기술을 소비자의 언어로 번역",
     articles: [
+      {
+        title: "AI 시대, 기업도 뭉쳐야 산다",
+        url: "https://newsroom.hyundaicard.com/front/board/TECHITSSUE-AI-%EC%8B%9C%EB%8C%80-%EA%B8%B0%EC%97%85%EB%8F%84-%EB%AD%89%EC%B3%90%EC%95%BC-%EC%82%B0%EB%8B%A4?bbsSeq=2204&menuCategory=MNC002&contentCategory=&topMenuCd=FMC002&sort=1&noImageContent=Y",
+      },
       {
         title: "우리 삶과 가까워지는 안전하고 빠른 결제 'EMV 컨택리스'",
         url: "https://newsroom.hyundaicard.com/front/board/TECHITSSUE-%EC%9A%B0%EB%A6%AC-%EC%82%B6%EA%B3%BC-%EA%B0%80%EA%B9%8C%EC%9B%8C%EC%A7%80%EB%8A%94-%EC%95%88%EC%A0%84%ED%95%98%EA%B3%A0-%EB%B9%A0%EB%A5%B8-%EA%B2%B0%EC%A0%9C-EMV-%EC%BB%A8%ED%83%9D%EB%A6%AC%EC%8A%A4?bbsSeq=2099&menuCategory=MNC002&contentCategory=&topMenuCd=FMC002&sort=1&noImageContent=Y",
@@ -128,6 +183,7 @@ const articlesByBrand = {
   outstanding: {
     name: "아웃스탠딩",
     logo: "assets/logo-outstanding.png.png",
+    mission: "**심층 비즈니스 분석** | 글로벌 빅테크의 이면을 파고드는 딥다이브",
     articles: [
       { title: "아마존에서 현대차를 구입할 수 있는 시대가 열립니다", url: "https://outstanding.kr/amazonhyundai20231205" },
       { title: "오픈AI와 어깨를 나란히 하고 엔비디아가 투자한 한국 AI 스타트업 '트웰브랩스'", url: "https://outstanding.kr/twelvelabs20231026" },
@@ -139,7 +195,9 @@ const articlesByBrand = {
   yozmit: {
     name: "요즘IT",
     logo: "assets/logo-yozmit.png.png",
+    mission: "**실무 중심 IT 트렌드** | 현업 적용 가능한 기술 인사이트 큐레이션",
     articles: [
+      { title: "챗GPT 보고 사표 쓴 비전공자, IT 커뮤니케이터가 되다", url: "https://yozm.wishket.com/magazine/detail/3471/" },
       { title: "2024년 가트너 10대 전략 기술 트렌드 톺아보기", url: "https://yozm.wishket.com/magazine/detail/2298/" },
       { title: "더 이상 외면할 수 없는 양자컴퓨터", url: "https://yozm.wishket.com/magazine/detail/2888/" },
       { title: "생성형 AI 시대를 이해하기 위한 필수 용어 사전", url: "https://yozm.wishket.com/magazine/detail/2360/" },
@@ -150,6 +208,7 @@ const articlesByBrand = {
   yozmit2: {
     name: "요즘IT",
     logo: "assets/logo-cheil.png.png",
+    mission: "**미래 산업 조망** | 테크가 바꾸는 엔터테인먼트와 마케팅의 진화",
     articles: [
       {
         title: "[Cheil Magazine] 엔터테인먼트 허브로 진화하는 거실",
@@ -340,6 +399,7 @@ function initCompanyCarousel() {
 
   let index = 0; // 실제 슬라이드 인덱스 (0 ~ slideCount-1)
   let isTransitioning = false;
+  let animationTimeout = null; // 애니메이션 타이머 추적
 
   const setTransition = (enabled) => {
     track.style.transition = enabled ? "transform 0.35s ease" : "none";
@@ -349,6 +409,70 @@ function initCompanyCarousel() {
     setTransition(withAnimation);
     const offset = -(index + 1) * 100; // 앞쪽 클론 한 개(1슬라이드) 보정
     track.style.transform = `translateX(${offset}%)`;
+    
+    // 슬라이드 변경 시 로고와 mission 텍스트 fade-in 애니메이션
+    if (withAnimation) {
+      // 이전 애니메이션 타이머가 있으면 취소
+      if (animationTimeout) {
+        clearTimeout(animationTimeout);
+        animationTimeout = null;
+      }
+      
+      // 모든 슬라이드의 identity 요소를 초기 상태로 리셋
+      const allSlides = track.children;
+      for (let i = 0; i < allSlides.length; i++) {
+        const slide = allSlides[i];
+        const identityElement = slide.querySelector(".carousel-brand-identity");
+        if (identityElement) {
+          identityElement.style.transition = "none";
+          identityElement.style.opacity = "0";
+          identityElement.style.transform = "translateY(10px)";
+        }
+      }
+      
+      animationTimeout = setTimeout(() => {
+        const currentSlide = track.children[index + 1]; // 앞쪽 클론 보정
+        if (currentSlide) {
+          const identityElement = currentSlide.querySelector(".carousel-brand-identity");
+          
+          if (identityElement) {
+            // 리플로우 강제
+            void identityElement.offsetHeight;
+            
+            // 현재 슬라이드만 애니메이션 시작
+            identityElement.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+            identityElement.style.opacity = "1";
+            identityElement.style.transform = "translateY(0)";
+          }
+        }
+        animationTimeout = null;
+      }, 200); // 슬라이드 전환 후 약간의 딜레이
+    } else {
+      // 애니메이션 없이 위치만 조정할 때는 현재 슬라이드의 identity 요소를 표시 상태로 유지
+      const currentSlide = track.children[index + 1]; // 앞쪽 클론 보정
+      if (currentSlide) {
+        const identityElement = currentSlide.querySelector(".carousel-brand-identity");
+        if (identityElement) {
+          // 다른 슬라이드들은 숨기기
+          const allSlides = track.children;
+          for (let i = 0; i < allSlides.length; i++) {
+            if (i !== index + 1) {
+              const slide = allSlides[i];
+              const otherIdentityElement = slide.querySelector(".carousel-brand-identity");
+              if (otherIdentityElement) {
+                otherIdentityElement.style.transition = "none";
+                otherIdentityElement.style.opacity = "0";
+                otherIdentityElement.style.transform = "translateY(10px)";
+              }
+            }
+          }
+          // 현재 슬라이드는 표시 상태 유지
+          identityElement.style.transition = "none";
+          identityElement.style.opacity = "1";
+          identityElement.style.transform = "translateY(0)";
+        }
+      }
+    }
   };
 
   const goPrev = () => {
@@ -585,6 +709,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (track) {
     const brandKeys = Object.keys(articlesByBrand);
 
+    // Mission 텍스트의 **키워드** 형식을 <strong> 태그로 변환하고 "|" 기준으로 줄바꿈하는 함수
+    const formatMission = (text) => {
+      if (!text) return "";
+      // "|" 기준으로 분리하고 각 부분을 <br>로 연결
+      const parts = text.split("|").map(part => part.trim());
+      return parts.map(part => part.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")).join("<br>");
+    };
+
     const slidesHTML = brandKeys
       .map((key) => {
         const brand = articlesByBrand[key];
@@ -594,16 +726,21 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="article-carousel-layout">
             <div class="article-carousel-center">
               <div class="article-carousel-center-inner">
-                <div class="carousel-brand-logo-frame">
-                  <span class="carousel-brand-logo-placeholder">기업 로고</span>
-                  <img
-                    src="${brand.logo}"
-                    alt="${brand.name}"
-                    class="carousel-brand-logo"
-                    onload="this.previousElementSibling.style.display='none'"
-                    onerror="this.style.display='none'"
-                  >
+                <!-- 왼쪽 컬럼: Identity & Mission -->
+                <div class="carousel-brand-identity">
+                  <div class="carousel-brand-logo-frame">
+                    <span class="carousel-brand-logo-placeholder">기업 로고</span>
+                    <img
+                      src="${brand.logo}"
+                      alt="${brand.name}"
+                      class="carousel-brand-logo"
+                      onload="this.previousElementSibling.style.display='none'"
+                      onerror="this.style.display='none'"
+                    >
+                  </div>
+                  <p class="carousel-brand-mission">${formatMission(brand.mission || "")}</p>
                 </div>
+                <!-- 오른쪽 컬럼: Content List -->
                 <div class="article-carousel-text">
                   <ul class="carousel-article-list">
                     ${brand.articles
@@ -626,6 +763,17 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
 
     track.innerHTML = slidesHTML;
+    
+    // 초기 로드 시 첫 번째 슬라이드의 로고와 mission 텍스트를 즉시 표시
+    const firstSlide = track.querySelector(".company-carousel__slide");
+    if (firstSlide) {
+      const identityElement = firstSlide.querySelector(".carousel-brand-identity");
+      if (identityElement) {
+        identityElement.style.opacity = "1";
+        identityElement.style.transform = "translateY(0)";
+      }
+    }
+    
     initCompanyCarousel();
   }
 
@@ -843,6 +991,82 @@ document.addEventListener("DOMContentLoaded", () => {
       button.innerHTML = html;
     }
   });
+});
+
+// Newsletter Metrics Count Up Animation
+document.addEventListener("DOMContentLoaded", () => {
+  const metricsContainer = document.getElementById("newsletter-metrics");
+  if (!metricsContainer) return;
+
+  const metricNumbers = metricsContainer.querySelectorAll(".metric-number");
+  let hasAnimated = false;
+
+  // 카운트업 함수
+  function animateValue(element, target, format = "number") {
+    const duration = 1800; // 1.8초
+    const start = 0;
+    const increment = target / (duration / 16); // 60fps 기준
+    let current = start;
+    const startTime = Date.now();
+
+    const timer = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      if (elapsed >= duration) {
+        current = target;
+        clearInterval(timer);
+      } else {
+        // ease-out 효과를 위한 easing 함수
+        const progress = elapsed / duration;
+        const eased = 1 - Math.pow(1 - progress, 3); // cubic ease-out
+        current = target * eased;
+      }
+
+      // 숫자 포맷팅
+      let displayValue = Math.floor(current);
+      if (format === "percentage") {
+        element.textContent = `${displayValue}%+`;
+      } else if (format === "number") {
+        element.textContent = `${displayValue.toLocaleString()}+`;
+      } else {
+        element.textContent = displayValue.toLocaleString();
+      }
+    }, 16); // 약 60fps
+  }
+
+  // Intersection Observer 설정
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.3, // 30% 보일 때 시작
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !hasAnimated) {
+        hasAnimated = true;
+        
+        // 각 메트릭 숫자에 대해 카운트업 애니메이션 시작
+        metricNumbers.forEach((element, index) => {
+          const target = parseInt(element.getAttribute("data-target"));
+          if (!isNaN(target)) {
+            // 각 메트릭의 포맷 타입 결정
+            let format = "number";
+            if (index === 1) {
+              // 두 번째 메트릭 (오픈율)은 퍼센트
+              format = "percentage";
+            }
+            
+            // 약간의 딜레이를 주어 순차적으로 시작하는 효과
+            setTimeout(() => {
+              animateValue(element, target, format);
+            }, index * 50); // 각 메트릭마다 50ms씩 딜레이
+          }
+        });
+      }
+    });
+  }, observerOptions);
+
+  observer.observe(metricsContainer);
 });
 
 

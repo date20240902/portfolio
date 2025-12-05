@@ -112,122 +112,291 @@ main {
   );
 }
 
+/* Hero Section - New Layout */
 .hero {
   min-height: 100vh;
   margin: 0;
   margin-top: var(--header-height);
-  padding: 0;
+  padding: clamp(3rem, 6vh, 5rem) clamp(2rem, 5vw, 4rem);
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
   scroll-snap-align: start;
   background: #111111;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.32);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero-inner {
+.hero-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  margin-left: clamp(3rem, 6vw, 5rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: center;
   position: relative;
   z-index: 2;
-  width: 100%;
-  height: 100%;
-  min-height: calc(100vh - var(--header-height));
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 0;
-  box-sizing: border-box;
 }
 
-.hero-photo {
-  position: absolute;
-  left: -5vw;
-  bottom: 0;
-  z-index: 1;
-  width: clamp(560px, 70vw, 80vw);
-  max-width: 1000px;
-  height: auto;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-}
-
-.hero-photo-image {
-  width: 100%;
-  height: auto;
-  max-height: 100vh;
-  object-fit: contain;
-  object-position: left bottom;
-  filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.1));
-  opacity: 1;
-  transition: transform 0.1s ease-out;
-  will-change: transform;
-}
-
-.hero-title-wrapper {
-  position: absolute;
-  right: clamp(2rem, 5vw, 6rem);
-  bottom: clamp(5rem, 12vh, 10rem);
-  z-index: 5;
-  pointer-events: none;
+/* Hero Content (Left Side) */
+.hero-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-  min-width: 0;
+  gap: 1.5rem;
+  text-align: left;
+  animation: fadeInUp 0.8s ease-out;
 }
 
-.hero-eyebrow {
-  margin: 0;
-  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(1.35rem, 1.8vw, 2.1rem);
+.hero-name-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.hero-name {
+  font-family: "LINESeedKR-Bd", "LINE Seed Sans KR Bold", "Pretendard", system-ui, sans-serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 900;
-  letter-spacing: 0.25em;
+  line-height: 1.1;
   color: #F2F2F2;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1.2s ease-out 0.3s forwards;
-  white-space: nowrap;
-  overflow: visible;
-  text-overflow: clip;
-  text-align: right;
-}
-
-.hero-eyebrow {
   margin: 0;
-  font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(1.35rem, 1.8vw, 2.1rem);
-  font-weight: 900;
-  letter-spacing: 0.25em;
-  color: #F2F2F2;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 1.2s ease-out 0.3s forwards;
-  white-space: nowrap;
-  overflow: visible;
-  text-overflow: clip;
-  text-align: right;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.32);
+  letter-spacing: -0.02em;
+  transition: filter 0.4s ease, transform 0.4s ease;
+  position: relative;
   z-index: 1;
+}
+
+/* 크리스마스 호버 효과 - 폰트 사이즈, 색상, 위치는 유지하고 애니메이션만 추가 */
+.hero-name-container:hover .hero-name {
+  filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.4)) 
+          drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))
+          drop-shadow(0 0 40px rgba(255, 102, 102, 0.8))
+          drop-shadow(0 0 60px rgba(102, 204, 102, 0.7))
+          drop-shadow(0 0 80px rgba(255, 102, 102, 0.5));
+  text-shadow: 
+    2px 2px 0 rgba(0, 0, 0, 0.3),
+    3px 3px 6px rgba(0, 0, 0, 0.3),
+    4px 4px 8px rgba(0, 0, 0, 0.25),
+    6px 6px 12px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(255, 102, 102, 0.6),
+    0 0 50px rgba(102, 204, 102, 0.5),
+    0 0 70px rgba(255, 102, 102, 0.4);
+  transform: scale(1.02);
+}
+
+/* 눈송이 컨테이너 */
+.snowflakes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
+  overflow: visible;
+  z-index: 15;
+}
+
+.snowflake {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+  animation: snowfall 1s linear forwards;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes snowfall {
+  0% {
+    opacity: 0;
+    transform: translateY(-120px) translateX(0) rotate(0deg) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(120px) translateX(var(--random-x, 20px)) rotate(var(--random-rotate, 360deg)) scale(1);
+  }
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 0.6rem 1.4rem;
+  background: #275EFE;
+  color: #FFFFFF;
+  border-radius: 999px;
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+  font-weight: 600;
+  font-family: "SUIT", "Pretendard", system-ui, sans-serif;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(39, 94, 254, 0.3);
+}
+
+.hero-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(39, 94, 254, 0.4);
+}
+
+.hero-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  min-height: 8rem;
+}
+
+.hero-message-line {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2rem;
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 600;
+  color: #F2F2F2;
+  font-family: "LINESeedKR-Bd", "LINE Seed Sans KR Bold", "Pretendard", system-ui, sans-serif;
+}
+
+.message-text {
+  color: #F2F2F2;
+  min-height: 1.5em;
+}
+
+.message-cursor {
+  color: #275EFE;
+  font-weight: 300;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Hero Image (Right Side) */
+.hero-image-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+.hero-image-blob {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(39, 94, 254, 0.15) 0%,
+    rgba(39, 94, 254, 0.08) 40%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  z-index: 1;
+  animation: blobFloat 8s ease-in-out infinite;
+  filter: blur(40px);
+}
+
+@keyframes blobFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(20px, -20px) scale(1.05);
+  }
+  66% {
+    transform: translate(-15px, 15px) scale(0.95);
+  }
+}
+
+.hero-image-frame {
+  position: relative;
+  width: clamp(320px, 35vw, 480px);
+  height: clamp(320px, 35vw, 480px);
+  border-radius: 50%;
+  overflow: hidden;
+  z-index: 2;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-image-frame:hover {
+  transform: scale(1.05);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scaleX(-1); /* 좌우반전 */
+  transition: transform 0.4s ease;
+}
+
+.hero-image-frame:hover .hero-image {
+  transform: scaleX(-1) scale(1.05);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .hero {
+    padding: clamp(2rem, 4vh, 3rem) clamp(1.5rem, 4vw, 2rem);
+    min-height: auto;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .hero-content {
+    text-align: center;
+    order: 2;
+  }
+
+  .hero-image-wrapper {
+    order: 1;
+    min-height: 300px;
+  }
+
+  .hero-image-frame {
+    width: clamp(240px, 50vw, 320px);
+    height: clamp(240px, 50vw, 320px);
+  }
+
+  .hero-badges {
+    justify-content: center;
+  }
+
+  .hero-messages {
+    align-items: center;
+    text-align: center;
+  }
 }
 
 
@@ -702,6 +871,111 @@ main {
   gap: 1.25rem;
   margin: 2rem auto;
   flex-wrap: wrap;
+}
+
+/* Newsletter Live Metrics Row */
+.newsletter-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin: 3rem auto;
+  padding: 2.5rem 2rem;
+  background: rgba(26, 26, 26, 0.6);
+  border: 1px solid #2A2A2A;
+  border-radius: 16px;
+  max-width: 800px;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.metric-item-highlight {
+  position: relative;
+}
+
+.metric-item-highlight::before {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  background: linear-gradient(135deg, rgba(39, 94, 254, 0.15) 0%, rgba(39, 94, 254, 0.05) 100%);
+  border-radius: 12px;
+  z-index: -1;
+}
+
+.metric-number {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #275EFE;
+  line-height: 1.2;
+  font-family: "LINESeedKR-Bd", "LINE Seed Sans KR Bold", "Pretendard", system-ui, sans-serif;
+  transition: transform 0.3s ease;
+}
+
+.metric-item-highlight .metric-number {
+  font-size: clamp(2.2rem, 4.5vw, 3.3rem);
+  color: #275EFE;
+  text-shadow: 0 0 20px rgba(39, 94, 254, 0.3);
+}
+
+.metric-label {
+  font-size: clamp(0.85rem, 1.2vw, 0.95rem);
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.metric-note {
+  display: block;
+  font-size: 0.75em;
+  color: rgba(168, 168, 168, 0.7);
+  margin-top: 0.25rem;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, transparent 0%, #2A2A2A 20%, #2A2A2A 80%, transparent 100%);
+  flex-shrink: 0;
+}
+
+/* 모바일 반응형 - Metrics Row */
+@media (max-width: 768px) {
+  .newsletter-metrics {
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+    margin: 2.5rem auto;
+  }
+
+  .metric-item {
+    width: 100%;
+  }
+
+  .metric-divider {
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #2A2A2A 20%, #2A2A2A 80%, transparent 100%);
+  }
+
+  .metric-number {
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+  }
+
+  .metric-item-highlight .metric-number {
+    font-size: clamp(2rem, 6.5vw, 2.8rem);
+  }
+
+  .metric-label {
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+  }
 }
 
 .btn-pill {
@@ -1349,7 +1623,7 @@ main {
   max-width: 100%;
   display: flex;
   flex-direction: row;
-  align-items: stretch;
+  align-items: flex-start !important; /* 상단 정렬 강제 적용 */
   justify-content: center;
   gap: 1.25rem;
   margin: 0 auto;
@@ -1357,27 +1631,39 @@ main {
 
 .article-carousel-center-inner {
   display: flex;
-  align-items: center; /* 로고 블록과 텍스트 블록을 카드 높이 기준으로 가운데 정렬 */
+  align-items: flex-start; /* 상단 정렬로 변경하여 로고 높이 기준으로 맞춤 */
   justify-content: flex-start;
-  gap: 2.5rem;
+  gap: 3rem;
   width: 100%;
 }
 
-.article-carousel-text {
-  flex: 1 1 60%;
+/* 왼쪽 컬럼: Identity & Mission */
+.carousel-brand-identity {
+  flex: 0 0 40%;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* 로고와 함께 수직 중앙 정렬 */
-  gap: 0.75rem;
-  /* 제목 리스트가 가장 많은 브랜드 기준으로 높이를 고정해
-     모든 슬라이드에서 텍스트 박스 크기가 동일하게 보이도록 설정 */
-  height: 220px;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  margin: 0;
+  padding: 0;
+  min-height: 280px; /* 로고(200px) + 미션 텍스트(약 80px) = 약 280px */
+}
+
+/* 첫 번째 슬라이드는 초기에 표시 */
+.company-carousel__slide:first-child .carousel-brand-identity {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .carousel-brand-logo-frame {
-  flex: 0 0 40%;
-  max-width: 520px;
-  height: 240px;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: 400px;
+  height: 200px;
   border-radius: 24px;
   border: none;
   background: transparent;
@@ -1386,7 +1672,43 @@ main {
   justify-content: center;
   position: relative;
   overflow: hidden;
+  margin: 0 0 0.5rem 0; /* 하단 여백을 더 줄임 */
+  padding: 0;
+  margin-top: 0; /* 상단 여백 제거 */
 }
+
+.carousel-brand-mission {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #9CA3AF;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  word-break: keep-all;
+  max-width: 100%;
+}
+
+/* Mission 텍스트 내부의 강조 키워드 스타일 */
+.carousel-brand-mission strong {
+  font-weight: 700;
+  color: #275EFE;
+}
+
+/* 오른쪽 컬럼: Content List */
+.article-carousel-text {
+  flex: 1 1 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0;
+  height: 280px; /* 로고(200px) + 미션 텍스트(약 80px) = 약 280px에 맞춤 */
+  min-height: 280px;
+  margin: 0;
+  padding: 0;
+}
+
 
 .carousel-brand-logo-placeholder {
   font-size: 1rem;
@@ -1440,6 +1762,9 @@ main {
   /* 제목이 중간에 잘리지 않도록 높이 제한 제거 */
   max-height: none;
   overflow: visible;
+  align-self: flex-start; /* 상단 정렬 */
+  padding-top: 0; /* 상단 패딩 제거 */
+  margin-top: 0; /* 마진 제거 */
 }
 
 /* ===== 데스크톱용 기고 레이아웃 재정렬 ===== */
@@ -1494,6 +1819,13 @@ main {
 .carousel-article-item {
   position: relative;
   padding-left: 1.25rem;
+  margin: 0;
+  padding-top: 0;
+}
+
+.carousel-article-item:first-child {
+  margin-top: 0;
+  padding-top: 0;
 }
 
 .carousel-article-item::before {
@@ -1505,6 +1837,10 @@ main {
   color: #275EFE;
 }
 
+.carousel-article-item:first-child::before {
+  top: 0; /* 첫 번째 항목의 불릿을 상단에 정확히 맞춤 */
+}
+
 .carousel-article-title {
   font-size: clamp(0.95rem, 1.2vw, 1.05rem);
   color: var(--text);
@@ -1512,6 +1848,8 @@ main {
   transition: color 0.2s ease;
   line-height: 1.5;
   display: block;
+  margin: 0;
+  padding: 0;
 }
 
 .carousel-article-title:hover {
@@ -1633,6 +1971,26 @@ main {
     max-width: 100%;
     max-height: 100%;
     object-fit: cover;    /* 프레임을 꽉 채우되 넘치는 부분은 잘라냄 */
+  }
+
+  .article-carousel-center-inner {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .carousel-brand-identity {
+    width: 100%;
+    flex: 0 0 auto;
+  }
+
+  .carousel-brand-logo-frame {
+    height: 140px;
+    margin-bottom: 1rem;
+  }
+
+  .carousel-brand-mission {
+    font-size: 0.8rem;
+    line-height: 1.5;
   }
 
   .article-carousel-text {
