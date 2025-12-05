@@ -221,24 +221,32 @@ const articlesByBrand = {
 // 강연 데이터
 const lectures = [
   {
-    title: "동탄국제고 | AI로 그리는 미래 시대 준비",
+    badge: "Future Gen",
+    client: "동탄국제고",
+    topic: "AI로 그리는 미래 시대 준비",
+    description: "청소년을 위한 AI 리터러시 특강",
     image: "assets/lecture-1.jpg.jpg",
   },
   {
-    title: "아이에이클라우드 | 사내 워크샵 특강",
+    badge: "Startup",
+    client: "대전 스타트업스쿨",
+    topic: "스타트업 성장을 위한 전략적 뉴스레터 구축",
+    description: "",
+    image: "assets/lecture-5.jpg.jpg.jpg",
+  },
+  {
+    badge: "Corporate",
+    client: "아이에이클라우드",
+    topic: "사내 임직원 대상 생성형 AI 워크샵",
+    description: "",
     image: "assets/lecture-2.jpg.jpg",
   },
   {
-    title: "마이온컴퍼니 | 갓생러 미니 토크 콘서트",
-    image: "assets/lecture-3.jpg.jpg.jpg",
-  },
-  {
-    title: "샘 올트먼, 더 비전 2030 | 북토크 & AI 강연",
+    badge: "Book Talk",
+    client: "샘 올트먼, 더 비전 2030",
+    topic: "저자 북토크 & AI 인사이트 강연",
+    description: "",
     image: "assets/lecture-4.jpg.jpg.jpg",
-  },
-  {
-    title: "대전 스타트업스쿨 | 스타트업 성장을 위한 전략적 뉴스레터 구축",
-    image: "assets/lecture-5.jpg.jpg.jpg",
   },
 ];
 
@@ -511,6 +519,7 @@ function initCompanyCarousel() {
   carousel.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
     isDragging = true;
+    isPaused = true; // 터치 시작 시 자동 넘김 일시정지
   });
 
   carousel.addEventListener("touchmove", (e) => {
@@ -528,6 +537,10 @@ function initCompanyCarousel() {
 
   carousel.addEventListener("touchend", () => {
     isDragging = false;
+    // 터치 종료 후 약간의 딜레이를 두고 재개
+    setTimeout(() => {
+      isPaused = false;
+    }, 500);
   });
 
   // 데스크톱용 마우스 드래그 제스처
@@ -563,6 +576,58 @@ function initCompanyCarousel() {
 
   // 초기 위치: 첫 번째 실제 슬라이드
   update(false);
+
+  // 자동 넘김 기능
+  let autoPlayInterval = null;
+  let isPaused = false;
+
+  const startAutoPlay = () => {
+    if (autoPlayInterval) clearInterval(autoPlayInterval);
+    autoPlayInterval = setInterval(() => {
+      if (!isPaused && !isTransitioning) {
+        goNext();
+      }
+    }, 4000);
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+  };
+
+  // 호버 시 일시정지
+  carousel.addEventListener("mouseenter", () => {
+    isPaused = true;
+  });
+
+  carousel.addEventListener("mouseleave", () => {
+    isPaused = false;
+  });
+
+  // 모바일 터치 중 일시정지
+  carousel.addEventListener("touchstart", () => {
+    isPaused = true;
+  });
+
+  carousel.addEventListener("touchend", () => {
+    // 터치 종료 후 약간의 딜레이를 두고 재개
+    setTimeout(() => {
+      isPaused = false;
+    }, 500);
+  });
+
+  // 자동 넘김 시작
+  startAutoPlay();
+
+  // 페이지 언마운트 시 타이머 정리
+  const cleanup = () => {
+    stopAutoPlay();
+  };
+
+  // 페이지 언로드 시 정리
+  window.addEventListener("beforeunload", cleanup);
 }
 
 // 강연 캐러셀 초기화 (한 번에 1개 슬라이드)
@@ -581,9 +646,16 @@ function initLectureCarousel() {
     .map(
       (lecture) => `
     <div class="carousel-slide">
-      <div class="carousel-slide-center">
-        <img src="${lecture.image}" alt="${lecture.title}" class="carousel-lecture-image" onerror="this.style.display='none'">
-        <h4 class="carousel-lecture-title">${lecture.title}</h4>
+      <div class="lecture-card">
+        <div class="lecture-card-image-wrapper">
+          <img src="${lecture.image}" alt="${lecture.topic}" class="lecture-card-image" onerror="this.style.display='none'">
+          <span class="lecture-badge">${lecture.badge}</span>
+        </div>
+        <div class="lecture-card-content">
+          <div class="lecture-client">${lecture.client}</div>
+          <h4 class="lecture-topic">${lecture.topic}</h4>
+          ${lecture.description ? `<p class="lecture-description">${lecture.description}</p>` : ''}
+        </div>
       </div>
     </div>`
     )
@@ -648,6 +720,7 @@ function initLectureCarousel() {
   wrapper.addEventListener("touchstart", (e) => {
     startX = e.touches[0].clientX;
     isDragging = true;
+    isPaused = true; // 터치 시작 시 자동 넘김 일시정지
   });
 
   wrapper.addEventListener("touchmove", (e) => {
@@ -665,6 +738,10 @@ function initLectureCarousel() {
 
   wrapper.addEventListener("touchend", () => {
     isDragging = false;
+    // 터치 종료 후 약간의 딜레이를 두고 재개
+    setTimeout(() => {
+      isPaused = false;
+    }, 500);
   });
 
   // 초기 위치: 첫 번째 실제 슬라이드
@@ -700,6 +777,47 @@ function initLectureCarousel() {
   wrapper.addEventListener("mousemove", handleMouseMove);
   wrapper.addEventListener("mouseup", handleMouseUpOrLeave);
   wrapper.addEventListener("mouseleave", handleMouseUpOrLeave);
+
+  // 자동 넘김 기능
+  let autoPlayInterval = null;
+  let isPaused = false;
+
+  const startAutoPlay = () => {
+    if (autoPlayInterval) clearInterval(autoPlayInterval);
+    autoPlayInterval = setInterval(() => {
+      if (!isPaused && !isTransitioning) {
+        goNext();
+      }
+    }, 4000);
+  };
+
+  const stopAutoPlay = () => {
+    if (autoPlayInterval) {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = null;
+    }
+  };
+
+  // 호버 시 일시정지
+  wrapper.addEventListener("mouseenter", () => {
+    isPaused = true;
+  });
+
+  wrapper.addEventListener("mouseleave", () => {
+    isPaused = false;
+  });
+
+
+  // 자동 넘김 시작
+  startAutoPlay();
+
+  // 페이지 언마운트 시 타이머 정리
+  const cleanup = () => {
+    stopAutoPlay();
+  };
+
+  // 페이지 언로드 시 정리
+  window.addEventListener("beforeunload", cleanup);
 }
 
 // 초기화
@@ -1068,5 +1186,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   observer.observe(metricsContainer);
 });
+
 
 

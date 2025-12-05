@@ -306,6 +306,15 @@
                   </div>
                 </div>
                 <button class="company-carousel__nav company-carousel__nav--next" aria-label="다음 브랜드">›</button>
+                <div class="carousel-swipe-hint">
+                  <span class="hint-arrow hint-arrow-left">◀</span>
+                  <span class="hint-arrow hint-arrow-left">◀</span>
+                  <span class="hint-arrow hint-arrow-left">◀</span>
+                  <span class="hint-spacer"></span>
+                  <span class="hint-arrow hint-arrow-right">▶</span>
+                  <span class="hint-arrow hint-arrow-right">▶</span>
+                  <span class="hint-arrow hint-arrow-right">▶</span>
+                </div>
               </div>
             </div>
             <!-- 강연 캐러셀 -->
@@ -321,6 +330,15 @@
                   </div>
                 </div>
                 <button class="carousel-btn carousel-btn-next" aria-label="다음 강연">›</button>
+                <div class="carousel-swipe-hint">
+                  <span class="hint-arrow hint-arrow-left">◀</span>
+                  <span class="hint-arrow hint-arrow-left">◀</span>
+                  <span class="hint-arrow hint-arrow-left">◀</span>
+                  <span class="hint-spacer"></span>
+                  <span class="hint-arrow hint-arrow-right">▶</span>
+                  <span class="hint-arrow hint-arrow-right">▶</span>
+                  <span class="hint-arrow hint-arrow-right">▶</span>
+                </div>
               </div>
             </div>
           </div>
@@ -333,41 +351,42 @@
           <h2>출간했어요</h2>
           <div class="book-section-card">
             <div class="book-layout">
-              <div class="book-card">
+              <!-- 왼쪽: 책 표지 -->
+              <div class="book-cover-container">
                 <div class="book-cover-wrapper">
                   <img src="assets/book-cover.png.png" alt="샘 올트먼, 더 비전 2030" class="book-cover-image" />
                 </div>
-                <div class="book-purchase-wrapper">
-                  <a
-                    class="btn primary pill book-purchase-btn"
-                    href="https://product.kyobobook.co.kr/detail/S000216910863"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    구매하기
-                  </a>
-                </div>
               </div>
+              <!-- 오른쪽: 책 정보 -->
               <div class="book-content">
-                <h3 class="book-title">샘 올트먼, 더 비전 2030</h3>
-                <p class="book-description">미래는 다가오는 대상이 아니라 우리가 만들어가는 결과입니다.<br>
-                  미래를 가장 정확하게 전망하는 첫 번째 방법은 미래를 만들어가는 사람들의 이야기에 귀 기울이는 일입니다.</p>
-                <ul class="book-points">
-                  <li>
-                    <span class="book-point-icon">✓</span>
-                    <span>
-                      <a href="https://product.kyobobook.co.kr/detail/S000216910863" target="_blank" rel="noreferrer" class="book-link">교보문고</a>, <a href="https://www.yes24.com/product/goods/148121872" target="_blank" rel="noreferrer" class="book-link">yes24</a> 등 주요 서점 평점 9.9 이상 기록
+                <div class="book-header">
+                  <h3 class="book-title">샘 올트먼, 더 비전 2030</h3>
+                </div>
+                <p class="book-description">AI와 기본소득, 그리고 에너지까지. 단순한 기술 예측을 넘어, 샘 올트먼이 설계하는 기술 로드맵과 새로운 경제 시스템의 청사진을 제시합니다.</p>
+                <ul class="book-achievements">
+                  <li class="achievement-item">
+                    <span class="achievement-icon">✓</span>
+                    <span class="achievement-text">
+                      <a href="https://product.kyobobook.co.kr/detail/S000216910863" target="_blank" rel="noreferrer" class="book-link">교보문고</a>, <a href="https://www.yes24.com/product/goods/148121872" target="_blank" rel="noreferrer" class="book-link">Yes24</a> 등 주요 서점 평점 9.9점 기록
                     </span>
                   </li>
-                  <li>
-                    <span class="book-point-icon">✓</span>
-                    <span>
-                      <a href="https://www.instagram.com/p/DNKGpCCzIBB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noreferrer" class="book-link">카페꼼마</a>, <a href="https://m.trevari.co.kr/product/0b905015-2140-460d-ac32-6a94b9e172fd" target="_blank" rel="noreferrer" class="book-link">트레바리</a> 등 주요 독서 플랫폼의 추천
+                  <li class="achievement-item">
+                    <span class="achievement-icon">✓</span>
+                    <span class="achievement-text">밀리의서재 경제경영 분야 Top 5 (AI Pick)</span>
+                  </li>
+                  <li class="achievement-item">
+                    <span class="achievement-icon">✓</span>
+                    <span class="achievement-text">출간 3주 만에 2쇄 인쇄 (베스트셀러 진입)</span>
+                  </li>
+                  <li class="achievement-item">
+                    <span class="achievement-icon">✓</span>
+                    <span class="achievement-text">
+                      <a href="https://www.instagram.com/p/DNKGpCCzIBB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" rel="noreferrer" class="book-link">카페꼼마</a>, <a href="https://m.trevari.co.kr/product/0b905015-2140-460d-ac32-6a94b9e172fd" target="_blank" rel="noreferrer" class="book-link">트레바리</a> 등 주요 독서 플랫폼 추천 도서 선정
                     </span>
                   </li>
-                  <li>
-                    <span class="book-point-icon">✓</span>
-                    <span>대통령실 하정우 AI미래기획수석 추천사</span>
+                  <li class="achievement-item">
+                    <span class="achievement-icon">✓</span>
+                    <span class="achievement-text">대통령실 하정우 AI미래기획수석 추천사 수록</span>
                   </li>
                 </ul>
               </div>
