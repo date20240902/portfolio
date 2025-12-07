@@ -171,7 +171,6 @@ const articlesByBrand = {
       { title: "하이브의 엔터테인먼트 혁신, 위버스로 만들어가는 글로벌 팬 커뮤니티", url: "https://kbthink.com/life/daily/hybe.html" },
       { title: "스포티파이 플레이리스트 추천 기술, AI DJ와 함께하는 음악 경험", url: "https://kbthink.com/life/daily/spotify.html" },
       { title: "AI 에이전트란? 활용 사례와 발전 방향 알아보기", url: "https://kbthink.com/life/daily/ai-agent.html" },
-      { title: "데이터 센터란? 냉각 기술의 중요성과 건설이 어려운 이유", url: "https://kbthink.com/life/daily/data-center.html" },
       { title: "전체보기", url: "https://kbthink.com/search/result.html?sk=%EC%9D%B4%EC%9E%AC%ED%9B%88" },
     ],
   },
@@ -211,7 +210,6 @@ const articlesByBrand = {
       { title: "아마존에서 현대차를 구입할 수 있는 시대가 열립니다", url: "https://outstanding.kr/amazonhyundai20231205" },
       { title: "오픈AI와 어깨를 나란히 하고 엔비디아가 투자한 한국 AI 스타트업 '트웰브랩스'", url: "https://outstanding.kr/twelvelabs20231026" },
       { title: "AI, X, TESLA.. 일론 머스크는 왜 프리미엄 도메인을 사랑하나", url: "https://outstanding.kr/premiundomain20230911" },
-      { title: "넥스트 위챗, X가 아닌 그랩일 가능성이 높습니다", url: "https://outstanding.kr/superappgrab20231004" },
       { title: "전체보기", url: "https://outstanding.kr/search_detail/%EC%9D%B4%EC%9E%AC%ED%9B%88" },
     ],
   },
@@ -223,8 +221,6 @@ const articlesByBrand = {
       { title: "챗GPT 보고 사표 쓴 비전공자, IT 커뮤니케이터가 되다", url: "https://yozm.wishket.com/magazine/detail/3471/" },
       { title: "2024년 가트너 10대 전략 기술 트렌드 톺아보기", url: "https://yozm.wishket.com/magazine/detail/2298/" },
       { title: "더 이상 외면할 수 없는 양자컴퓨터", url: "https://yozm.wishket.com/magazine/detail/2888/" },
-      { title: "생성형 AI 시대를 이해하기 위한 필수 용어 사전", url: "https://yozm.wishket.com/magazine/detail/2360/" },
-      { title: "ChatGPT vs Claude, 수능 보고 서울대 갈 수 있을까?", url: "https://yozm.wishket.com/magazine/detail/2851/" },
       { title: "전체보기", url: "https://yozm.wishket.com/magazine/@jhjh126/" },
     ],
   },
@@ -622,7 +618,7 @@ function initCompanyCarousel() {
       if (!isPaused && !isTransitioning) {
         goNext();
       }
-    }, 4000);
+    }, 6000);
   };
 
   const stopAutoPlay = () => {
@@ -823,7 +819,7 @@ function initLectureCarousel() {
       if (!isPaused && !isTransitioning) {
         goNext();
       }
-    }, 4000);
+    }, 6000);
   };
 
   const stopAutoPlay = () => {
@@ -947,8 +943,11 @@ document.addEventListener("DOMContentLoaded", () => {
                   </div>
                   <p class="carousel-brand-mission">${formatMission(brand.mission || "")}</p>
                 </div>
+                <!-- 구분선 -->
+                <div class="article-carousel-divider"></div>
                 <!-- 오른쪽 컬럼: Content List -->
                 <div class="article-carousel-text">
+                  <p class="carousel-content-label">주요 콘텐츠</p>
                   <ul class="carousel-article-list">
                     ${brand.articles
                       .map(

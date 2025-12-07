@@ -2404,8 +2404,17 @@ main {
   display: flex;
   align-items: flex-start; /* 상단 정렬로 변경하여 로고 높이 기준으로 맞춤 */
   justify-content: flex-start;
-  gap: 3rem;
+  gap: 2.5rem;
   width: 100%;
+}
+
+.article-carousel-divider {
+  width: 1px;
+  height: 100%;
+  background: var(--stroke);
+  flex-shrink: 0;
+  align-self: stretch;
+  margin: 0;
 }
 
 /* 왼쪽 컬럼: Identity & Mission */
@@ -2474,10 +2483,17 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   gap: 0;
-  height: 280px; /* 로고(200px) + 미션 텍스트(약 80px) = 약 280px에 맞춤 */
-  min-height: 280px;
-  margin: 0;
+}
+
+.carousel-content-label {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #9CA3AF;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 500;
+  margin: 0 0 0.4rem 0;
   padding: 0;
+  text-align: left;
 }
 
 
@@ -2617,9 +2633,16 @@ main {
   }
   
   .article-carousel-center-inner {
-    gap: 1.5rem !important; /* 좌우 간격 줄이기 */
+    display: grid !important;
+    grid-template-columns: 4fr auto 6fr !important; /* 로고 40% / 구분선 / 텍스트 60% */
+    column-gap: 2.5rem !important; /* 좌우 간격 */
     align-items: flex-start !important; /* 위쪽 정렬 */
     justify-content: flex-start !important; /* 위쪽 정렬 */
+  }
+
+  .article-carousel-divider {
+    align-self: stretch !important; /* 전체 높이에 맞춤 */
+    height: 100% !important;
   }
   
   .article-carousel-text {
@@ -2646,14 +2669,6 @@ main {
   .collab-card-article,
   .collab-card-lecture {
     padding-bottom: 1.5rem !important; /* 하단 공백 더 최소화 */
-  }
-
-  .article-carousel-center-inner {
-    display: grid;
-    grid-template-columns: 4fr 6fr; /* 기본: 로고 40% / 텍스트 60% */
-    column-gap: 2.5rem;
-    align-items: center;
-    justify-content: stretch;
   }
 
   .carousel-brand-logo-frame {
@@ -3212,6 +3227,14 @@ main {
     align-items: flex-start !important; /* 위쪽 정렬 */
   }
 
+  .article-carousel-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--stroke);
+    align-self: flex-start;
+    margin: 0.75rem 0;
+  }
+
   .carousel-brand-identity {
     width: 100%;
     flex: 0 0 auto;
@@ -3270,6 +3293,11 @@ main {
     padding-top: 0;
   }
   
+  .carousel-content-label {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
   .carousel-article-list {
     margin-top: 0 !important; /* negative margin 제거 - 간격 조금 넓히기 */
     padding-top: 0;
