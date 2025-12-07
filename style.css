@@ -2042,7 +2042,7 @@ main {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
-    margin-bottom: 0.25rem; /* 공백 최소화 */
+    margin-bottom: 0.5rem; /* 공백 조금 넓히기 */
   }
   
   .collab-card-subtitle {
@@ -3227,13 +3227,13 @@ main {
     font-size: 0.8rem;
     line-height: 1.1; /* 모바일에서 줄 간격 더 압축 */
     margin-top: 0 !important; /* 상단 여백 완전 제거 */
-    margin-bottom: 1rem; /* 설명 텍스트와 제목 리스트 사이 간격 추가 */
+    margin-bottom: 1.25rem; /* 설명 텍스트와 제목 리스트 사이 간격 조금 넓히기 */
     padding-top: 0 !important;
     padding-bottom: 0;
   }
   
   .company-carousel .carousel-brand-logo-frame {
-    margin-bottom: 0.25rem !important; /* 로고와 설명 텍스트 사이 공백 최소화 */
+    margin-bottom: 0.5rem !important; /* 로고와 설명 텍스트 사이 공백 조금 넓히기 */
     margin-top: 0 !important;
   }
 
