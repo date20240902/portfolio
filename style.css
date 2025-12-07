@@ -459,7 +459,7 @@ main {
     gap: 0.2rem;
     overflow: visible !important; /* 애니메이션을 위해 visible로 변경 */
     max-height: none !important;
-    padding: 0.5rem 0 !important; /* 위아래 여유 공간 추가 (애니메이션용) */
+    padding: 0.8rem 0 !important; /* 위아래 여유 공간 추가 (애니메이션용) */
   }
   
   .hashtag-row {
@@ -467,7 +467,7 @@ main {
     flex-wrap: nowrap !important; /* 줄바꿈 방지 */
     overflow: visible !important; /* 애니메이션을 위해 visible로 변경 */
     max-height: none !important;
-    padding: 0.5rem 0 !important; /* 위아래 여유 공간 추가 (애니메이션용) */
+    padding: 0.8rem 0 !important; /* 위아래 여유 공간 추가 (애니메이션용) */
   }
   
   .hashtag-row:nth-child(n+3) {
@@ -476,7 +476,7 @@ main {
   
   .about-hashtags span {
     font-size: 0.75rem !important; /* 12px - 더 작게 */
-    padding: 0.3rem 0.1rem !important; /* 위아래 padding 증가 (애니메이션용) */
+    padding: 0.5rem 0.1rem !important; /* 위아래 padding 더 증가 (애니메이션용) */
     white-space: nowrap;
     line-height: 1.4;
     flex-shrink: 0;
