@@ -87,9 +87,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // Hero Terminal-style Typewriter Effect (With Delete & Loop)
 document.addEventListener("DOMContentLoaded", () => {
   const messages = [
-    "기술의 흐름을 읽고 전략을 분석합니다",
-    "복잡한 기술을 이야기로 만듭니다",
-    "기술 브랜드를 높이고 가치 있는 관계를 연결합니다"
+    "난해한 기술을 쉬운 언어로 번역합니다",
+    "흩어진 정보를 단단한 이야기로 구조화합니다",
+    "더 넓은 세상으로 기술의 가치를 확산합니다"
   ];
 
   // 각 줄마다 다른 타이핑 속도와 시작 시간
@@ -237,6 +237,18 @@ const articlesByBrand = {
         title: "[Cheil Magazine] 엔터테인먼트 허브로 진화하는 거실",
         url: "https://magazine.cheil.com/57425",
       },
+    ],
+  },
+  channelExpansion: {
+    name: "Channel Expansion",
+    layout: "grid", // 그리드 레이아웃 사용
+    title: "Channel Expansion",
+    description: "다양한 플랫폼의 성격에 맞춘 콘텐츠 확산 (OSMU)",
+    items: [
+      { name: "브런치스토리", role: "IT 분야 크리에이터", url: "https://brunch.co.kr/@dldyfm", logo: "assets/logo-brunchstory.png.png" },
+      { name: "오픈애즈", role: "인사이터", url: "https://www.openads.co.kr/insighter/insighterDetail?authorId=541", logo: "assets/logo-openads.png.png" },
+      { name: "뉴닉", role: "공식 크리에이터", url: "https://newneek.co/@techissue", logo: "assets/logo-newneek.png.png" },
+      { name: "이오플래닛", role: "주목받는 멤버", url: "https://eopla.net/users?user=%EC%9D%B4%EC%9E%AC%ED%9B%88%24824840", logo: "assets/logo-eoplanet.png.png" },
     ],
   },
 };
@@ -858,9 +870,54 @@ document.addEventListener("DOMContentLoaded", () => {
       return parts.map(part => part.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")).join("<br>");
     };
 
+    // 제목 텍스트의 **강조** 형식을 <strong> 태그로 변환하는 함수
+    const formatTitle = (text) => {
+      if (!text) return "";
+      return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    };
+
     const slidesHTML = brandKeys
       .map((key) => {
         const brand = articlesByBrand[key];
+        
+        // 그리드 레이아웃인 경우
+        if (brand.layout === "grid") {
+          const titleParts = (brand.title || brand.name).split(" ");
+          return `
+      <div class="company-carousel__slide">
+        <div class="company-card">
+          <div class="channel-grid-container">
+            <div class="channel-title-section">
+              <h3 class="channel-grid-title">
+                <span class="channel-title-line">${titleParts[0] || ""}</span>
+                <span class="channel-title-line">${titleParts.slice(1).join(" ") || ""}</span>
+              </h3>
+            </div>
+            <div class="channel-divider"></div>
+            <div class="channel-grid">
+              ${brand.items
+                .map(
+                  (item) => `
+                <a href="${item.url}" target="_blank" rel="noreferrer" class="channel-grid-card">
+                  <span class="channel-card-link-icon">↗</span>
+                  <div class="channel-card-wrapper">
+                    ${item.logo ? `
+                      <img src="${item.logo}" alt="${item.name}" class="channel-logo-img-full">
+                    ` : ''}
+                    <p class="channel-card-description">${item.role}</p>
+                  </div>
+                </a>
+              `
+                )
+                .join("")}
+            </div>
+          </div>
+        </div>
+      </div>`;
+        }
+        
+        // 기본 레이아웃 (기존 로직)
+        const hasLogo = brand.logo && brand.logo.trim() !== "";
         return `
       <div class="company-carousel__slide">
         <div class="company-card">
@@ -870,6 +927,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <!-- 왼쪽 컬럼: Identity & Mission -->
                 <div class="carousel-brand-identity">
                   <div class="carousel-brand-logo-frame">
+                    ${hasLogo ? `
                     <span class="carousel-brand-logo-placeholder">기업 로고</span>
                     <img
                       src="${brand.logo}"
@@ -877,7 +935,15 @@ document.addEventListener("DOMContentLoaded", () => {
                       class="carousel-brand-logo"
                       onload="this.previousElementSibling.style.display='none'"
                       onerror="this.style.display='none'"
-                    >
+                    >` : `
+                    <div class="carousel-brand-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </div>
+                    `}
                   </div>
                   <p class="carousel-brand-mission">${formatMission(brand.mission || "")}</p>
                 </div>
@@ -888,7 +954,10 @@ document.addEventListener("DOMContentLoaded", () => {
                       .map(
                         (article) => `
                       <li class="carousel-article-item">
-                        <a href="${article.url}" target="_blank" rel="noreferrer" class="carousel-article-title">${article.title}</a>
+                        <a href="${article.url}" target="_blank" rel="noreferrer" class="carousel-article-title">
+                          ${formatTitle(article.title)}
+                          <span class="external-link-icon">↗</span>
+                        </a>
                       </li>
                     `
                       )
