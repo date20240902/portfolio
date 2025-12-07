@@ -424,7 +424,7 @@ main {
 }
 
 /* Mobile Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .hero {
     padding: clamp(2rem, 4vh, 3rem) clamp(1.5rem, 4vw, 2rem);
     min-height: auto;
@@ -500,11 +500,13 @@ main {
   }
 
   .hero-tech-badge {
-    margin-top: 1.5rem;
-    margin-left: auto;
-    margin-right: auto;
+    display: flex !important; /* inline-flex에서 flex로 변경 */
+    margin: 1.5rem auto 0 auto !important; /* 중앙 정렬 강제 */
     font-size: 0.7rem;
     padding: 0.4rem 0.8rem;
+    justify-content: center; /* 내부 콘텐츠 중앙 정렬 */
+    align-items: center;
+    width: fit-content; /* 내용물에 맞는 너비 */
   }
 
   .tech-badge-icon {
@@ -2035,7 +2037,7 @@ main {
   display: none;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .collab-card-title-wrapper {
     flex-direction: column;
     align-items: flex-start;
@@ -2214,7 +2216,7 @@ main {
   background: #275EFE;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   /* 모바일에서는 기고 캐러셀의 화살표도 숨기고 콘텐츠만 보이게 */
   .company-carousel {
     gap: 0;
@@ -3097,7 +3099,7 @@ main {
 }
 
 /* 모바일 반응형 */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .carousel-wrapper {
     gap: 0; /* 모바일에서는 좌우 간격 제거해서 한 화면에 하나만 보이게 */
   }
