@@ -84,20 +84,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// Hero Terminal-style Typewriter Effect (No Delete, Different Timing)
+// Hero Terminal-style Typewriter Effect (With Delete & Loop)
 document.addEventListener("DOMContentLoaded", () => {
   const messages = [
-    "Analyzing Tech Trends & Strategy",
-    "Crafting Story-Driven Content",
-    "Building Tech Brands & Networks"
+    "기술의 흐름을 읽고 전략을 분석합니다",
+    "복잡한 기술을 이야기로 만듭니다",
+    "기술 브랜드를 높이고 가치 있는 관계를 연결합니다"
   ];
 
   // 각 줄마다 다른 타이핑 속도와 시작 시간
   const configs = [
-    { typeSpeed: 80, initialDelay: 200 },   // 느리게, 빠르게 시작
-    { typeSpeed: 60, initialDelay: 600 },    // 중간 속도, 중간에 시작
-    { typeSpeed: 100, initialDelay: 1000 }  // 빠르게, 늦게 시작
+    { typeSpeed: 80, deleteSpeed: 50, initialDelay: 200 },   // 느리게, 빠르게 시작
+    { typeSpeed: 60, deleteSpeed: 40, initialDelay: 600 },    // 중간 속도, 중간에 시작
+    { typeSpeed: 100, deleteSpeed: 60, initialDelay: 1000 }  // 빠르게, 늦게 시작
   ];
+
+  const DISPLAY_DURATION = 6000; // 6초 유지
 
   function createTypewriter(lineId, message, config) {
     const lineElement = document.getElementById(lineId);
@@ -108,15 +110,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentText = "";
     let timeoutId = null;
+    let isTyping = true; // 타이핑 중인지 삭제 중인지 구분
 
     function type() {
-      // 타이핑만 진행 (삭제 없음)
       if (currentText.length < message.length) {
+        // 타이핑 진행
         currentText = message.slice(0, currentText.length + 1);
         textElement.textContent = currentText;
         timeoutId = setTimeout(type, config.typeSpeed);
+      } else {
+        // 타이핑 완료 - 6초 대기 후 삭제 시작
+        isTyping = false;
+        timeoutId = setTimeout(() => {
+          deleteText();
+        }, DISPLAY_DURATION);
       }
-      // 타이핑 완료 후에는 그대로 유지 (더 이상 동작 없음)
+    }
+
+    function deleteText() {
+      if (currentText.length > 0) {
+        // 삭제 진행
+        currentText = currentText.slice(0, -1);
+        textElement.textContent = currentText;
+        timeoutId = setTimeout(deleteText, config.deleteSpeed);
+      } else {
+        // 삭제 완료 - 다시 타이핑 시작 (무한 반복)
+        isTyping = true;
+        timeoutId = setTimeout(() => {
+          type();
+        }, 500); // 삭제 완료 후 잠시 대기 후 다시 시작
+      }
     }
 
     // 각 줄마다 다른 초기 딜레이로 시작
@@ -1187,5 +1210,42 @@ document.addEventListener("DOMContentLoaded", () => {
   observer.observe(metricsContainer);
 });
 
+// Timeline Scroll Animation
+document.addEventListener("DOMContentLoaded", () => {
+  const timelineLine = document.querySelector(".timeline-line");
+  const timelineItems = document.querySelectorAll(".timeline-item");
 
+  if (!timelineLine || timelineItems.length === 0) return;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.2, // 20% 보일 때 시작
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        // 타임라인 선 애니메이션
+        timelineLine.classList.add("animate");
+
+        // 각 타임라인 항목을 순차적으로 나타나게
+        timelineItems.forEach((item, index) => {
+          setTimeout(() => {
+            item.classList.add("animate");
+          }, index * 600); // 각 항목마다 600ms씩 딜레이
+        });
+
+        // 한 번만 실행되도록 observer 해제
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // 타임라인 컨테이너를 관찰
+  const timelineContainer = document.querySelector(".timeline-container");
+  if (timelineContainer) {
+    observer.observe(timelineContainer);
+  }
+});
 
