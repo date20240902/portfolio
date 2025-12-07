@@ -429,6 +429,24 @@ main {
     padding: clamp(2rem, 4vh, 3rem) clamp(1.5rem, 4vw, 2rem);
     min-height: auto;
   }
+  
+  .hero-message-line {
+    font-size: clamp(0.85rem, 3.2vw, 1rem);
+    line-height: 1.4;
+  }
+  
+  .about-hashtags {
+    font-size: clamp(0.75rem, 2.5vw, 0.95rem);
+    gap: 1rem;
+  }
+  
+  .hashtag-row {
+    gap: 0.75rem;
+  }
+  
+  .about-hashtags span {
+    padding: 0.15rem 0.3rem;
+  }
 
   .hero-container {
     grid-template-columns: 1fr;
@@ -3026,6 +3044,7 @@ main {
   gap: 1rem;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
   margin-top: 1rem;
 }
 
@@ -3033,6 +3052,7 @@ main {
   min-width: 140px;
   padding: 0.9rem 1.8rem;
 }
+
 
 .site-header {
   position: fixed;
@@ -3906,6 +3926,7 @@ h3 {
   .contact-section-card .lead {
     margin-bottom: 1.5rem;
   }
+  
 
   /* 모바일 - Newsletter 레이아웃 */
   .newsletter-layout {
