@@ -286,7 +286,7 @@ main {
   align-items: center;
   gap: 0.5rem;
   min-height: 2rem;
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
   font-weight: 700; /* 한글 가독성을 위한 굵기 강화 */
   color: #F2F2F2;
   font-family: "Pretendard", "Noto Sans KR", "LINESeedKR-Bd", "LINE Seed Sans KR Bold", system-ui, sans-serif;
@@ -1909,6 +1909,15 @@ main {
   border-color: #275EFE;
 }
 
+.collab-card-title-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+}
+
 .collab-card-title {
   font-size: clamp(1.2rem, 2vw, 1.5rem);
   font-weight: 700;
@@ -1930,6 +1939,14 @@ main {
   border-radius: 2px;
 }
 
+.collab-card-subtitle {
+  font-size: clamp(0.875rem, 1.2vw, 1rem);
+  font-weight: 400;
+  color: #9CA3AF;
+  margin: 0;
+  line-height: 1.5;
+}
+
 /* 기고 - company-carousel (한 번에 1개 슬라이드) */
 .company-carousel {
   position: relative;
@@ -1944,6 +1961,16 @@ main {
 }
 
 @media (max-width: 768px) {
+  .collab-card-title-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .collab-card-subtitle {
+    margin-top: 0.25rem;
+  }
+  
   .collab-card-article,
   .collab-card-lecture {
     position: relative;
