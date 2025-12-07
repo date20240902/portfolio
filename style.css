@@ -455,11 +455,11 @@ main {
   
   .about-hashtags {
     font-size: clamp(0.55rem, 1.5vw, 0.65rem);
-    gap: 0.5rem;
+    gap: 0.2rem;
   }
   
   .hashtag-row {
-    gap: 0.5rem;
+    gap: 0.2rem;
     flex-wrap: nowrap;
   }
   
