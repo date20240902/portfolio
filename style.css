@@ -461,6 +461,8 @@ main {
   .hashtag-row {
     gap: 0.2rem;
     flex-wrap: wrap;
+    max-height: calc(2 * (1.5em + 0.16rem)); /* 2줄 높이: (line-height * font-size + padding) * 2 */
+    overflow: hidden;
   }
   
   .about-hashtags span {
