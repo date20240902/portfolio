@@ -1256,7 +1256,7 @@ main {
     opacity: 1;
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(-3px);
     opacity: 0.95;
   }
 }
