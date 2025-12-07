@@ -459,6 +459,7 @@ main {
     gap: 0.2rem;
     overflow: hidden;
     max-height: none !important;
+    padding: 0.4rem 0 !important; /* 위아래 여유 공간 추가 (애니메이션용) */
   }
   
   .hashtag-row {
@@ -466,6 +467,7 @@ main {
     flex-wrap: nowrap !important; /* 줄바꿈 방지 */
     overflow: hidden;
     max-height: none !important;
+    padding: 0.4rem 0 !important; /* 위아래 여유 공간 추가 (애니메이션용) */
   }
   
   .hashtag-row:nth-child(n+3) {
