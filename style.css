@@ -454,24 +454,29 @@ main {
   }
   
   .about-hashtags {
-    font-size: 0.875rem !important; /* 14px */
+    display: grid !important;
+    grid-template-rows: repeat(2, auto) !important; /* 정확히 2행만 */
     gap: 0.2rem;
-    max-height: calc(2 * (0.875rem * 1.5 + 0.16rem) + 0.2rem); /* 2줄 높이: (font-size * line-height + padding) * 2 + gap */
     overflow: hidden;
+    max-height: none !important;
   }
   
   .hashtag-row {
     gap: 0.15rem !important; /* gap 더 줄임 */
     flex-wrap: nowrap !important; /* 줄바꿈 방지 */
-    max-height: calc(0.875rem * 1.5 + 0.16rem); /* 1줄 높이 */
     overflow: hidden;
+    max-height: none !important;
+  }
+  
+  .hashtag-row:nth-child(n+3) {
+    display: none !important; /* 3번째 row부터 숨김 */
   }
   
   .about-hashtags span {
-    font-size: 0.8rem !important; /* 12.8px - 더 작게 */
-    padding: 0.06rem 0.12rem !important; /* padding 더 줄임 */
+    font-size: 0.75rem !important; /* 12px - 더 작게 */
+    padding: 0.05rem 0.1rem !important; /* padding 더 줄임 */
     white-space: nowrap;
-    line-height: 1.5;
+    line-height: 1.4;
     flex-shrink: 0;
   }
 
