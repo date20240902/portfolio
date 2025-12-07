@@ -454,7 +454,7 @@ main {
   }
   
   .about-hashtags {
-    font-size: clamp(0.55rem, 1.5vw, 0.65rem);
+    font-size: 0.875rem !important; /* 14px */
     gap: 0.2rem;
   }
   
@@ -464,6 +464,7 @@ main {
   }
   
   .about-hashtags span {
+    font-size: 0.875rem !important; /* 14px */
     padding: 0.08rem 0.15rem;
     white-space: nowrap;
   }
