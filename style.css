@@ -461,17 +461,18 @@ main {
   }
   
   .hashtag-row {
-    gap: 0.2rem;
-    flex-wrap: wrap;
+    gap: 0.15rem !important; /* gap 더 줄임 */
+    flex-wrap: nowrap !important; /* 줄바꿈 방지 */
     max-height: calc(0.875rem * 1.5 + 0.16rem); /* 1줄 높이 */
     overflow: hidden;
   }
   
   .about-hashtags span {
-    font-size: 0.875rem !important; /* 14px */
-    padding: 0.08rem 0.15rem;
+    font-size: 0.8rem !important; /* 12.8px - 더 작게 */
+    padding: 0.06rem 0.12rem !important; /* padding 더 줄임 */
     white-space: nowrap;
     line-height: 1.5;
+    flex-shrink: 0;
   }
 
   .hero-container {
