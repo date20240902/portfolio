@@ -447,7 +447,7 @@ main {
 /* Mobile Responsive */
 @media (max-width: 1024px) {
   .hero {
-    padding: clamp(2rem, 4vh, 3rem) clamp(1.5rem, 4vw, 2rem);
+    padding: clamp(1rem, 2vh, 1.5rem) clamp(1.5rem, 4vw, 2rem) clamp(2rem, 4vh, 3rem);
     min-height: auto;
   }
   
@@ -506,19 +506,23 @@ main {
 
   .hero-container {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
     text-align: center;
     margin-left: 0;
+    margin-top: -2rem;
   }
 
   .hero-content {
     text-align: center;
     order: 2;
+    margin-top: -1rem;
+    gap: 0.8rem;
   }
 
   .hero-image-wrapper {
     order: 1;
     min-height: 300px;
+    margin-top: -1rem;
   }
 
   .hero-image-frame {
@@ -537,7 +541,7 @@ main {
 
   .hero-tech-badge {
     display: flex !important; /* inline-flex에서 flex로 변경 */
-    margin: 1.5rem auto 0 auto !important; /* 중앙 정렬 강제 */
+    margin: 0.8rem auto 0 auto !important; /* 중앙 정렬 강제 */
     font-size: 0.7rem;
     padding: 0.4rem 0.8rem;
     justify-content: center; /* 내부 콘텐츠 중앙 정렬 */
