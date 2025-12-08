@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "SDKukdetopokki-bBd";
+  src: url("assets/SDKukdetopokki-bBd.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: dark;
   --bg: #111111;
@@ -421,6 +429,19 @@ main {
 
 .hero-image-frame:hover .hero-image {
   transform: scaleX(-1) scale(1.05);
+}
+
+/* Newsletter 도장 반응형 */
+@media (max-width: 768px) {
+  .newsletter-stamps {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .newsletter-stamps {
+    display: none;
+  }
 }
 
 /* Mobile Responsive */
@@ -1466,7 +1487,199 @@ main {
   border-radius: 24px;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   position: relative;
+  overflow: visible;
+}
+
+/* Newsletter 인증 도장 배지 */
+.newsletter-stamps {
+  position: absolute;
+  top: clamp(-80px, -8vh, -110px);
+  left: clamp(-150px, -15vw, -200px);
+  width: clamp(135px, 25vw, 360px);
+  height: clamp(120px, 22vw, 300px);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.newsletter-stamp {
+  position: absolute;
+  width: clamp(52px, 8vw, 143px);
+  height: clamp(52px, 8vw, 143px);
+  border: clamp(1.5px, 0.2vw, 3px) solid #F31009;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "SDKukdetopokki-bBd", "Pretendard", "Noto Sans KR", system-ui, sans-serif !important;
+  font-weight: 700;
+  font-size: clamp(0.7rem, 1.5vw, 1.9rem);
+  color: #F31009;
+  background: transparent;
+  opacity: 0;
+  transform: scale(0);
+  box-shadow: 0 2px 8px rgba(243, 16, 9, 0.3);
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-align: center;
+  padding: 0.15rem;
+  word-break: keep-all;
   overflow: hidden;
+  gap: 0.1rem;
+}
+
+.newsletter-stamp span {
+  display: block;
+  line-height: 1;
+  font-family: "SDKukdetopokki-bBd", "Pretendard", "Noto Sans KR", system-ui, sans-serif !important;
+}
+
+/* 삼각형 구도 배치 - 중앙에서 겹치게 */
+.stamp-koita {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateX(-10px) translateY(-65px) rotate(-12deg);
+  --stamp-rotate: -12deg;
+  z-index: 3;
+}
+
+.stamp-stibee {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateX(-55px) translateY(45px) rotate(-12deg);
+  --stamp-rotate: -12deg;
+  z-index: 2;
+}
+
+.stamp-openads {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateX(70px) translateY(35px) rotate(-12deg);
+  --stamp-rotate: -12deg;
+  z-index: 1;
+}
+
+/* 도장 찍히는 애니메이션 */
+@keyframes stampPress {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(var(--stamp-rotate, 0deg));
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.4) rotate(var(--stamp-rotate, 0deg));
+  }
+  45% {
+    transform: scale(0.95) rotate(var(--stamp-rotate, 0deg));
+  }
+  60% {
+    transform: scale(1.1) rotate(var(--stamp-rotate, 0deg));
+  }
+  75% {
+    transform: scale(0.98) rotate(var(--stamp-rotate, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(var(--stamp-rotate, 0deg));
+  }
+}
+
+/* 코이타 배지 전용 애니메이션 */
+@keyframes stampPressKoita {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(-10px) translateY(-65px) scale(0) rotate(-12deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(-10px) translateY(-65px) scale(1.4) rotate(-12deg);
+  }
+  45% {
+    transform: translate(-50%, -50%) translateX(-10px) translateY(-65px) scale(0.95) rotate(-12deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) translateX(-10px) translateY(-65px) scale(1.1) rotate(-12deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(-10px) translateY(-65px) scale(0.98) rotate(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(-10px) translateY(-65px) scale(1) rotate(-12deg);
+  }
+}
+
+/* 스티비 배지 전용 애니메이션 */
+@keyframes stampPressStibee {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(-55px) translateY(45px) scale(0) rotate(-12deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(-55px) translateY(45px) scale(1.4) rotate(-12deg);
+  }
+  45% {
+    transform: translate(-50%, -50%) translateX(-55px) translateY(45px) scale(0.95) rotate(-12deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) translateX(-55px) translateY(45px) scale(1.1) rotate(-12deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(-55px) translateY(45px) scale(0.98) rotate(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(-55px) translateY(45px) scale(1) rotate(-12deg);
+  }
+}
+
+/* 오픈애즈 배지 전용 애니메이션 */
+@keyframes stampPressOpenads {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) translateX(70px) translateY(35px) scale(0) rotate(-12deg);
+  }
+  30% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(70px) translateY(35px) scale(1.4) rotate(-12deg);
+  }
+  45% {
+    transform: translate(-50%, -50%) translateX(70px) translateY(35px) scale(0.95) rotate(-12deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) translateX(70px) translateY(35px) scale(1.1) rotate(-12deg);
+  }
+  75% {
+    transform: translate(-50%, -50%) translateX(70px) translateY(35px) scale(0.98) rotate(-12deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) translateX(70px) translateY(35px) scale(1) rotate(-12deg);
+  }
+}
+
+/* 도장 떠있는 애니메이션 */
+@keyframes stampFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(var(--stamp-rotate, 0deg));
+  }
+  50% {
+    transform: translateY(-3px) rotate(var(--stamp-rotate, 0deg));
+  }
+}
+
+/* 스크롤 시 애니메이션 트리거 */
+.newsletter-section-card.in-view .stamp-koita {
+  animation: stampPressKoita 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.newsletter-section-card.in-view .stamp-stibee {
+  animation: stampPressStibee 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s forwards;
+}
+
+.newsletter-section-card.in-view .stamp-openads {
+  animation: stampPressOpenads 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.8s forwards;
 }
 
 .newsletter-header {

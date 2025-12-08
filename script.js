@@ -279,6 +279,13 @@ const lectures = [
     description: "",
     image: "assets/lecture-4.jpg.jpg.jpg",
   },
+  {
+    badge: "Workshop",
+    client: "플렉스웍",
+    topic: "4주만에 만드는 나만의 뉴스레터 (총 3기 진행)",
+    description: "",
+    image: "assets/lecture-6.jpg,jpg.jpg",
+  },
 ];
 
 // 캐러셀 클래스 (강연용)
@@ -1278,10 +1285,30 @@ document.addEventListener("DOMContentLoaded", () => {
   observer.observe(metricsContainer);
 });
 
+// Newsletter Stamp Animation on Scroll
+const newsletterCard = document.querySelector(".newsletter-section-card");
+if (newsletterCard) {
+  const stampObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          newsletterCard.classList.add("in-view");
+        }
+      });
+    },
+    {
+      threshold: 0.3,
+      rootMargin: "0px",
+    }
+  );
+  stampObserver.observe(newsletterCard);
+}
+
 // Timeline Scroll Animation
 document.addEventListener("DOMContentLoaded", () => {
   const timelineLine = document.querySelector(".timeline-line");
   const timelineItems = document.querySelectorAll(".timeline-item");
+  const timelineContainer = document.querySelector(".timeline-container");
 
   if (!timelineLine || timelineItems.length === 0) return;
 
@@ -1291,29 +1318,35 @@ document.addEventListener("DOMContentLoaded", () => {
     threshold: 0.2, // 20% 보일 때 시작
   };
 
-  const observer = new IntersectionObserver((entries) => {
+  // 타임라인 선은 첫 번째 항목(확장)이 보일 때 애니메이션
+  let timelineLineAnimated = false;
+
+  // 각 타임라인 항목을 개별적으로 관찰
+  const itemObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        // 타임라인 선 애니메이션
-        timelineLine.classList.add("animate");
-
-        // 각 타임라인 항목을 순차적으로 나타나게
-        timelineItems.forEach((item, index) => {
+        // 첫 번째 항목이 보이면 타임라인 선 애니메이션 시작
+        if (!timelineLineAnimated && entry.target === timelineItems[0]) {
           setTimeout(() => {
-            item.classList.add("animate");
-          }, index * 600); // 각 항목마다 600ms씩 딜레이
-        });
+            timelineLine.classList.add("animate");
+          }, 200);
+          timelineLineAnimated = true;
+        }
+
+        // 해당 항목에 약간의 딜레이 후 애니메이션 클래스 추가
+        setTimeout(() => {
+          entry.target.classList.add("animate");
+        }, 300);
 
         // 한 번만 실행되도록 observer 해제
-        observer.unobserve(entry.target);
+        itemObserver.unobserve(entry.target);
       }
     });
   }, observerOptions);
 
-  // 타임라인 컨테이너를 관찰
-  const timelineContainer = document.querySelector(".timeline-container");
-  if (timelineContainer) {
-    observer.observe(timelineContainer);
-  }
+  // 각 타임라인 항목을 개별적으로 관찰
+  timelineItems.forEach((item) => {
+    itemObserver.observe(item);
+  });
 });
 
