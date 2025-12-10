@@ -3807,6 +3807,14 @@ main {
   }
 }
 
+/* 데스크톱 화면: 중앙 정렬 (1400px 이상) */
+@media (min-width: 1400px) {
+  .hero-container {
+    margin: 0 auto;
+    padding-inline: clamp(2rem, 4vw, 3rem);
+  }
+}
+
 /* 크리스마스 Hover 효과 */
 .hero-name-container:hover .hero-name {
   filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.4)) 
