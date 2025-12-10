@@ -166,7 +166,7 @@ main {
 
 .hero-name {
   font-family: "LINESeedKR-Bd", "LINE Seed Sans KR Bold", "Pretendard", system-ui, sans-serif;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.75rem);
   font-weight: 900;
   line-height: 1.1;
   color: #F2F2F2;
@@ -175,6 +175,7 @@ main {
   transition: filter 0.4s ease, transform 0.4s ease;
   position: relative;
   z-index: 1;
+  text-align: left;
 }
 
 /* 크리스마스 호버 효과 - 폰트 사이즈, 색상, 위치는 유지하고 애니메이션만 추가 */
@@ -3777,7 +3778,7 @@ main {
 .hero-name {
   margin: 0;
   font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(4.7rem, 10.8vw, 8.8rem);
+  font-size: clamp(2.35rem, 5.4vw, 4.4rem);
   font-weight: 900;
   letter-spacing: 0.05em;
   color: #F2F2F2;
@@ -3792,10 +3793,18 @@ main {
   text-overflow: clip;
   max-width: 90vw;
   width: auto;
-  text-align: right;
+  text-align: left;
   transition: filter 0.4s ease, transform 0.4s ease;
   cursor: pointer;
   pointer-events: auto;
+}
+
+/* 노트북 화면: 텍스트 최대한 키우기 (1025px ~ 1400px) */
+@media (max-width: 1400px) and (min-width: 1025px) {
+  .hero-title-wrapper h1,
+  .hero-name {
+    font-size: clamp(4.5rem, 9.5vw, 7.5rem) !important;
+  }
 }
 
 /* 크리스마스 Hover 효과 */
@@ -4207,6 +4216,7 @@ h3 {
   }
 }
 
+
 /* 모바일 전용 스타일 (768px 이하) */
 @media (max-width: 768px) {
 
@@ -4263,6 +4273,7 @@ h3 {
     font-size: clamp(2.2rem, 6vw, 2.8rem);
     line-height: 1.1;
     text-align: center;
+    margin-top: 0.5rem;
   }
 
   /* 서브타이틀 스타일 */
@@ -4539,5 +4550,14 @@ h3 {
     padding: 1.5rem;
   }
 
+}
+
+/* 노트북 화면: 텍스트 최대한 키우기 (1025px ~ 1400px) - 최우선 적용 */
+@media (max-width: 1400px) and (min-width: 1025px) {
+  .hero-name-container .hero-name,
+  .hero-title-wrapper h1,
+  .hero-name {
+    font-size: clamp(4.5rem, 9.5vw, 7.5rem) !important;
+  }
 }
 
