@@ -937,6 +937,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 강연 벤토 그리드 초기화
   initSpeakingBentoGrid();
+  initSpeakingModal();
+  
+  // 리사이즈 시 다시 렌더링 (모바일/데스크톱 전환 시)
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      initSpeakingBentoGrid();
+    }, 250);
+  });
 });
 
 // 강연 벤토 그리드 초기화
@@ -944,18 +954,32 @@ function initSpeakingBentoGrid() {
   const bentoGrid = document.getElementById("speaking-bento-grid");
   if (!bentoGrid || !lectures || lectures.length === 0) return;
 
+  const isMobile = window.innerWidth < 768;
+
   const gridHTML = lectures
     .map((lecture, index) => {
+      // 모바일에서 제목 변경
+      let displayTitle = lecture.topic;
+      if (isMobile) {
+        if (lecture.client === "샘 올트먼, 더 비전 2030") {
+          displayTitle = "북토크";
+        } else if (lecture.client === "동탄국제고") {
+          displayTitle = "동탄국제고<br>AI 강의";
+        } else if (lecture.client === "플렉스웍") {
+          displayTitle = "4주만에 만드는 나만의 뉴스레터 강의";
+        }
+      }
+
       // 대전 스타트업스쿨은 전체 가로 크기 (3열 전체)
       if (lecture.client === "대전 스타트업스쿨") {
         return `
-    <div class="speaking-bento-card full-width" data-index="${index}">
+    <div class="speaking-bento-card full-width" data-index="${index}" data-client="대전 스타트업스쿨">
       <div class="speaking-card-background" style="background-image: url('${lecture.image}')"></div>
       <div class="speaking-card-overlay"></div>
       <div class="speaking-card-content">
         <div class="speaking-card-badge">${lecture.badge}</div>
         <div class="speaking-card-text">
-          <h4 class="speaking-card-title">${lecture.topic}</h4>
+          <h4 class="speaking-card-title">${displayTitle}</h4>
           <p class="speaking-card-subtitle">${lecture.client}</p>
           ${lecture.description ? `<p class="speaking-card-description">${lecture.description}</p>` : ""}
         </div>
@@ -979,13 +1003,13 @@ function initSpeakingBentoGrid() {
       }
 
       return `
-    <div class="speaking-bento-card ${size}" data-index="${index}">
+    <div class="speaking-bento-card ${size}" data-index="${index}" data-client="${lecture.client}">
       <div class="speaking-card-background" style="background-image: url('${lecture.image}')"></div>
       <div class="speaking-card-overlay"></div>
       <div class="speaking-card-content">
         <div class="speaking-card-badge">${lecture.badge}</div>
         <div class="speaking-card-text">
-          <h4 class="speaking-card-title">${lecture.topic}</h4>
+          <h4 class="speaking-card-title">${displayTitle}</h4>
           <p class="speaking-card-subtitle">${lecture.client}</p>
           ${lecture.description ? `<p class="speaking-card-description">${lecture.description}</p>` : ""}
         </div>
@@ -995,6 +1019,83 @@ function initSpeakingBentoGrid() {
     .join("");
 
   bentoGrid.innerHTML = gridHTML;
+}
+
+// 모바일 모달 초기화 (이벤트 위임 사용)
+let speakingModalInitialized = false;
+function initSpeakingModal() {
+  if (speakingModalInitialized) return;
+  
+  const modal = document.getElementById("speaking-modal");
+  if (!modal) return;
+
+  const modalImage = modal.querySelector(".speaking-modal-image");
+  const modalTitle = modal.querySelector(".speaking-modal-title");
+  const modalSubtitle = modal.querySelector(".speaking-modal-subtitle");
+  const modalDescription = modal.querySelector(".speaking-modal-description");
+  const closeBtn = modal.querySelector(".speaking-modal-close");
+  const backdrop = modal.querySelector(".speaking-modal-backdrop");
+  const bentoGrid = document.getElementById("speaking-bento-grid");
+
+  if (!bentoGrid) return;
+
+  // 이벤트 위임: 그리드에 클릭 이벤트를 한 번만 등록
+  bentoGrid.addEventListener("click", (e) => {
+    // 모바일에서만 작동
+    if (window.innerWidth >= 768) return;
+
+    const card = e.target.closest(".speaking-bento-card");
+    if (!card) return;
+
+    e.preventDefault();
+    const index = parseInt(card.getAttribute("data-index"));
+    if (isNaN(index)) return;
+
+    const lecture = lectures[index];
+    const cardBg = card.querySelector(".speaking-card-background");
+    const bgImage = cardBg ? window.getComputedStyle(cardBg).backgroundImage : "";
+    const imageUrl = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)?.[1] || lecture.image;
+
+    // 모달에 데이터 채우기
+    modalImage.src = imageUrl;
+    modalImage.alt = lecture.topic;
+    modalTitle.textContent = lecture.topic;
+    modalSubtitle.textContent = lecture.client;
+    modalDescription.textContent = lecture.description || "";
+
+    // 모달 표시
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+  });
+
+  // 닫기 버튼 클릭
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  });
+
+  // 배경 클릭 시 닫기
+  backdrop.addEventListener("click", (e) => {
+    e.stopPropagation();
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  });
+
+  // 모달 콘텐츠 클릭 시 이벤트 전파 방지 (닫히지 않도록)
+  const modalContent = modal.querySelector(".speaking-modal-content");
+  modalContent.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  // 모달 자체를 클릭했을 때 (콘텐츠 외부) 닫기
+  modal.addEventListener("click", (e) => {
+    if (e.target === modal || e.target === backdrop) {
+      modal.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+  });
+
+  speakingModalInitialized = true;
 }
 
 

@@ -959,16 +959,30 @@ main {
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0);
+  background-image: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.7) 30%, transparent 50%);
+  background-size: 100% 100%;
+  background-position: bottom;
+  background-repeat: no-repeat;
   z-index: 2;
   pointer-events: none;
   transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 1;
 }
 
-.speaking-bento-card:hover .speaking-card-overlay {
-  background: rgba(0, 0, 0, 0.7);
+@media (min-width: 768px) {
+  .speaking-card-overlay {
+    background: rgba(0, 0, 0, 0);
+    background-image: none;
+    opacity: 1;
+  }
+
+  .speaking-bento-card:hover .speaking-card-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    background-image: none;
+  }
 }
 
-/* 카드 콘텐츠 - 기본 상태에서는 숨김, 호버 시 중앙에 표시 */
+/* 카드 콘텐츠 - 모바일에서는 항상 보임, 데스크톱에서는 호버 시 표시 */
 .speaking-card-content {
   position: absolute;
   top: 50%;
@@ -982,13 +996,36 @@ main {
   text-align: center;
   width: 90%;
   max-width: 600px;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: none;
 }
 
-.speaking-bento-card:hover .speaking-card-content {
-  opacity: 1;
+/* 모바일: 하단에 고정 */
+@media (max-width: 767px) {
+  .speaking-card-content {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
+    padding: 1.5rem 1rem;
+    align-items: flex-start;
+    text-align: left;
+    justify-content: flex-end;
+  }
+}
+
+/* 데스크톱: 중앙에 숨김, 호버 시 표시 */
+@media (min-width: 768px) {
+  .speaking-card-content {
+    opacity: 0;
+  }
+
+  .speaking-bento-card:hover .speaking-card-content {
+    opacity: 1;
+  }
 }
 
 /* 배지 - 숨김 */
@@ -1009,6 +1046,7 @@ main {
   margin: 0 0 0.5rem 0;
   line-height: 1.4;
   font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  white-space: normal;
 }
 
 .speaking-card-subtitle {
@@ -1028,9 +1066,214 @@ main {
   font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
 }
 
+/* 모바일 텍스트 크기 조정 */
+@media (max-width: 767px) {
+  .speaking-card-title {
+    font-size: clamp(0.7rem, 3vw, 0.9rem);
+    margin: 0 0 0.3rem 0;
+  }
+
+  .speaking-card-subtitle {
+    font-size: clamp(0.55rem, 2.5vw, 0.65rem);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .speaking-card-description {
+    font-size: clamp(0.5rem, 2.2vw, 0.6rem);
+  }
+
+  /* 대전 스타트업스쿨: 우측 하단 정렬 */
+  .speaking-bento-card[data-client="대전 스타트업스쿨"] .speaking-card-content {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    transform: none;
+    align-items: flex-end;
+    text-align: right;
+    padding: 1.5rem 1rem;
+  }
+
+  /* 플렉스웍: 우측 하단 정렬, 제목만 표시 */
+  .speaking-bento-card[data-client="플렉스웍"] .speaking-card-content {
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    transform: none;
+    align-items: flex-end;
+    text-align: right;
+    padding: 1.5rem 1rem;
+  }
+
+  .speaking-bento-card[data-client="플렉스웍"] .speaking-card-subtitle,
+  .speaking-bento-card[data-client="플렉스웍"] .speaking-card-description {
+    display: none;
+  }
+
+  /* 샘 올트먼, 더 비전 2030: 제목만 표시 */
+  .speaking-bento-card[data-client="샘 올트먼, 더 비전 2030"] .speaking-card-subtitle,
+  .speaking-bento-card[data-client="샘 올트먼, 더 비전 2030"] .speaking-card-description {
+    display: none;
+  }
+
+  /* 동탄국제고: 제목만 표시, 폰트 크기 조정 */
+  .speaking-bento-card[data-client="동탄국제고"] .speaking-card-subtitle,
+  .speaking-bento-card[data-client="동탄국제고"] .speaking-card-description {
+    display: none;
+  }
+
+  .speaking-bento-card[data-client="동탄국제고"] .speaking-card-title {
+    font-size: clamp(0.65rem, 2.8vw, 0.85rem);
+  }
+}
+
 /* 화살표 아이콘 제거 (중앙 레이아웃에서는 불필요) */
 .speaking-card-arrow {
   display: none;
+}
+
+/* 모바일 전체 화면 모달 */
+.speaking-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.speaking-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.speaking-modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  cursor: pointer;
+}
+
+.speaking-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow-y: auto;
+  pointer-events: auto;
+}
+
+.speaking-modal-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.speaking-modal-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.speaking-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #FFFFFF;
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 10001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.speaking-modal-close:hover,
+.speaking-modal-close:active {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 
+              inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.speaking-modal-info {
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.speaking-modal-badge {
+  display: none;
+}
+
+.speaking-modal-title {
+  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+.speaking-modal-subtitle {
+  font-size: clamp(0.9rem, 3vw, 1.1rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0 0 1rem 0;
+  font-family: "SUIT", "Pretendard", system-ui, sans-serif;
+}
+
+.speaking-modal-description {
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: 1.6;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+/* 모바일에서만 모달 표시 */
+@media (min-width: 768px) {
+  .speaking-modal {
+    display: none !important;
+  }
 }
 
 /* 모바일 반응형 */
@@ -1079,9 +1322,26 @@ main {
     height: auto;
   }
 
-  .speaking-card-content {
-    width: 85%;
-    padding: 1.5rem;
+  /* 태블릿 크기 (768px ~ 1024px)에서는 기존 호버 효과 유지 */
+  @media (min-width: 768px) {
+    .speaking-card-content {
+      width: 85%;
+      padding: 1.5rem;
+      opacity: 0;
+    }
+
+    .speaking-bento-card:hover .speaking-card-content {
+      opacity: 1;
+    }
+  }
+
+  /* 모바일 (767px 이하)에서는 항상 표시 */
+  @media (max-width: 767px) {
+    .speaking-card-content {
+      width: 100%;
+      padding: 1.5rem 1rem;
+      opacity: 1;
+    }
   }
 
   .speaking-card-title {
