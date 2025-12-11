@@ -166,7 +166,7 @@ const articlesByBrand = {
   kb: {
     name: "KB",
     logo: "assets/logo-kb.png.png",
-    mission: "**금융 DX 브랜딩** | '기술을 아는 금융'을 위한 트렌드 재해석",
+    mission: "**KB** | '기술을 아는 금융' 브랜딩",
     articles: [
       { title: "하이브의 엔터테인먼트 혁신, 위버스로 만들어가는 글로벌 팬 커뮤니티", url: "https://kbthink.com/life/daily/hybe.html" },
       { title: "스포티파이 플레이리스트 추천 기술, AI DJ와 함께하는 음악 경험", url: "https://kbthink.com/life/daily/spotify.html" },
@@ -177,7 +177,7 @@ const articlesByBrand = {
   skt: {
     name: "SKT",
     logo: "assets/logo-skt.png.png",
-    mission: "**AI 기술 리더십 전파** | 복잡한 인프라 생태계를 대중의 언어로 해설",
+    mission: "**SKT** | AI 기술 리더십 전파",
     articles: [
       { title: "SK AI SUMMIT 2025, SK가 그린 AI 인프라의 미래", url: "https://www.sktelecom.com/webzine/lib/tstory_detail.do?index=52&currentPage=1&keyword=" },
       { title: "GPU, 대체 뭐길래 다들 난리일까?", url: "https://www.sktelecom.com/webzine/lib/insight_detail.do?index=40&currentPage=1&keyword=" },
@@ -186,7 +186,7 @@ const articlesByBrand = {
   hyundaicard: {
     name: "현대카드",
     logo: "assets/logo-hyundaicard.png.png",
-    mission: "**테크와 라이프스타일의 연결** | 금융·결제 기술을 소비자의 언어로 번역",
+    mission: "**현대카드** | 테크와 라이프스타일의 연결",
     articles: [
       {
         title: "AI 시대, 기업도 뭉쳐야 산다",
@@ -205,7 +205,7 @@ const articlesByBrand = {
   outstanding: {
     name: "아웃스탠딩",
     logo: "assets/logo-outstanding.png.png",
-    mission: "**심층 비즈니스 분석** | 글로벌 빅테크의 이면을 파고드는 딥다이브",
+    mission: "**아웃스탠딩** | 글로벌 빅테크 전략 딥다이브",
     articles: [
       { title: "아마존에서 현대차를 구입할 수 있는 시대가 열립니다", url: "https://outstanding.kr/amazonhyundai20231205" },
       { title: "오픈AI와 어깨를 나란히 하고 엔비디아가 투자한 한국 AI 스타트업 '트웰브랩스'", url: "https://outstanding.kr/twelvelabs20231026" },
@@ -216,7 +216,7 @@ const articlesByBrand = {
   yozmit: {
     name: "요즘IT",
     logo: "assets/logo-yozmit.png.png",
-    mission: "**실무 중심 IT 트렌드** | 현업 적용 가능한 기술 인사이트 큐레이션",
+    mission: "**요즘IT** | 실무 중심 IT 트렌드",
     articles: [
       { title: "챗GPT 보고 사표 쓴 비전공자, IT 커뮤니케이터가 되다", url: "https://yozm.wishket.com/magazine/detail/3471/" },
       { title: "2024년 가트너 10대 전략 기술 트렌드 톺아보기", url: "https://yozm.wishket.com/magazine/detail/2298/" },
@@ -225,9 +225,9 @@ const articlesByBrand = {
     ],
   },
   yozmit2: {
-    name: "요즘IT",
+    name: "제일기획",
     logo: "assets/logo-cheil.png.png",
-    mission: "**미래 산업 조망** | 테크가 바꾸는 엔터테인먼트와 마케팅의 진화",
+    mission: "**제일기획** | 테크가 바꾸는 엔터테인먼트와 마케팅",
     articles: [
       {
         title: "[Cheil Magazine] 엔터테인먼트 허브로 진화하는 거실",
@@ -858,144 +858,179 @@ function initLectureCarousel() {
   window.addEventListener("beforeunload", cleanup);
 }
 
-// 초기화
+// Collaboration 타임라인 초기화
 document.addEventListener("DOMContentLoaded", () => {
-  // 기고 슬라이드 생성
-  const track = document.querySelector(".company-carousel__track");
-  if (track) {
-    const brandKeys = Object.keys(articlesByBrand);
+  const timelineItemsContainer = document.getElementById("collaboration-timeline-items");
+  if (!timelineItemsContainer) return;
 
-    // Mission 텍스트의 **키워드** 형식을 <strong> 태그로 변환하고 "|" 기준으로 줄바꿈하는 함수
-    const formatMission = (text) => {
-      if (!text) return "";
-      // "|" 기준으로 분리하고 각 부분을 <br>로 연결
-      const parts = text.split("|").map(part => part.trim());
-      return parts.map(part => part.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")).join("<br>");
-    };
+  // Mission 텍스트의 **키워드** 형식을 <strong> 태그로 변환하는 함수
+  const formatMission = (text) => {
+    if (!text) return "";
+    return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  };
 
-    // 제목 텍스트의 **강조** 형식을 <strong> 태그로 변환하는 함수
-    const formatTitle = (text) => {
-      if (!text) return "";
-      return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-    };
+  // 제목 텍스트의 **강조** 형식을 <strong> 태그로 변환하는 함수
+  const formatTitle = (text) => {
+    if (!text) return "";
+    return text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  };
 
-    const slidesHTML = brandKeys
-      .map((key) => {
-        const brand = articlesByBrand[key];
-        
-        // 그리드 레이아웃인 경우
-        if (brand.layout === "grid") {
-          const titleParts = (brand.title || brand.name).split(" ");
-          return `
-      <div class="company-carousel__slide">
-        <div class="company-card">
-          <div class="channel-grid-container">
-            <div class="channel-title-section">
-              <h3 class="channel-grid-title">
-                <span class="channel-title-line">${titleParts[0] || ""}</span>
-                <span class="channel-title-line">${titleParts.slice(1).join(" ") || ""}</span>
-              </h3>
-            </div>
-            <div class="channel-divider"></div>
-            <div class="channel-grid">
-              ${brand.items
-                .map(
-                  (item) => `
-                <a href="${item.url}" target="_blank" rel="noreferrer" class="channel-grid-card">
-                  <span class="channel-card-link-icon">↗</span>
-                  <div class="channel-card-wrapper">
-                    ${item.logo ? `
-                      <img src="${item.logo}" alt="${item.name}" class="channel-logo-img-full">
-                    ` : ''}
-                    <p class="channel-card-description">${item.role}</p>
-                  </div>
-                </a>
-              `
-                )
-                .join("")}
-            </div>
-          </div>
+  // 기고 데이터를 배열로 변환 (그리드 레이아웃 제외)
+  const brandKeys = Object.keys(articlesByBrand).filter(
+    (key) => articlesByBrand[key].layout !== "grid"
+  );
+
+  const timelineHTML = brandKeys
+    .map((key, index) => {
+      const brand = articlesByBrand[key];
+      const hasLogo = brand.logo && brand.logo.trim() !== "";
+      const isOdd = index % 2 === 0; // 0-based index이므로 홀수 번째 = 짝수 인덱스
+
+      return `
+    <div class="collaboration-timeline-item" data-index="${index}">
+      <!-- 중앙 로고 배지 -->
+      <div class="collaboration-timeline-badge">
+        ${hasLogo ? `
+        <img
+          src="${brand.logo}"
+          alt="${brand.name}"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<div style=\\'color: #275EFE; font-weight: 700; font-size: 1.2rem;\\'>${brand.name}</div>'"
+        >` : `
+        <div style="color: #275EFE; font-weight: 700; font-size: 1.2rem; text-align: center;">
+          ${brand.name}
         </div>
-      </div>`;
+        `}
+      </div>
+      
+      <!-- 연결선 -->
+      <div class="collaboration-timeline-connector"></div>
+      
+      <!-- 글래스모피즘 카드 -->
+      <div class="collaboration-timeline-card">
+        <div class="collaboration-timeline-mission">
+          ${formatMission(brand.mission || "")}
+        </div>
+        <p class="collaboration-timeline-content-label">주요 콘텐츠</p>
+        <ul class="collaboration-timeline-articles">
+          ${brand.articles
+            .map(
+              (article) => `
+            <li class="collaboration-timeline-article-item">
+              <a href="${article.url}" target="_blank" rel="noreferrer" class="collaboration-timeline-article-link">
+                ${formatTitle(article.title)}
+                <span class="external-icon">↗</span>
+              </a>
+            </li>
+          `
+            )
+            .join("")}
+        </ul>
+      </div>
+    </div>`;
+    })
+    .join("");
+
+  timelineItemsContainer.innerHTML = timelineHTML;
+
+  // 스크롤 애니메이션 및 자동 카드 열기 초기화
+  initCollaborationTimelineAnimation();
+});
+
+
+// Collaboration 타임라인 스크롤 애니메이션 및 자동 카드 열기
+function initCollaborationTimelineAnimation() {
+  const timelineItems = document.querySelectorAll(".collaboration-timeline-item");
+  if (timelineItems.length === 0) return;
+
+  let activeItem = null;
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "-20% 0px -20% 0px", // 뷰포트 중앙 근처에 도착했을 때
+    threshold: [0, 0.3, 0.5, 0.7, 1],
+  };
+
+  const itemObserver = new IntersectionObserver((entries) => {
+    // 가장 뷰포트 중앙에 가까운 아이템 찾기
+    let closestItem = null;
+    let closestDistance = Infinity;
+
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const rect = entry.boundingClientRect;
+        const viewportCenter = window.innerHeight / 2;
+        const itemCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(itemCenter - viewportCenter);
+
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestItem = entry.target;
         }
-        
-        // 기본 레이아웃 (기존 로직)
-        const hasLogo = brand.logo && brand.logo.trim() !== "";
-        return `
-      <div class="company-carousel__slide">
-        <div class="company-card">
-          <div class="article-carousel-layout">
-            <div class="article-carousel-center">
-              <div class="article-carousel-center-inner">
-                <!-- 왼쪽 컬럼: Identity & Mission -->
-                <div class="carousel-brand-identity">
-                  <div class="carousel-brand-logo-frame">
-                    ${hasLogo ? `
-                    <span class="carousel-brand-logo-placeholder">기업 로고</span>
-                    <img
-                      src="${brand.logo}"
-                      alt="${brand.name}"
-                      class="carousel-brand-logo"
-                      onload="this.previousElementSibling.style.display='none'"
-                      onerror="this.style.display='none'"
-                    >` : `
-                    <div class="carousel-brand-icon" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
-                      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent);">
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                        <polyline points="15 3 21 3 21 9"></polyline>
-                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                      </svg>
-                    </div>
-                    `}
-                  </div>
-                  <p class="carousel-brand-mission">${formatMission(brand.mission || "")}</p>
-                </div>
-                <!-- 구분선 -->
-                <div class="article-carousel-divider"></div>
-                <!-- 오른쪽 컬럼: Content List -->
-                <div class="article-carousel-text">
-                  <p class="carousel-content-label">주요 콘텐츠</p>
-                  <ul class="carousel-article-list">
-                    ${brand.articles
-                      .map(
-                        (article) => `
-                      <li class="carousel-article-item">
-                        <a href="${article.url}" target="_blank" rel="noreferrer" class="carousel-article-title">
-                          ${formatTitle(article.title)}
-                          <span class="external-link-icon">↗</span>
-                        </a>
-                      </li>
-                    `
-                      )
-                      .join("")}
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>`;
-      })
-      .join("");
 
-    track.innerHTML = slidesHTML;
-    
-    // 초기 로드 시 첫 번째 슬라이드의 로고와 mission 텍스트를 즉시 표시
-    const firstSlide = track.querySelector(".company-carousel__slide");
-    if (firstSlide) {
-      const identityElement = firstSlide.querySelector(".carousel-brand-identity");
-      if (identityElement) {
-        identityElement.style.opacity = "1";
-        identityElement.style.transform = "translateY(0)";
+        // 로고 애니메이션 클래스 추가
+        if (!entry.target.classList.contains("animate")) {
+          setTimeout(() => {
+            entry.target.classList.add("animate");
+          }, 200);
+        }
+      }
+    });
+
+    // 가장 가까운 아이템의 카드 열기 (한 번 열린 카드는 유지)
+    if (closestItem) {
+      const card = closestItem.querySelector(".collaboration-timeline-card");
+      const badge = closestItem.querySelector(".collaboration-timeline-badge");
+
+      if (card && badge && !card.classList.contains("is-visible")) {
+        // 새로운 카드 표시 (기존 카드는 닫지 않음)
+        card.classList.add("is-visible", "was-visible");
+        badge.classList.add("is-active");
       }
     }
-    
-    initCompanyCarousel();
-  }
+  }, observerOptions);
 
-  // 강연 캐러셀 (한 번에 한 슬라이드)
-  initLectureCarousel();
-});
+  // 각 타임라인 항목을 개별적으로 관찰
+  timelineItems.forEach((item) => {
+    itemObserver.observe(item);
+  });
+
+  // 스크롤 이벤트로도 업데이트 (더 부드러운 반응)
+  let scrollTimeout;
+  window.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      // 스크롤이 멈추면 가장 가까운 아이템 찾기
+      let closestItem = null;
+      let closestDistance = Infinity;
+
+      timelineItems.forEach((item) => {
+        const rect = item.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          const viewportCenter = window.innerHeight / 2;
+          const itemCenter = rect.top + rect.height / 2;
+          const distance = Math.abs(itemCenter - viewportCenter);
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestItem = item;
+          }
+        }
+      });
+
+      // 가장 가까운 아이템의 카드 열기 (한 번 열린 카드는 유지)
+      if (closestItem) {
+        const card = closestItem.querySelector(".collaboration-timeline-card");
+        const badge = closestItem.querySelector(".collaboration-timeline-badge");
+
+        if (card && badge && !card.classList.contains("is-visible")) {
+          // 새로운 카드 표시 (기존 카드는 닫지 않음)
+          card.classList.add("is-visible", "was-visible");
+          badge.classList.add("is-active");
+        }
+      }
+    }, 100);
+  });
+}
 
 // Newsletter 브랜드 뱃지 및 패널 인터랙션
 const brandedContentByBrand = {

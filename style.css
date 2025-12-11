@@ -65,6 +65,47 @@ a {
   margin: 0 auto;
 }
 
+/* 데스크톱 화면: 좌우 여백 최소화 및 요소 확대 */
+@media (min-width: 1400px) {
+  .container {
+    width: min(1600px, 95vw);
+    padding: 0 clamp(1rem, 2vw, 2rem);
+  }
+
+  .section-stack {
+    max-width: 1400px;
+    width: 100%;
+  }
+
+  .hero-container {
+    max-width: 1600px;
+    padding-inline: clamp(2rem, 4vw, 4rem);
+  }
+
+  .about-section-card,
+  .book-section-card,
+  .newsletter-section-card,
+  .contact-section-card {
+    max-width: 1200px;
+  }
+
+  .collaboration-timeline-container {
+    max-width: 1600px;
+    padding: 2rem clamp(2rem, 4vw, 4rem);
+  }
+
+  .collaboration-timeline-card {
+    max-width: 900px;
+    min-width: 700px;
+    padding: 3rem;
+  }
+
+  .collaboration-timeline-badge {
+    width: clamp(120px, 9vw, 160px);
+    height: clamp(120px, 9vw, 160px);
+  }
+}
+
 main {
   scroll-snap-type: y proximity;
 }
@@ -807,6 +848,517 @@ main {
 
 .collaboration {
   --section-bg: var(--section-collab);
+}
+
+/* Collaboration 섹션 - 수직 타임라인 레이아웃 */
+.collaboration-timeline-container {
+  position: relative;
+  max-width: 1400px;
+  margin: 3rem auto 0;
+  padding: 2rem clamp(2rem, 4vw, 4rem);
+  width: 100%;
+}
+
+/* 수직 라인 (중앙) */
+.collaboration-timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    rgba(39, 94, 254, 0.8) 0%,
+    rgba(39, 94, 254, 0.6) 30%,
+    rgba(39, 94, 254, 0.4) 60%,
+    rgba(39, 94, 254, 0.2) 80%,
+    transparent 100%
+  );
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+/* 타임라인 아이템 컨테이너 */
+.collaboration-timeline-items {
+  position: relative;
+  z-index: 2;
+}
+
+/* 타임라인 아이템 */
+.collaboration-timeline-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 4rem;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.collaboration-timeline-item.animate {
+  opacity: 1;
+}
+
+/* 홀수 번째 아이템 (왼쪽) */
+.collaboration-timeline-item:nth-child(odd) {
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 50%;
+  padding-left: 0;
+}
+
+.collaboration-timeline-item:nth-child(odd) .collaboration-timeline-card {
+  margin-right: clamp(4rem, 6vw, 6rem);
+  transform: translateX(-30px);
+}
+
+.collaboration-timeline-item:nth-child(odd).animate .collaboration-timeline-card {
+  transform: translateX(-30px);
+}
+
+/* 짝수 번째 아이템 (오른쪽) */
+.collaboration-timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  padding-left: 50%;
+  padding-right: 0;
+}
+
+.collaboration-timeline-item:nth-child(even) .collaboration-timeline-card {
+  margin-left: clamp(4rem, 6vw, 6rem);
+  transform: translateX(30px);
+}
+
+.collaboration-timeline-item:nth-child(even).animate .collaboration-timeline-card {
+  transform: translateX(30px);
+}
+
+/* 카드 등장 애니메이션 */
+.collaboration-timeline-item:nth-child(odd) .collaboration-timeline-card.is-visible {
+  animation: slideInFromRight 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.collaboration-timeline-item:nth-child(even) .collaboration-timeline-card.is-visible {
+  animation: slideInFromLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(40px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-40px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* 카드 사라짐 애니메이션 (was-visible 클래스가 있을 때만) */
+.collaboration-timeline-item:nth-child(odd) .collaboration-timeline-card.was-visible:not(.is-visible) {
+  animation: slideOutToRight 0.3s ease-in forwards;
+}
+
+.collaboration-timeline-item:nth-child(even) .collaboration-timeline-card.was-visible:not(.is-visible) {
+  animation: slideOutToLeft 0.3s ease-in forwards;
+}
+
+@keyframes slideOutToRight {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(40px) scale(0.9);
+  }
+}
+
+@keyframes slideOutToLeft {
+  0% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-40px) scale(0.9);
+  }
+}
+
+/* 중앙 로고 배지 */
+.collaboration-timeline-badge {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(100px, 8vw, 140px);
+  height: clamp(100px, 8vw, 140px);
+  margin-left: calc(clamp(100px, 8vw, 140px) / -2);
+  margin-top: calc(clamp(100px, 8vw, 140px) / -2);
+  border-radius: 50%;
+  background: rgba(17, 17, 17, 0.95);
+  border: 3px solid rgba(39, 94, 254, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 8px 24px rgba(39, 94, 254, 0.3);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+  overflow: hidden;
+  transform: none;
+}
+
+.collaboration-timeline-badge:hover {
+  border-color: rgba(39, 94, 254, 0.8);
+  box-shadow: 0 12px 32px rgba(39, 94, 254, 0.5);
+  transform: scale(1.1);
+}
+
+.collaboration-timeline-badge.is-active {
+  border-color: #275EFE;
+  box-shadow: 0 12px 32px rgba(39, 94, 254, 0.6);
+  transform: scale(1.1);
+}
+
+.collaboration-timeline-item.animate .collaboration-timeline-badge {
+  animation: badgeScale 0.6s ease-out;
+}
+
+@keyframes badgeScale {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.collaboration-timeline-badge:hover {
+  transform: translateX(-50%) scale(1.1);
+  box-shadow: 0 12px 32px rgba(39, 94, 254, 0.5);
+}
+
+.collaboration-timeline-badge img {
+  width: 80%;
+  height: 80%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+/* 연결선 (로고에서 카드로) */
+.collaboration-timeline-connector {
+  position: absolute;
+  top: 50%;
+  width: clamp(2rem, 3vw, 3.5rem);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(39, 94, 254, 0.6) 0%,
+    rgba(39, 94, 254, 0.3) 50%,
+    transparent 100%
+  );
+  z-index: 5;
+  transform: translateY(-50%);
+}
+
+.collaboration-timeline-item:nth-child(odd) .collaboration-timeline-connector {
+  right: 50%;
+  margin-right: clamp(4rem, 6vw, 6rem);
+}
+
+.collaboration-timeline-item:nth-child(even) .collaboration-timeline-connector {
+  left: 50%;
+  margin-left: clamp(4rem, 6vw, 6rem);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(39, 94, 254, 0.3) 50%,
+    rgba(39, 94, 254, 0.6) 100%
+  );
+}
+
+/* 글래스모피즘 카드 */
+.collaboration-timeline-card {
+  flex: 0 0 48%;
+  max-width: 800px;
+  min-width: 600px;
+  background: rgba(26, 26, 26, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  visibility: hidden;
+  text-align: left;
+}
+
+.collaboration-timeline-card.is-visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.collaboration-timeline-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(39, 94, 254, 0.2);
+  border-color: rgba(39, 94, 254, 0.3);
+}
+
+/* 카드 내부 콘텐츠 */
+.collaboration-timeline-mission {
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 700;
+  color: #275EFE;
+  margin: 0 0 1.5rem 0;
+  line-height: 1.5;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  text-align: left;
+}
+
+.collaboration-timeline-mission strong {
+  color: #275EFE;
+  font-weight: 700;
+}
+
+.collaboration-timeline-content-label {
+  font-size: clamp(0.9rem, 1.1vw, 1rem);
+  font-weight: 500;
+  color: var(--muted);
+  margin: 0 0 1rem 0;
+  font-family: "SUIT", "Pretendard", system-ui, sans-serif;
+  text-align: left;
+}
+
+.collaboration-timeline-articles {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.collaboration-timeline-article-item {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.collaboration-timeline-article-item::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  color: #275EFE;
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.collaboration-timeline-article-item:hover::before {
+  transform: translateX(4px);
+}
+
+.collaboration-timeline-article-link {
+  font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+  color: var(--text);
+  text-decoration: none;
+  line-height: 1.6;
+  transition: color 0.2s ease;
+  display: block;
+}
+
+.collaboration-timeline-article-link:hover {
+  color: #275EFE;
+}
+
+.collaboration-timeline-article-link .external-icon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  opacity: 0.6;
+  font-size: 0.85em;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.collaboration-timeline-article-link:hover .external-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+.collaboration-timeline-company {
+  font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+  color: var(--muted);
+  margin: 1rem 0 0 0;
+  font-weight: 500;
+  font-family: "SUIT", "Pretendard", system-ui, sans-serif;
+  text-align: left;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 1024px) {
+  .collaboration-timeline-container {
+    padding: 2rem 1rem;
+    width: 100%;
+  }
+
+  /* 라인을 중앙에 배치 */
+  .collaboration-timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* 모든 아이템을 중앙 정렬 */
+  .collaboration-timeline-item {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    width: 100%;
+    position: relative;
+  }
+
+  .collaboration-timeline-item.animate {
+    transform: none !important;
+  }
+
+  /* 홀수/짝수 아이템 모두 동일하게 배치 */
+  .collaboration-timeline-item:nth-child(odd),
+  .collaboration-timeline-item:nth-child(even) {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  .collaboration-timeline-item:nth-child(odd) .collaboration-timeline-card,
+  .collaboration-timeline-item:nth-child(even) .collaboration-timeline-card {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    transform: none !important;
+  }
+
+  /* 로고 배지를 중앙선에 배치하고 카드에 반만 걸치게 */
+  .collaboration-timeline-badge {
+    position: absolute;
+    left: 50%;
+    top: 1.5rem;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    z-index: 10;
+    margin-bottom: 0;
+  }
+
+  .collaboration-timeline-item.animate .collaboration-timeline-badge {
+    animation: badgeScaleMobile 0.6s ease-out;
+  }
+
+  @keyframes badgeScaleMobile {
+    0% {
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .collaboration-timeline-badge:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  /* 연결선 제거 (모바일에서는 필요 없음) */
+  .collaboration-timeline-connector {
+    display: none !important;
+  }
+
+  /* 카드 너비 조정 - 화면에 꽉 차게, 중앙 정렬 */
+  .collaboration-timeline-card {
+    flex: 0 0 auto;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: 50px;
+    box-sizing: border-box;
+    padding: 3rem 1.5rem 2rem 1.5rem;
+  }
+
+  /* 제목이 세로로 길어지지 않도록 조정 */
+  .collaboration-timeline-mission {
+    font-size: clamp(0.95rem, 4vw, 1.1rem);
+    line-height: 1.4;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  /* 모든 카드 동일한 애니메이션 */
+  .collaboration-timeline-item:nth-child(odd) .collaboration-timeline-card.is-visible,
+  .collaboration-timeline-item:nth-child(even) .collaboration-timeline-card.is-visible {
+    animation: slideInFromBottomMobile 0.5s ease-out forwards;
+  }
+
+  .collaboration-timeline-item .collaboration-timeline-card.was-visible:not(.is-visible) {
+    animation: slideOutToBottomMobile 0.3s ease-in forwards;
+  }
+
+  @keyframes slideInFromBottomMobile {
+    0% {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes slideOutToBottomMobile {
+    0% {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+    100% {
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px) scale(0.95);
+    }
+  }
 }
 
 .journey {
