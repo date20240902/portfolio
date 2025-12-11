@@ -1098,7 +1098,6 @@ function initSpeakingModal() {
   speakingModalInitialized = true;
 }
 
-
 // Collaboration 타임라인 스크롤 애니메이션 및 자동 카드 열기
 function initCollaborationTimelineAnimation() {
   const timelineItems = document.querySelectorAll(".collaboration-timeline-item");
