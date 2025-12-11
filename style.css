@@ -1513,14 +1513,17 @@ main {
 
   /* 로고 배지를 중앙선에 배치하고 카드에 반만 걸치게 */
   .collaboration-timeline-badge {
-    position: absolute;
-    left: 50%;
-    top: 1.5rem;
-    transform: translate(-50%, -50%);
+    position: absolute !important;
+    left: 50% !important;
+    top: 1.5rem !important;
+    transform: translate(-50%, -50%) !important;
     width: 100px;
     height: 100px;
     z-index: 10;
     margin-bottom: 0;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    opacity: 1;
   }
 
   .collaboration-timeline-item.animate .collaboration-timeline-badge {
@@ -1529,11 +1532,11 @@ main {
 
   @keyframes badgeScaleMobile {
     0% {
-      transform: translate(-50%, -50%) scale(0);
-      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.8;
     }
     50% {
-      transform: translate(-50%, -50%) scale(1.2);
+      transform: translate(-50%, -50%) scale(1.1);
     }
     100% {
       transform: translate(-50%, -50%) scale(1);
