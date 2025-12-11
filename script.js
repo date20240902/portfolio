@@ -252,25 +252,18 @@ const articlesByBrand = {
 // 강연 데이터
 const lectures = [
   {
-    badge: "Future Gen",
-    client: "동탄국제고",
-    topic: "AI로 그리는 미래 시대 준비",
-    description: "청소년을 위한 AI 리터러시 특강",
-    image: "assets/lecture-1.jpg.jpg",
-  },
-  {
-    badge: "Startup",
-    client: "대전 스타트업스쿨",
-    topic: "스타트업 성장을 위한 전략적 뉴스레터 구축",
-    description: "",
-    image: "assets/lecture-5.jpg.jpg.jpg",
-  },
-  {
     badge: "Corporate",
     client: "아이에이클라우드",
     topic: "사내 임직원 대상 생성형 AI 워크샵",
     description: "",
     image: "assets/lecture-2.jpg.jpg",
+  },
+  {
+    badge: "Future Gen",
+    client: "동탄국제고",
+    topic: "AI로 그리는 미래 시대 준비",
+    description: "",
+    image: "assets/lecture-1.jpg.jpg",
   },
   {
     badge: "Book Talk",
@@ -285,6 +278,13 @@ const lectures = [
     topic: "4주만에 만드는 나만의 뉴스레터 (총 3기 진행)",
     description: "",
     image: "assets/lecture-6.jpg,jpg.jpg",
+  },
+  {
+    badge: "Startup",
+    client: "대전 스타트업스쿨",
+    topic: "스타트업 성장을 위한 전략적 뉴스레터 구축",
+    description: "",
+    image: "assets/lecture-5.jpg.jpg.jpg",
   },
 ];
 
@@ -934,7 +934,68 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // 스크롤 애니메이션 및 자동 카드 열기 초기화
   initCollaborationTimelineAnimation();
+
+  // 강연 벤토 그리드 초기화
+  initSpeakingBentoGrid();
 });
+
+// 강연 벤토 그리드 초기화
+function initSpeakingBentoGrid() {
+  const bentoGrid = document.getElementById("speaking-bento-grid");
+  if (!bentoGrid || !lectures || lectures.length === 0) return;
+
+  const gridHTML = lectures
+    .map((lecture, index) => {
+      // 대전 스타트업스쿨은 전체 가로 크기 (3열 전체)
+      if (lecture.client === "대전 스타트업스쿨") {
+        return `
+    <div class="speaking-bento-card full-width" data-index="${index}">
+      <div class="speaking-card-background" style="background-image: url('${lecture.image}')"></div>
+      <div class="speaking-card-overlay"></div>
+      <div class="speaking-card-content">
+        <div class="speaking-card-badge">${lecture.badge}</div>
+        <div class="speaking-card-text">
+          <h4 class="speaking-card-title">${lecture.topic}</h4>
+          <p class="speaking-card-subtitle">${lecture.client}</p>
+          ${lecture.description ? `<p class="speaking-card-description">${lecture.description}</p>` : ""}
+        </div>
+      </div>
+    </div>`;
+      }
+      
+      // 줄 번호 계산 (한 줄에 2개씩, 대전 스타트업스쿨 제외)
+      const itemsBeforeThis = lectures.slice(0, index).filter(l => l.client !== "대전 스타트업스쿨").length;
+      const rowNumber = Math.floor(itemsBeforeThis / 2);
+      // 줄 내에서의 위치 (0 또는 1)
+      const positionInRow = itemsBeforeThis % 2;
+      
+      // 줄 번호가 짝수면: 첫 번째가 wide, 두 번째가 normal
+      // 줄 번호가 홀수면: 첫 번째가 normal, 두 번째가 wide
+      let size;
+      if (rowNumber % 2 === 0) {
+        size = positionInRow === 0 ? "wide" : "normal";
+      } else {
+        size = positionInRow === 0 ? "normal" : "wide";
+      }
+
+      return `
+    <div class="speaking-bento-card ${size}" data-index="${index}">
+      <div class="speaking-card-background" style="background-image: url('${lecture.image}')"></div>
+      <div class="speaking-card-overlay"></div>
+      <div class="speaking-card-content">
+        <div class="speaking-card-badge">${lecture.badge}</div>
+        <div class="speaking-card-text">
+          <h4 class="speaking-card-title">${lecture.topic}</h4>
+          <p class="speaking-card-subtitle">${lecture.client}</p>
+          ${lecture.description ? `<p class="speaking-card-description">${lecture.description}</p>` : ""}
+        </div>
+      </div>
+    </div>`;
+    })
+    .join("");
+
+  bentoGrid.innerHTML = gridHTML;
+}
 
 
 // Collaboration 타임라인 스크롤 애니메이션 및 자동 카드 열기

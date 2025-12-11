@@ -850,6 +850,253 @@ main {
   --section-bg: var(--section-collab);
 }
 
+/* 기고 섹션 */
+.article-section {
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+.article-section-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 2rem 0;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  text-align: left;
+}
+
+/* 강연 벤토 그리드 섹션 */
+.speaking-section {
+  margin-top: 4rem;
+  width: 100%;
+}
+
+.speaking-section-title {
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 2rem 0;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  text-align: left;
+}
+
+/* 벤토 그리드 컨테이너 */
+.speaking-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(300px, auto);
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* 벤토 카드 기본 스타일 */
+.speaking-bento-card {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.speaking-bento-card:hover {
+  transform: translateY(-4px);
+}
+
+/* 카드 크기 변형 - 한 줄에 2개: 가로 긴 직사각형 + 정사각형 */
+.speaking-bento-card.large {
+  grid-column: span 2;
+  grid-row: span 1;
+  aspect-ratio: 2 / 1;
+  min-height: 300px;
+}
+
+.speaking-bento-card.wide {
+  grid-column: span 2;
+  grid-row: span 1;
+  aspect-ratio: 2 / 1;
+  min-height: 300px;
+}
+
+.speaking-bento-card.normal {
+  grid-column: span 1;
+  grid-row: span 1;
+  aspect-ratio: 1;
+  min-height: 300px;
+}
+
+.speaking-bento-card.full-width {
+  grid-column: span 3;
+  grid-row: span 1;
+  aspect-ratio: 3 / 1;
+  min-height: 300px;
+}
+
+/* 배경 이미지 */
+.speaking-card-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+
+.speaking-bento-card:hover .speaking-card-background {
+  transform: scale(1.05);
+}
+
+/* 그라데이션 오버레이 - 기본 상태에서는 숨김 */
+.speaking-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  z-index: 2;
+  pointer-events: none;
+  transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.speaking-bento-card:hover .speaking-card-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* 카드 콘텐츠 - 기본 상태에서는 숨김, 호버 시 중앙에 표시 */
+.speaking-card-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 90%;
+  max-width: 600px;
+  opacity: 0;
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.speaking-bento-card:hover .speaking-card-content {
+  opacity: 1;
+}
+
+/* 배지 - 숨김 */
+.speaking-card-badge {
+  display: none;
+}
+
+/* 텍스트 영역 */
+.speaking-card-text {
+  position: relative;
+  width: 100%;
+}
+
+.speaking-card-title {
+  font-size: clamp(0.8rem, 1.3vw, 1.2rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+.speaking-card-subtitle {
+  font-size: clamp(0.6rem, 0.9vw, 0.75rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 0.75rem 0;
+  font-family: "SUIT", "Pretendard", system-ui, sans-serif;
+}
+
+.speaking-card-description {
+  font-size: clamp(0.6rem, 0.8vw, 0.7rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: 1.6;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+}
+
+/* 화살표 아이콘 제거 (중앙 레이아웃에서는 불필요) */
+.speaking-card-arrow {
+  display: none;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 1024px) {
+  .speaking-section {
+    margin-top: 3rem;
+  }
+
+  .speaking-bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(120px, auto);
+    gap: 0.75rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* 데스크톱과 동일한 레이아웃 유지 */
+  .speaking-bento-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+
+  .speaking-bento-card.wide {
+    grid-column: span 2;
+    grid-row: span 1;
+    aspect-ratio: 2 / 1;
+    min-height: 0;
+    height: auto;
+  }
+
+  .speaking-bento-card.normal {
+    grid-column: span 1;
+    grid-row: span 1;
+    aspect-ratio: 1;
+    min-height: 0;
+    height: auto;
+  }
+
+  .speaking-bento-card.full-width {
+    grid-column: span 3;
+    grid-row: span 1;
+    aspect-ratio: 3 / 1;
+    min-height: 0;
+    height: auto;
+  }
+
+  .speaking-card-content {
+    width: 85%;
+    padding: 1.5rem;
+  }
+
+  .speaking-card-title {
+    font-size: clamp(0.7rem, 3vw, 0.95rem);
+  }
+
+  .speaking-card-subtitle {
+    font-size: clamp(0.55rem, 2.5vw, 0.7rem);
+  }
+
+  .speaking-card-description {
+    font-size: clamp(0.5rem, 2.2vw, 0.65rem);
+  }
+}
+
 /* Collaboration 섹션 - 수직 타임라인 레이아웃 */
 .collaboration-timeline-container {
   position: relative;
