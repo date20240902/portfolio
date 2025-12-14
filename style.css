@@ -498,6 +498,10 @@ main {
     line-height: 1.4;
   }
   
+  .about-intro-text {
+    margin: 1.5rem auto 1.5rem;
+  }
+
   .about-intro-text .lead {
     font-size: clamp(0.85rem, 2.5vw, 1rem);
     line-height: 1.6;
@@ -757,7 +761,7 @@ main {
 
 .about-intro-text {
   max-width: 900px;
-  margin: 2rem auto 0;
+  margin: 2rem auto 2rem;
   text-align: center;
 }
 
@@ -2170,6 +2174,120 @@ main {
 .about-hashtags span:nth-child(2) {
   animation-duration: 2.5s;
   animation-delay: 0.2s;
+}
+
+/* About 인터뷰 링크 버튼 */
+/* 인터뷰 링크 안내 텍스트 */
+.about-interview-hint {
+  font-size: 0.875rem;
+  color: #9CA3AF;
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 400;
+}
+
+.about-interview-hint-highlight {
+  color: #60A5FA;
+}
+
+.about-interview-link {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  animation: fade-in-up 0.6s ease-out;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.interview-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(242, 242, 242, 0.8);
+  text-decoration: none;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+  font-weight: 400;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.interview-link-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #275EFE;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.interview-link-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.interview-link-text strong {
+  font-weight: 600;
+}
+
+.interview-link-icon {
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.interview-link-btn:hover .interview-link-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+  stroke: #275EFE;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .about-interview-hint {
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.8125rem;
+  }
+
+  .about-interview-link {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .interview-link-btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .interview-link-text {
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+  }
 }
 
 /* Identity Grid - Mobile First */
