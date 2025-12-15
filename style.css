@@ -1564,7 +1564,7 @@ main {
   justify-content: center;
   z-index: 10;
   box-shadow: 0 8px 24px rgba(39, 94, 254, 0.3);
-  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
+  transition: box-shadow 0.4s ease, border-color 0.3s ease;
   overflow: hidden;
   transform: none;
 }
@@ -1572,37 +1572,18 @@ main {
 .collaboration-timeline-badge:hover {
   border-color: rgba(39, 94, 254, 0.8);
   box-shadow: 0 12px 32px rgba(39, 94, 254, 0.5);
-  transform: scale(1.1);
 }
 
 .collaboration-timeline-badge.is-active {
   border-color: #275EFE;
   box-shadow: 0 12px 32px rgba(39, 94, 254, 0.6);
-  transform: scale(1.1);
 }
 
 .collaboration-timeline-item.animate .collaboration-timeline-badge {
-  animation: badgeScale 0.6s ease-out;
+  animation: none;
 }
 
-@keyframes badgeScale {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.collaboration-timeline-badge:hover {
-  transform: translateX(-50%) scale(1.1);
-  box-shadow: 0 12px 32px rgba(39, 94, 254, 0.5);
-}
+/* 기존 badgeScale 애니메이션 제거 (정적인 동작 유지) */
 
 .collaboration-timeline-badge img {
   width: 80%;
@@ -1825,25 +1806,11 @@ main {
   }
 
   .collaboration-timeline-item.animate .collaboration-timeline-badge {
-    animation: badgeScaleMobile 0.6s ease-out;
-  }
-
-  @keyframes badgeScaleMobile {
-    0% {
-      transform: translate(-50%, -50%) scale(0.8);
-      opacity: 0.8;
-    }
-    50% {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-    }
+    animation: none;
   }
 
   .collaboration-timeline-badge:hover {
-    transform: translate(-50%, -50%) scale(1.1);
+    /* 모바일에서도 움직임 없이 유지 */
   }
 
   /* 연결선 제거 (모바일에서는 필요 없음) */
