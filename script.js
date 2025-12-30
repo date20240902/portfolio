@@ -13,73 +13,150 @@ window.addEventListener("click", (event) => {
   }
 });
 
-// 크리스마스 눈송이 효과
+// 해가 떠오르는 효과 (하나만, "N" 글자 위쪽에 위치)
 document.addEventListener("DOMContentLoaded", () => {
   const heroNameContainer = document.querySelector(".hero-name-container");
-  const snowflakesContainer = document.querySelector(".snowflakes");
+  const sunriseContainer = document.querySelector(".sunrise-container");
+  const heroName = document.querySelector(".hero-name");
 
-  if (heroNameContainer && snowflakesContainer) {
-    let snowflakeInterval = null;
-    const snowflakeSymbols = ["❄", "❅", "❆", "✻", "✼", "✽"];
+  if (heroNameContainer && sunriseContainer && heroName) {
+    let currentSun = null;
 
-    function createSnowflake() {
-      const snowflake = document.createElement("div");
-      snowflake.className = "snowflake";
-      snowflake.textContent = snowflakeSymbols[Math.floor(Math.random() * snowflakeSymbols.length)];
+    function getLastLetterPosition() {
+      // 텍스트 노드에서 마지막 글자 "N"의 위치 찾기
+      const text = heroName.textContent.trim();
+      const lastCharIndex = text.length - 1;
       
-      // 텍스트 영역 내 랜덤 위치에서 시작
+      // Range API를 사용하여 마지막 글자의 위치 계산
+      const range = document.createRange();
+      const textNode = heroName.firstChild;
+      
+      if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+        range.setStart(textNode, lastCharIndex);
+        range.setEnd(textNode, lastCharIndex + 1);
+        
+        const rect = range.getBoundingClientRect();
+        const containerRect = heroNameContainer.getBoundingClientRect();
+        
+        // 컨테이너 기준 상대 위치 계산
+        const relativeX = rect.right - containerRect.left;
+        const relativeY = rect.top - containerRect.top;
+        
+        return {
+          x: relativeX,
+          y: relativeY
+        };
+      }
+      
+      // 폴백: 텍스트의 오른쪽 끝 위치
+      const heroNameRect = heroName.getBoundingClientRect();
       const containerRect = heroNameContainer.getBoundingClientRect();
-      const startX = Math.random() * containerRect.width;
-      const startY = -20; // 텍스트 위쪽에서 시작
+      return {
+        x: heroNameRect.right - containerRect.left,
+        y: heroNameRect.top - containerRect.top
+      };
+    }
+
+    function createSun() {
+      // 기존 해가 있으면 제거
+      if (currentSun) {
+        currentSun.remove();
+        currentSun = null;
+      }
+
+      const sun = document.createElement("div");
+      sun.className = "sun";
       
-      snowflake.style.position = "absolute";
-      snowflake.style.left = `${startX}px`;
-      snowflake.style.top = `${startY}px`;
-      snowflake.style.pointerEvents = "none";
-      snowflake.style.userSelect = "none";
+      // 해 모양 SVG 생성
+      const sunSVG = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      const isMobile = window.innerWidth < 768;
+      const sunSize = isMobile ? "60" : "80";
+      sunSVG.setAttribute("width", sunSize);
+      sunSVG.setAttribute("height", sunSize);
+      sunSVG.setAttribute("viewBox", "0 0 60 60");
       
-      // 랜덤 애니메이션 지속 시간 (0.8s ~ 1.2s)
-      const duration = 0.8 + Math.random() * 0.4;
-      snowflake.style.animationDuration = `${duration}s`;
-      snowflake.style.animationName = "snowfall";
-      snowflake.style.animationTimingFunction = "linear";
-      snowflake.style.animationFillMode = "forwards";
+      // 해 원형
+      const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      circle.setAttribute("cx", "30");
+      circle.setAttribute("cy", "30");
+      circle.setAttribute("r", "20");
+      circle.setAttribute("fill", "#FFD700");
+      circle.setAttribute("opacity", "0.85");
       
-      // 랜덤 좌우 이동 (각 눈송이마다 다른 값)
-      const randomX = (Math.random() - 0.5) * 60;
-      const randomRotate = Math.random() * 360;
+      // 빛나는 효과를 위한 여러 선
+      for (let i = 0; i < 8; i++) {
+        const ray = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const angle = (i * Math.PI * 2) / 8;
+        const x1 = 30 + Math.cos(angle) * 20;
+        const y1 = 30 + Math.sin(angle) * 20;
+        const x2 = 30 + Math.cos(angle) * 28;
+        const y2 = 30 + Math.sin(angle) * 28;
+        ray.setAttribute("x1", x1);
+        ray.setAttribute("y1", y1);
+        ray.setAttribute("x2", x2);
+        ray.setAttribute("y2", y2);
+        ray.setAttribute("stroke", "#FFA500");
+        ray.setAttribute("stroke-width", "1.5");
+        ray.setAttribute("opacity", "0.6");
+        sunSVG.appendChild(ray);
+      }
       
-      // CSS 변수로 랜덤 값 전달
-      snowflake.style.setProperty("--random-x", `${randomX}px`);
-      snowflake.style.setProperty("--random-rotate", `${randomRotate}deg`);
+      sunSVG.appendChild(circle);
+      sun.appendChild(sunSVG);
       
-      snowflakesContainer.appendChild(snowflake);
+      // "N" 글자 위치 계산
+      const lastLetterPos = getLastLetterPosition();
+      const sunOffset = isMobile ? 30 : 40;
+      const sunSizeNum = parseInt(sunSize);
+      const containerRect = heroNameContainer.getBoundingClientRect();
+      const containerHeight = containerRect.height;
       
-      // 애니메이션 종료 후 제거
-      setTimeout(() => {
-        if (snowflake.parentNode) {
-          snowflake.remove();
-        }
-      }, duration * 1000 + 100);
+      // 최종 위치: "N" 글자 위쪽
+      const finalTop = lastLetterPos.y - sunOffset;
+      
+      // 초기 위치: 컨테이너 아래에서 시작
+      // bottom: -80px는 컨테이너 아래 80px를 의미
+      // 이를 top 기준으로 변환하면: containerHeight + 80
+      const initialTop = containerHeight + 80;
+      
+      // 이동 거리 계산
+      const moveDistance = initialTop - finalTop;
+      
+      // 초기 위치 설정 (top으로 설정하고 translateY로 이동)
+      sun.style.position = "absolute";
+      sun.style.left = `${lastLetterPos.x - sunSizeNum / 2}px`;
+      sun.style.top = `${initialTop}px`;
+      sun.style.pointerEvents = "none";
+      sun.style.userSelect = "none";
+      sun.style.animation = "sunrise 1.2s ease-out forwards";
+      
+      // 이동 거리를 CSS 변수로 전달
+      sun.style.setProperty("--move-distance", `${moveDistance}px`);
+      
+      sunriseContainer.appendChild(sun);
+      currentSun = sun;
     }
 
     heroNameContainer.addEventListener("mouseenter", () => {
-      // 마우스 진입 시 눈송이 생성 시작 (0.2초마다)
-      if (snowflakeInterval) {
-        clearInterval(snowflakeInterval);
-      }
-      createSnowflake(); // 즉시 하나 생성
-      snowflakeInterval = setInterval(() => {
-        createSnowflake();
-      }, 200);
+      createSun();
     });
 
     heroNameContainer.addEventListener("mouseleave", () => {
-      // 마우스 떠날 때 눈송이 생성 중지
-      if (snowflakeInterval) {
-        clearInterval(snowflakeInterval);
-        snowflakeInterval = null;
+      if (currentSun) {
+        currentSun.remove();
+        currentSun = null;
       }
+    });
+
+    // 리사이즈 시 위치 재계산
+    let resizeTimeout;
+    window.addEventListener("resize", () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        if (currentSun) {
+          createSun();
+        }
+      }, 100);
     });
   }
 });

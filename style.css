@@ -219,26 +219,24 @@ main {
   text-align: left;
 }
 
-/* 크리스마스 호버 효과 - 폰트 사이즈, 색상, 위치는 유지하고 애니메이션만 추가 */
+/* 해가 떠오르는 호버 효과 - 폰트 사이즈, 색상, 위치는 유지하고 애니메이션만 추가 (톤 다운) */
 .hero-name-container:hover .hero-name {
   filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.4)) 
           drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))
-          drop-shadow(0 0 40px rgba(255, 102, 102, 0.8))
-          drop-shadow(0 0 60px rgba(102, 204, 102, 0.7))
-          drop-shadow(0 0 80px rgba(255, 102, 102, 0.5));
+          drop-shadow(0 0 20px rgba(255, 215, 0, 0.3))
+          drop-shadow(0 0 30px rgba(255, 165, 0, 0.2));
   text-shadow: 
     2px 2px 0 rgba(0, 0, 0, 0.3),
     3px 3px 6px rgba(0, 0, 0, 0.3),
     4px 4px 8px rgba(0, 0, 0, 0.25),
     6px 6px 12px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(255, 102, 102, 0.6),
-    0 0 50px rgba(102, 204, 102, 0.5),
-    0 0 70px rgba(255, 102, 102, 0.4);
+    0 0 15px rgba(255, 215, 0, 0.25),
+    0 0 25px rgba(255, 165, 0, 0.2);
   transform: scale(1.02);
 }
 
-/* 눈송이 컨테이너 */
-.snowflakes {
+/* 해가 떠오르는 컨테이너 */
+.sunrise-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -5296,15 +5294,15 @@ main {
   pointer-events: auto !important; /* 부모의 pointer-events: none을 무시 */
 }
 
-/* 테스트용 - hover 시 배경색 변경 (크리스마스 그라데이션) */
+/* hover 시 배경색 변경 (톤 다운) */
 .hero-name-container:hover {
   background: linear-gradient(
     90deg,
-    rgba(255, 102, 102, 0.15) 0%,
-    rgba(180, 153, 153, 0.15) 25%,
-    rgba(102, 204, 102, 0.15) 50%,
-    rgba(180, 153, 153, 0.15) 75%,
-    rgba(255, 102, 102, 0.15) 100%
+    rgba(255, 215, 0, 0.08) 0%,
+    rgba(255, 200, 100, 0.08) 25%,
+    rgba(255, 165, 0, 0.08) 50%,
+    rgba(255, 200, 100, 0.08) 75%,
+    rgba(255, 215, 0, 0.08) 100%
   );
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
@@ -5352,59 +5350,53 @@ main {
   }
 }
 
-/* 크리스마스 Hover 효과 */
+/* 해가 떠오르는 Hover 효과 (톤 다운) */
 .hero-name-container:hover .hero-name {
   filter: drop-shadow(0 6px 24px rgba(0, 0, 0, 0.4)) 
           drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3))
-          drop-shadow(0 0 40px rgba(255, 102, 102, 0.8))
-          drop-shadow(0 0 60px rgba(102, 204, 102, 0.7))
-          drop-shadow(0 0 80px rgba(255, 102, 102, 0.5)) !important;
+          drop-shadow(0 0 20px rgba(255, 215, 0, 0.3))
+          drop-shadow(0 0 30px rgba(255, 165, 0, 0.2)) !important;
   text-shadow: 
     2px 2px 0 rgba(0, 0, 0, 0.3),
     3px 3px 6px rgba(0, 0, 0, 0.3),
     4px 4px 8px rgba(0, 0, 0, 0.25),
     6px 6px 12px rgba(0, 0, 0, 0.2),
-    0 0 30px rgba(255, 102, 102, 0.6),
-    0 0 50px rgba(102, 204, 102, 0.5),
-    0 0 70px rgba(255, 102, 102, 0.4) !important;
+    0 0 15px rgba(255, 215, 0, 0.25),
+    0 0 25px rgba(255, 165, 0, 0.2) !important;
   transform: scale(1.02) !important;
 }
 
-/* 크리스마스 메시지 */
-.christmas-message {
+/* 새해 메시지 (깔끔한 텍스트만) */
+.newyear-message {
   position: absolute;
   top: -3.5rem;
   left: 50%;
   transform: translateX(-50%) translateY(10px);
   font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
   font-size: clamp(0.9rem, 1.2vw, 1.1rem);
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.4s ease;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   z-index: 20;
-  background: rgba(0, 0, 0, 0.3);
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  backdrop-filter: blur(4px);
 }
 
-.hero-name-container:hover .christmas-message {
+.hero-name-container:hover .newyear-message {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
 
-.hero-name-container:not(:hover) .christmas-message {
+.hero-name-container:not(:hover) .newyear-message {
   opacity: 0;
   transform: translateX(-50%) translateY(-10px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-/* 눈송이 컨테이너 */
-.snowflakes {
+/* 해가 떠오르는 컨테이너 */
+.sunrise-container {
   position: absolute;
   top: 0;
   left: 0;
@@ -5415,32 +5407,40 @@ main {
   z-index: 15;
 }
 
-.snowflake {
+.sun {
   position: absolute;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: 1.2rem;
-  font-family: Arial, sans-serif;
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-  animation: snowfall 1s linear forwards;
-  opacity: 0;
   pointer-events: none;
   user-select: none;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.4)) 
+          drop-shadow(0 0 15px rgba(255, 165, 0, 0.3));
 }
 
-@keyframes snowfall {
+.sun svg {
+  display: block;
+  animation: sunRotate 4s linear infinite;
+}
+
+@keyframes sunrise {
   0% {
     opacity: 0;
-    transform: translateY(-120px) translateX(0) rotate(0deg) scale(0.5);
+    transform: translateY(0) scale(0.6);
   }
-  10% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
+  30% {
+    opacity: 0.8;
   }
   100% {
-    opacity: 0;
-    transform: translateY(120px) translateX(var(--random-x, 20px)) rotate(var(--random-rotate, 360deg)) scale(1);
+    opacity: 1;
+    transform: translateY(calc(-1 * var(--move-distance, 120px))) scale(1);
+  }
+}
+
+@keyframes sunRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
