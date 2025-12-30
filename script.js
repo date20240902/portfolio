@@ -218,9 +218,9 @@ const articlesByBrand = {
     logo: "assets/logo-yozmit.png.png",
     mission: "**요즘IT** | 실무 중심 IT 트렌드",
     articles: [
-      { title: "챗GPT 보고 사표 쓴 비전공자, IT 커뮤니케이터가 되다", url: "https://yozm.wishket.com/magazine/detail/3471/" },
       { title: "2024년 가트너 10대 전략 기술 트렌드 톺아보기", url: "https://yozm.wishket.com/magazine/detail/2298/" },
-      { title: "더 이상 외면할 수 없는 양자컴퓨터", url: "https://yozm.wishket.com/magazine/detail/2888/" },
+      { title: "OpenAI의 새로운 무기, 텍스트-비디오 모델 'SORA'", url: "https://yozm.wishket.com/magazine/detail/2461/" },
+      { title: "AI 기업 탐구 시리즈", url: "https://yozm.wishket.com/magazine/collection/73861/" },
       { title: "전체보기", url: "https://yozm.wishket.com/magazine/@jhjh126/" },
     ],
   },
