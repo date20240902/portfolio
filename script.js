@@ -245,10 +245,10 @@ const articlesByBrand = {
     logo: "assets/logo-kb.png.png",
     mission: "**KB** | '기술을 아는 금융' 브랜딩",
     articles: [
-      { title: "하이브의 엔터테인먼트 혁신, 위버스로 만들어가는 글로벌 팬 커뮤니티", url: "https://kbthink.com/life/daily/hybe.html" },
-      { title: "스포티파이 플레이리스트 추천 기술, AI DJ와 함께하는 음악 경험", url: "https://kbthink.com/life/daily/spotify.html" },
-      { title: "AI 에이전트란? 활용 사례와 발전 방향 알아보기", url: "https://kbthink.com/life/daily/ai-agent.html" },
-      { title: "전체보기", url: "https://kbthink.com/search/result.html?sk=%EC%9D%B4%EC%9E%AC%ED%9B%88" },
+      { title: "피지컬 AI란? 왜 젠슨 황은 GPU를 들고 한국을 찾았을까", url: "https://kbthink.com/life/daily/physical-ai.html" },
+      { title: "디즈니랜드 놀이기구는 줄 서는 순간부터 시작된다? 기술이 만든 경험", url: "https://kbthink.com/life/daily/disneyland.html" },
+      { title: "휴머노이드 기술 어디까지 왔을까? 테슬라 로봇이 보여준 미래", url: "https://kbthink.com/life/daily/humanoid.html" },
+      { title: "전체보기", url: "https://kbthink.com/search/result.html?sk=%EC%9D%B4%EC%9E%AC%ED%9B%88&tab=tam_contents&category=dcp_all" },
     ],
   },
   skt: {
@@ -256,6 +256,7 @@ const articlesByBrand = {
     logo: "assets/logo-skt.png.png",
     mission: "**SKT** | AI 기술 리더십 전파",
     articles: [
+      { title: "2026 AI 트렌드 상상을 넘어 현실의 영역으로", url: "https://www.sktelecom.com/webzine/lib/insight_detail.do?index=64&currentPage=1&keyword=" },
       { title: "SK AI SUMMIT 2025, SK가 그린 AI 인프라의 미래", url: "https://www.sktelecom.com/webzine/lib/tstory_detail.do?index=52&currentPage=1&keyword=" },
       { title: "GPU, 대체 뭐길래 다들 난리일까?", url: "https://www.sktelecom.com/webzine/lib/insight_detail.do?index=40&currentPage=1&keyword=" },
     ],
