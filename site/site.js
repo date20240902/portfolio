@@ -97,3 +97,56 @@ const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     spy.observe(s);
   });
 })();
+
+// Inquiry form: validate in place, then send through FormSubmit without leaving the page.
+(() => {
+  const form = document.getElementById("inquiry");
+  const status = document.getElementById("inquiry-status");
+  if (!form || !status) return;
+
+  const say = (text, kind = "") => {
+    status.textContent = text;
+    status.className = "inquiry__status" + (kind ? " is-" + kind : "");
+  };
+
+  form.addEventListener("input", (e) => e.target.closest(".field")?.classList.remove("is-invalid"));
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (form._honey.value) return;
+
+    if (!form.category.value) return say("어떤 이야기인지 먼저 골라 주세요.", "error");
+    const missing = [...form.querySelectorAll(".field [required]")].filter((el) => !el.value.trim());
+    missing.forEach((el) => el.closest(".field").classList.add("is-invalid"));
+    if (missing.length) return say("표시된 칸을 채워 주세요.", "error");
+    if (!form.email.checkValidity()) {
+      form.email.closest(".field").classList.add("is-invalid");
+      return say("이메일 주소를 다시 확인해 주세요.", "error");
+    }
+    if (!form.consent.checked) return say("개인정보 수집에 동의해 주세요.", "error");
+
+    const button = form.querySelector("button[type=submit]");
+    button.disabled = true;
+    say("보내는 중입니다.");
+
+    const data = Object.fromEntries(new FormData(form));
+    data._subject = `[techissue.xyz] ${data.category} 문의 · ${data.name}`;
+    delete data._honey;
+
+    try {
+      const res = await fetch(form.action.replace("formsubmit.co/", "formsubmit.co/ajax/"), {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok || String(body.success) === "false") throw new Error(body.message || res.status);
+      form.reset();
+      say("잘 받았습니다. 확인하고 답장 드리겠습니다.", "done");
+    } catch (err) {
+      say("보내지 못했습니다. newsletter@techissue.xyz 로 직접 메일을 보내 주세요.", "error");
+    } finally {
+      button.disabled = false;
+    }
+  });
+})();
