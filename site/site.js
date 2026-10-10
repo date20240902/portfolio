@@ -63,3 +63,37 @@ const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     });
   });
 })();
+
+// Sections: titles roll up the first time they come into view; the menu marks the current section.
+(() => {
+  const sections = [...document.querySelectorAll(".section")];
+  const links = new Map([...document.querySelectorAll(".nav__links a")].map((a) => [a.getAttribute("href").slice(1), a]));
+
+  const reveal = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-in");
+        reveal.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  const spy = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        links.forEach((a) => a.classList.remove("is-active"));
+        links.get(entry.target.id)?.classList.add("is-active");
+      });
+    },
+    { rootMargin: "-45% 0px -50% 0px" }
+  );
+
+  sections.forEach((s) => {
+    if (still) s.classList.add("is-in");
+    else reveal.observe(s);
+    spy.observe(s);
+  });
+})();
