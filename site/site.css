@@ -832,8 +832,7 @@ p {
 .book__cover img {
   display: block;
   width: 100%;
-  border-radius: 6px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.55));
 }
 
 .book__title {
