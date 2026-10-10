@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" />
     <link rel="stylesheet" href="lab.css" />
     <style>
-      :root { --paper: #f4f2ee; --ink: #161616; --soft: #6f6c66; --acc: #2f4bb8; --rule: rgba(22, 22, 22, 0.14); --display: "Hahmlet", "Noto Serif KR", serif; --mono: "IBM Plex Mono", ui-monospace, monospace; }
+      :root { --paper: #0f0f11; --ink: #f2f1ee; --soft: #8c8a86; --acc: #7d97ff; --rule: rgba(242, 241, 238, 0.16); --display: "Hahmlet", "Noto Serif KR", serif; --mono: "IBM Plex Mono", ui-monospace, monospace; }
       html, body { background: var(--paper); color: var(--ink); transition: background-color 1.4s ease; }
       .lab-nav { color: var(--soft); }
       .lab-switch a { color: var(--soft); border-color: var(--rule); }
@@ -26,6 +26,7 @@
       .who span { display: inline-block; font-variation-settings: "wght" 800; transition: font-variation-settings 0.35s ease; }
       .serif { font-weight: 200; letter-spacing: -0.035em; }
       .soft { color: var(--soft); font-weight: 300; }
+      .strong { font-weight: inherit; }
       .hair { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; text-decoration-color: var(--acc); transition: text-decoration-color 1.4s; }
 
       .roll { display: inline-grid; height: 1.16em; overflow: hidden; vertical-align: bottom; color: var(--acc); transition: color 1.4s, width 0.7s cubic-bezier(0.6, 0, 0.2, 1); }
@@ -69,11 +70,11 @@
 
       <h1>
         <span class="line who" id="who" aria-label="전합니다."><span>전</span><span>합</span><span>니</span><span>다</span><span>.</span></span>
-        <span class="line"><span class="serif">세상에 필요한</span> <span class="hair">이야기</span>를,</span>
+        <span class="line"><span class="serif">세상에 필요한</span> <b class="strong">이야기</b>를,</span>
         <span class="line"><span class="serif">세상에 필요한</span> <span class="roll" id="roll"><span class="on">목소리로.</span><span>뉴스레터로.</span><span>칼럼으로.</span><span>책으로.</span><span>강연으로.</span></span></span>
       </h1>
 
-      <p class="footnote"><i></i><span id="note">유행보다 오래 가는 것을 씁니다.</span></p>
+      <p class="footnote"><i></i><span id="note">쉽게, 정확하게, 오래 남게 씁니다.</span></p>
 
       <div class="sub">
         <ul class="roles">
