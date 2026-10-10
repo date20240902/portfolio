@@ -118,6 +118,7 @@ p {
 }
 
 .nav__cta {
+  margin-left: auto;
   font-size: 14px;
   font-weight: 600;
   padding: 8px 16px;
@@ -487,6 +488,66 @@ p {
 
 #stb_subscribe .stb_asterisk {
   color: var(--sec) !important;
+}
+
+/* Featured columns: label, article link, link to the outlet's full list */
+.rows--columns li {
+  display: grid;
+  grid-template-columns: 120px 1fr 88px;
+  gap: 24px;
+  align-items: baseline;
+  border-bottom: 1px solid var(--rule);
+}
+
+.rows--columns li > a:not(.more) {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  border-bottom: 0;
+}
+
+.rows--columns .more,
+.rows--columns a.more:hover {
+  display: inline;
+  padding: 0 0 2px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.rows--columns .more {
+  justify-self: end;
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--soft);
+  border-bottom: 1px solid var(--rule);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.rows--columns a.more:hover {
+  color: var(--sec);
+  border-color: var(--sec);
+}
+
+@media (max-width: 860px) {
+  .rows--columns li {
+    grid-template-columns: 1fr auto;
+    padding-top: 18px;
+  }
+
+  .rows--columns li > a:not(.more) {
+    grid-column: 1 / -1;
+    padding-top: 6px;
+  }
+
+  .rows--columns .more {
+    grid-column: 1 / -1;
+    justify-self: start;
+    margin-bottom: 20px;
+  }
+
+  .rows--columns span.more {
+    display: none;
+  }
 }
 
 /* Voice */
