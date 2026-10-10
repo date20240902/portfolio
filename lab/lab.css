@@ -1,0 +1,107 @@
+:root {
+  --bg: #0e0e10;
+  --text: #f2f2f2;
+  --muted: #9a9aa2;
+  --accent: #275efe;
+  --accent-soft: #6e96ff;
+  --font: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --gutter: clamp(20px, 5vw, 72px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  word-break: keep-all;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.lab-nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 20;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px var(--gutter);
+  font-size: 14px;
+}
+
+.lab-nav b {
+  font-size: 16px;
+}
+
+.lab-switch {
+  display: flex;
+  gap: 8px;
+}
+
+.lab-switch a {
+  padding: 6px 12px;
+  border: 1px solid rgba(242, 242, 242, 0.2);
+  border-radius: 999px;
+  color: var(--muted);
+}
+
+.lab-switch a[aria-current] {
+  border-color: var(--accent-soft);
+  color: var(--text);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 50px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: transform 0.25s, background 0.25s, border-color 0.25s;
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn--ghost {
+  border: 1px solid rgba(242, 242, 242, 0.28);
+}
+
+.roles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.roles span {
+  color: var(--accent-soft);
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
