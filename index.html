@@ -3,78 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>이재훈 | 어려운 기술을 누구나 읽는 이야기로</title>
+    <title>이재훈 | 세상에 필요한 이야기를, 세상에 필요한 목소리로</title>
     <meta
       name="description"
-      content="AI를 만드는 회사 안에서 일하는 비개발자. 기술 뉴스레터 『테크잇슈』 발행인, 『샘 올트먼, 더 비전 2030』 저자 이재훈의 공식 웹사이트."
+      content="세상에 필요한 이야기를, 세상에 필요한 목소리로 전합니다. 기술 뉴스레터 『테크잇슈』 발행인, 『샘 올트먼, 더 비전 2030』 저자 이재훈의 웹사이트."
     />
-    <meta property="og:title" content="이재훈 | 어려운 기술을 누구나 읽는 이야기로" />
-    <meta property="og:description" content="어려운 기술을 누구나 읽는 이야기로 옮깁니다. 노타 Technical Content Manager, 『테크잇슈』 발행인." />
+    <meta property="og:title" content="이재훈 | 세상에 필요한 이야기를, 세상에 필요한 목소리로" />
+    <meta property="og:description" content="뉴스레터, 칼럼, 책, 강연으로 세상에 필요한 이야기를 전합니다." />
     <meta property="og:image" content="assets/profile-hero.png.png" />
     <link rel="icon" href="assets/favicon.png.png" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" />
     <link rel="stylesheet" href="site/site.css" />
   </head>
   <body>
     <header class="nav">
       <a class="nav__name" href="#top">이재훈</a>
       <nav class="nav__links" aria-label="주요 메뉴">
-        <a href="#now">지금</a>
-        <a href="#writing">글</a>
-        <a href="#books">책</a>
-        <a href="#speaking">강연</a>
-        <a href="#story">걸어온 길</a>
+        <a href="#voice" style="--dot: var(--c-voice)">목소리</a>
+        <a href="#newsletter" style="--dot: var(--c-newsletter)">뉴스레터</a>
+        <a href="#columns" style="--dot: var(--c-column)">칼럼</a>
+        <a href="#books" style="--dot: var(--c-book)">책</a>
+        <a href="#talks" style="--dot: var(--c-talk)">강연</a>
         <a href="#contact">연락</a>
       </nav>
-      <a class="nav__cta" href="#subscribe">뉴스레터 구독</a>
+      <a class="nav__cta" href="#newsletter">뉴스레터 구독</a>
     </header>
 
     <main id="top">
       <section class="hero" aria-labelledby="hero-title">
-        <canvas class="hero__network" aria-hidden="true"></canvas>
-        <div class="hero__copy">
-          <h1 id="hero-title" class="hero__name">이재훈</h1>
-          <p class="hero__tagline">어려운 기술을<br class="br-m" /> 누구나 읽는 이야기로 옮깁니다.</p>
-          <ul class="hero__roles">
-            <li><span>지금</span>노타(Nota AI) Technical Content Manager</li>
-            <li><span>발행</span>기술 뉴스레터 『테크잇슈』</li>
-            <li><span>저서</span>『샘 올트먼, 더 비전 2030』</li>
-            <li><span>강연</span>기업·학교 AI 강연과 워크숍</li>
+        <p class="hero__top label"><span>Writer · Editor · Speaker</span><span class="hero__rule"></span><span>Seoul</span></p>
+
+        <h1 id="hero-title" class="hero__title">
+          <span class="hero__line hero__verb" id="verb" aria-label="전합니다."><span>전</span><span>합</span><span>니</span><span>다</span><span>.</span></span>
+          <span class="hero__line"><span class="thin">세상에 필요한</span> 이야기를,</span>
+          <span class="hero__line"><span class="thin">세상에 필요한</span> <span class="roll" id="roll"><span class="on">목소리로.</span><span>뉴스레터로.</span><span>칼럼으로.</span><span>책으로.</span><span>강연으로.</span></span></span>
+        </h1>
+
+        <p class="hero__note"><i></i><span id="note">쉽게, 정확하게, 오래 남게 씁니다.</span></p>
+
+        <div class="hero__sub">
+          <ul class="roles">
+            <li><span class="label">Now</span>노타 Technical Content Manager</li>
+            <li><span class="label">Newsletter</span>『테크잇슈』</li>
+            <li><span class="label">Book</span>『샘 올트먼, 더 비전 2030』</li>
+            <li><span class="label">Talk</span>기업·학교 AI 강연</li>
           </ul>
           <div class="hero__actions">
-            <a class="btn btn--primary" href="#subscribe">뉴스레터 구독</a>
+            <a class="btn btn--primary" href="#newsletter">뉴스레터 구독</a>
             <a class="btn btn--ghost" href="#contact">강연·협업 문의</a>
           </div>
         </div>
-        <a class="hero__scroll" href="#numbers" aria-label="아래로 이동"><span></span></a>
-      </section>
 
-      <section id="numbers" class="numbers" aria-label="숫자로 보는 이재훈">
-        <dl class="numbers__list">
-          <div class="numbers__item">
-            <dt>뉴스레터 구독자</dt>
-            <dd>2,500<small>+</small></dd>
-          </div>
-          <div class="numbers__item">
-            <dt>평균 오픈율</dt>
-            <dd>45<small>%</small></dd>
-          </div>
-          <div class="numbers__item">
-            <dt>칼럼과 기고</dt>
-            <dd>300<small>+</small></dd>
-          </div>
-          <div class="numbers__item">
-            <dt>함께한 브랜드·매체</dt>
-            <dd>10<small>곳</small></dd>
-          </div>
-        </dl>
+        <div class="hero__foot label">
+          <p class="hero__stats"><span><b>300+</b>Columns</span><span><b>2,500+</b>Subscribers</span><span><b>45%</b>Open rate</span></p>
+          <a class="hero__scroll" href="#voice"><i></i>Scroll</a>
+        </div>
       </section>
     </main>
 
-    <script src="site/network.js"></script>
     <script src="site/site.js"></script>
   </body>
 </html>
