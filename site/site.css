@@ -1086,13 +1086,6 @@ p {
   border-top: 1px solid var(--rule);
 }
 
-.inquiry__types {
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.inquiry__types legend,
 .inquiry__trap {
   position: absolute;
   width: 1px;
@@ -1101,68 +1094,8 @@ p {
   clip: rect(0 0 0 0);
 }
 
-.inquiry__types label {
-  display: grid;
-  grid-template-columns: 120px 1fr auto;
-  align-items: center;
-  gap: 24px;
-  padding: 26px 0;
-  border-bottom: 1px solid var(--rule);
-  cursor: pointer;
-  transition: color 0.25s, padding 0.3s;
-}
-
-.inquiry__types input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.inquiry__types .label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.inquiry__types .label::before {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--dot);
-}
-
-.inquiry__types b {
-  font-family: var(--display);
-  font-size: clamp(24px, 3vw, 44px);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
-
-.inquiry__types i {
-  font-style: normal;
-  color: var(--soft);
-  transition: transform 0.3s, color 0.25s;
-}
-
-.inquiry__types label:hover,
-.inquiry__types label:has(input:checked) {
-  color: var(--dot);
-  padding-left: 10px;
-}
-
-.inquiry__types label:has(input:checked) i {
-  color: var(--dot);
-  transform: rotate(90deg);
-}
-
-.inquiry__types label:has(input:focus-visible) {
-  outline: 1px solid var(--dot);
-  outline-offset: 4px;
-}
-
 .inquiry__fields {
-  margin-top: 40px;
+  padding-top: 40px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px 24px;
@@ -1186,7 +1119,8 @@ p {
 }
 
 .field input,
-.field textarea {
+.field textarea,
+.field select {
   width: 100%;
   padding: 14px 16px;
   border: 1px solid var(--rule);
@@ -1201,8 +1135,25 @@ p {
   resize: vertical;
 }
 
+.field select {
+  appearance: none;
+  padding-right: 44px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23f2f1ee' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat right 18px center;
+  cursor: pointer;
+}
+
+.field select:invalid {
+  color: #5c5b58;
+}
+
+.field select option {
+  background: #17171a;
+  color: var(--ink);
+}
+
 .field input:focus,
-.field textarea:focus {
+.field textarea:focus,
+.field select:focus {
   outline: none;
   border-color: var(--ink);
 }
@@ -1213,7 +1164,8 @@ p {
 }
 
 .field.is-invalid input,
-.field.is-invalid textarea {
+.field.is-invalid textarea,
+.field.is-invalid select {
   border-color: #ff7a7a;
 }
 
@@ -1313,14 +1265,6 @@ p {
 }
 
 @media (max-width: 860px) {
-  .inquiry__types label {
-    grid-template-columns: 1fr auto;
-  }
-
-  .inquiry__types .label {
-    grid-column: 1 / -1;
-  }
-
   .inquiry__fields {
     grid-template-columns: 1fr;
   }

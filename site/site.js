@@ -110,12 +110,20 @@ const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   };
 
   form.addEventListener("input", (e) => e.target.closest(".field")?.classList.remove("is-invalid"));
+  form.addEventListener("change", (e) => e.target.closest(".field")?.classList.remove("is-invalid"));
+
+  // Buttons elsewhere on the page open the form with a category already chosen.
+  document.querySelectorAll("[data-category]").forEach((link) =>
+    link.addEventListener("click", () => {
+      form.category.value = link.dataset.category;
+      form.category.closest(".field").classList.remove("is-invalid");
+    })
+  );
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (form._honey.value) return;
 
-    if (!form.category.value) return say("어떤 이야기인지 먼저 골라 주세요.", "error");
     const missing = [...form.querySelectorAll(".field [required]")].filter((el) => !el.value.trim());
     missing.forEach((el) => el.closest(".field").classList.add("is-invalid"));
     if (missing.length) return say("표시된 칸을 채워 주세요.", "error");
