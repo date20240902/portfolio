@@ -6,7 +6,7 @@
     <title>시안 F · 세상에 필요한 이야기</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Gowun+Batang&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=Noto+Serif+KR:wght@200;300&family=Nanum+Myeongjo&family=Song+Myung&family=IBM+Plex+Mono:wght@400;500&display=swap" />
     <link rel="stylesheet" href="lab.css" />
     <style>
       :root { --paper: #f4f2ee; --ink: #161616; --soft: #6f6c66; --acc: #2f4bb8; --rule: rgba(22, 22, 22, 0.14); --display: "Hahmlet", "Noto Serif KR", serif; --mono: "IBM Plex Mono", ui-monospace, monospace; }
@@ -24,7 +24,10 @@
       h1 { margin: 0; font-family: var(--display); font-size: clamp(40px, 6.6vw, 112px); font-weight: 600; line-height: 1.16; letter-spacing: -0.035em; }
       .line { display: block; }
       .who span { display: inline-block; font-variation-settings: "wght" 800; transition: font-variation-settings 0.35s ease; }
-      .serif { font-family: "Gowun Batang", serif; font-weight: 400; letter-spacing: -0.04em; }
+      .serif { font-family: var(--accent-font, "Hahmlet"); font-weight: var(--accent-weight, 200); letter-spacing: -0.035em; }
+      .picker { position: fixed; right: var(--gutter); top: 76px; justify-content: flex-end; z-index: 30; display: flex; gap: 6px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; }
+      .picker button { font: inherit; padding: 6px 10px; border-radius: 999px; border: 1px solid var(--rule); background: var(--paper); color: var(--soft); cursor: pointer; }
+      .picker button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
       .soft { color: var(--soft); font-weight: 300; }
       .hair { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; text-decoration-color: var(--acc); transition: text-decoration-color 1.4s; }
 
@@ -91,7 +94,22 @@
         <p class="scroll" style="margin:0"><i></i>Scroll</p>
       </div>
     </section>
+    <div class="picker" id="picker" aria-label="강조 서체 비교">
+      <button data-f="Hahmlet" data-w="200" aria-pressed="true">함렛 가늘게</button>
+      <button data-f="Noto Serif KR" data-w="300">본명조</button>
+      <button data-f="Nanum Myeongjo" data-w="400">나눔명조</button>
+      <button data-f="Song Myung" data-w="400">송명</button>
+    </div>
     <script>
+      // Temporary font comparison for the "세상에 필요한" phrase.
+      document.getElementById("picker").addEventListener("click", e => {
+        const b = e.target.closest("button"); if (!b) return;
+        document.documentElement.style.setProperty("--accent-font", `"${b.dataset.f}"`);
+        document.documentElement.style.setProperty("--accent-weight", b.dataset.w);
+        document.querySelectorAll("#picker button").forEach(x => x.setAttribute("aria-pressed", x === b));
+        document.fonts.ready.then(() => fit(i));
+      });
+
       // Quiet cycle: one word, one muted palette, one caption at a time.
       const scenes = [
         { paper: "#f4f2ee", acc: "#2f4bb8", note: "쉽게, 정확하게, 오래 남게 씁니다." },
