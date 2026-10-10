@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>시안 F · 오래 남는 이야기</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;500&display=swap" />
+    <link rel="stylesheet" href="lab.css" />
+    <style>
+      :root { --paper: #f4f2ee; --ink: #161616; --soft: #6f6c66; --acc: #2f4bb8; --rule: rgba(22, 22, 22, 0.14); --serif: "Noto Serif KR", serif; }
+      html, body { background: var(--paper); color: var(--ink); transition: background-color 1.4s ease; }
+      .lab-nav { color: var(--soft); }
+      .lab-switch a { color: var(--soft); border-color: var(--rule); }
+      .lab-switch a[aria-current] { border-color: var(--ink); color: var(--ink); }
+
+      .hero { position: relative; min-height: max(100svh, 700px); padding: 120px var(--gutter) 150px; display: grid; align-content: center; }
+
+      .label { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--soft); }
+      .top { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; }
+      .top .rule { flex: 0 0 64px; height: 1px; background: var(--rule); }
+      .top .count { font-variant-numeric: tabular-nums; color: var(--acc); transition: color 1.4s; }
+
+      h1 { margin: 0; font-size: clamp(40px, 6.6vw, 112px); font-weight: 700; line-height: 1.12; letter-spacing: -0.04em; }
+      .line { display: block; }
+      .who span { display: inline-block; font-variation-settings: "wght" 860; transition: font-variation-settings 0.35s ease; }
+      .serif { font-family: var(--serif); font-weight: 300; font-style: italic; letter-spacing: -0.02em; }
+      .soft { color: var(--soft); font-weight: 400; }
+      .hair { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.16em; text-decoration-color: var(--acc); transition: text-decoration-color 1.4s; }
+
+      .roll { display: inline-grid; height: 1.16em; overflow: hidden; vertical-align: bottom; color: var(--acc); transition: color 1.4s, width 0.7s cubic-bezier(0.6, 0, 0.2, 1); }
+      .roll span { grid-area: 1 / 1; justify-self: start; white-space: nowrap; transform: translateY(110%); opacity: 0; transition: transform 0.8s cubic-bezier(0.6, 0, 0.2, 1), opacity 0.8s; }
+      .roll span.on { transform: none; opacity: 1; }
+      .roll span.off { transform: translateY(-110%); opacity: 0; }
+      sup.fn { font-size: 0.22em; font-weight: 500; vertical-align: super; margin-left: 0.15em; letter-spacing: 0; color: var(--acc); transition: color 1.4s; }
+
+      .footnote { margin: 36px 0 0; display: flex; gap: 14px; align-items: baseline; font-size: 14px; color: var(--soft); min-height: 1.6em; }
+      .footnote b { font-weight: 500; color: var(--acc); transition: color 1.4s; }
+      .footnote span { transition: opacity 0.5s; }
+      .footnote span.out { opacity: 0; }
+
+      .sub { margin-top: 56px; padding-top: 22px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: 1fr auto; gap: 24px 48px; align-items: end; }
+      .roles { display: grid; grid-template-columns: repeat(4, max-content); gap: 8px 36px; font-size: 14px; color: var(--ink); }
+      .roles li { display: grid; gap: 4px; }
+      .roles span { font-size: 11px; letter-spacing: 0.2em; color: var(--soft); font-weight: 500; margin: 0; }
+      .actions { display: flex; gap: 10px; }
+      .btn { height: 46px; font-size: 14px; }
+      .btn--primary { background: var(--ink); color: var(--paper); }
+      .btn--primary:hover { background: var(--acc); }
+      .btn--ghost { border-color: var(--rule); }
+
+      .foot { position: absolute; left: var(--gutter); right: var(--gutter); bottom: 34px; display: flex; justify-content: space-between; gap: 16px; }
+      .foot .stats { display: flex; gap: 28px; }
+      .foot .stats b { color: var(--ink); font-weight: 600; letter-spacing: 0; margin-right: 6px; font-size: 12px; }
+      .scroll { display: flex; align-items: center; gap: 10px; }
+      .scroll i { width: 40px; height: 1px; background: var(--rule); position: relative; overflow: hidden; }
+      .scroll i::after { content: ""; position: absolute; inset: 0; background: var(--ink); transform: translateX(-100%); animation: sweep 2.4s ease-in-out infinite; }
+      @keyframes sweep { 60%, 100% { transform: translateX(100%); } }
+
+      @media (max-width: 900px) { .sub { grid-template-columns: 1fr; } .roles { grid-template-columns: repeat(2, max-content); } .foot .stats { display: none; } }
+    </style>
+  </head>
+  <body>
+    <header class="lab-nav">
+      <b>이재훈</b>
+      <nav class="lab-switch"><a href="a.html">A</a><a href="b.html">B</a><a href="c.html">C</a><a href="d.html">D</a><a href="e.html">E</a><a href="f.html" aria-current="page">F</a></nav>
+    </header>
+    <section class="hero">
+      <p class="top label"><span class="count" id="count">01 / 05</span><span class="rule"></span><span>Writer · Editor · Speaker</span></p>
+
+      <h1>
+        <span class="line who" id="who" aria-label="이재훈은"><span>이</span><span>재</span><span>훈</span><span>은</span></span>
+        <span class="line"><span class="serif">빠르게 바뀌는</span> <span class="soft">세상을</span></span>
+        <span class="line">오래 <span class="hair">남는</span> <span class="roll" id="roll"><span class="on">이야기</span><span>뉴스레터</span><span>칼럼</span><span>책</span><span>강연</span></span><sup class="fn" id="fn">1</sup>로</span>
+        <span class="line">옮깁니다.</span>
+      </h1>
+
+      <p class="footnote"><b id="fnb">1</b><span id="note">유행보다 오래 가는 것을 씁니다.</span></p>
+
+      <div class="sub">
+        <ul class="roles">
+          <li><span>NOW</span>노타 Technical Content Manager</li>
+          <li><span>NEWSLETTER</span>『테크잇슈』</li>
+          <li><span>BOOK</span>『샘 올트먼, 더 비전 2030』</li>
+          <li><span>TALK</span>기업·학교 AI 강연</li>
+        </ul>
+        <div class="actions"><a class="btn btn--primary" href="#">뉴스레터 구독</a><a class="btn btn--ghost" href="#">강연·협업 문의</a></div>
+      </div>
+
+      <div class="foot label">
+        <p class="stats" style="margin:0"><span><b>300+</b>Columns</span><span><b>2,500+</b>Subscribers</span><span><b>45%</b>Open rate</span></p>
+        <p class="scroll" style="margin:0"><i></i>Scroll</p>
+      </div>
+    </section>
+    <script>
+      // Quiet cycle: one word, one muted palette, one footnote at a time.
+      const scenes = [
+        { paper: "#f4f2ee", acc: "#2f4bb8", note: "유행보다 오래 가는 것을 씁니다." },
+        { paper: "#eef0f3", acc: "#2b4a8f", note: "기술 뉴스레터 『테크잇슈』 · 구독자 2,500명 이상" },
+        { paper: "#eef1ec", acc: "#3c6a52", note: "뉴스레터와 기고를 합쳐 칼럼 300편 이상" },
+        { paper: "#f3eee8", acc: "#9a5a35", note: "『샘 올트먼, 더 비전 2030』(한빛비즈, 2025)" },
+        { paper: "#f0eef2", acc: "#5e4c86", note: "기업 임직원 워크숍부터 고등학교 교실까지" },
+      ];
+      const root = document.documentElement;
+      const roll = document.getElementById("roll"), words = [...roll.children];
+      const note = document.getElementById("note"), count = document.getElementById("count");
+      const fn = document.getElementById("fn"), fnb = document.getElementById("fnb");
+      const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      let i = 0;
+      const fit = n => { roll.style.width = words[n].getBoundingClientRect().width + "px"; };
+      document.fonts.ready.then(() => fit(0));
+      addEventListener("resize", () => fit(i));
+
+      function show(n) {
+        const s = scenes[n];
+        fit(n);
+        root.style.setProperty("--paper", s.paper);
+        root.style.setProperty("--acc", s.acc);
+        count.textContent = `${String(n + 1).padStart(2, "0")} / 05`;
+        fn.textContent = fnb.textContent = n + 1;
+        note.classList.add("out");
+        setTimeout(() => { note.textContent = s.note; note.classList.remove("out"); }, 450);
+      }
+
+      if (!still) setInterval(() => {
+        const cur = words[i]; i = (i + 1) % words.length; const next = words[i];
+        cur.className = "off"; next.className = "on";
+        setTimeout(() => { cur.className = ""; }, 820);
+        show(i);
+      }, 3200);
+
+      // The name eases toward a lighter weight where the pointer passes.
+      const letters = [...document.querySelectorAll("#who span")];
+      addEventListener("pointermove", e => {
+        if (still) return;
+        letters.forEach(l => {
+          const r = l.getBoundingClientRect();
+          const d = Math.hypot(e.clientX - (r.left + r.width / 2), e.clientY - (r.top + r.height / 2));
+          l.style.fontVariationSettings = `"wght" ${Math.round(860 - Math.max(0, 1 - d / 300) * 560)}`;
+        });
+      });
+    </script>
+  </body>
+</html>
