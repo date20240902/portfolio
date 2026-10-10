@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@100..900&family=IBM+Plex+Mono:wght@400;500&display=swap" />
     <link rel="stylesheet" href="lab.css" />
     <style>
-      :root { --paper: #0f0f11; --ink: #f2f1ee; --soft: #8c8a86; --acc: #7d97ff; --rule: rgba(242, 241, 238, 0.16); --display: "Hahmlet", "Noto Serif KR", serif; --mono: "IBM Plex Mono", ui-monospace, monospace; }
+      :root { --paper: #0f0f11; --ink: #f2f1ee; --soft: #8c8a86; --acc: #4f7dff; --rule: rgba(242, 241, 238, 0.16); --display: "Hahmlet", "Noto Serif KR", serif; --mono: "IBM Plex Mono", ui-monospace, monospace; }
       html, body { background: var(--paper); color: var(--ink); transition: background-color 1.4s ease; }
       .lab-nav { color: var(--soft); }
       .lab-switch a { color: var(--soft); border-color: var(--rule); }
@@ -92,13 +92,13 @@
       </div>
     </section>
     <script>
-      // Quiet cycle: one word and one caption at a time, on a fixed palette.
+      // Quiet cycle: one word, its own accent colour and one caption at a time. The background stays fixed.
       const scenes = [
-        { note: "쉽게, 정확하게, 오래 남게 씁니다." },
-        { note: "기술 뉴스레터 『테크잇슈』 · 구독자 2,500명 이상" },
-        { note: "뉴스레터와 기고를 합쳐 칼럼 300편 이상" },
-        { note: "『샘 올트먼, 더 비전 2030』(한빛비즈, 2025)" },
-        { note: "기업 임직원 워크숍부터 고등학교 교실까지" },
+        { acc: "#4f7dff", note: "쉽게, 정확하게, 오래 남게 씁니다." },
+        { acc: "#22d3ee", note: "기술 뉴스레터 『테크잇슈』 · 구독자 2,500명 이상" },
+        { acc: "#a3e635", note: "뉴스레터와 기고를 합쳐 칼럼 300편 이상" },
+        { acc: "#ff8a3d", note: "『샘 올트먼, 더 비전 2030』(한빛비즈, 2025)" },
+        { acc: "#ff5fa2", note: "기업 임직원 워크숍부터 고등학교 교실까지" },
       ];
       const roll = document.getElementById("roll"), words = [...roll.children];
       const note = document.getElementById("note");
@@ -111,6 +111,7 @@
       function show(n) {
         const s = scenes[n];
         fit(n);
+        document.documentElement.style.setProperty("--acc", s.acc);
         note.classList.add("out");
         setTimeout(() => { note.textContent = s.note; note.classList.remove("out"); }, 450);
       }
